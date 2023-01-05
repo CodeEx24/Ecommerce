@@ -16,11 +16,17 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link id="pagestyle" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
+    <link id="pagestyle" href="assets/css/styles.css" rel="stylesheet" />
+    <link id="pagestyle3" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
+
+    <!-- AlertifyJs -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
 
 </head>
 
@@ -28,4 +34,3 @@
     <?php session_start();
     include('sidebar.php') ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <?php include('navbar.php') ?>

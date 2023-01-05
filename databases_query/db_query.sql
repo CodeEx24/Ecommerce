@@ -10,6 +10,7 @@ CREATE TABLE users (
 
 CREATE TABLE Categories (
     ID INT PRIMARY KEY AUTO_INCREMENT,
+    Image VARCHAR(255),
     Name VARCHAR(255) NOT NULL,
     Slug VARCHAR(255) NOT NULL,
     Description TEXT,
