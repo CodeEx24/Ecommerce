@@ -1,0 +1,8 @@
+.darker-item {
+  color: #000; /* black text */
+  background-color: #2d2c38; /* light grey background */
+}
+
+.dropdown-item {
+  color: white;
+}
