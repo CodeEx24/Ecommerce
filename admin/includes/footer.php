@@ -1,4 +1,4 @@
-<footer class="footer pt-5">
+<footer class="footer">
     <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
@@ -32,9 +32,14 @@
 </footer>
 </div>
 </main>
-<script src="../assets/js/core/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/smooth-scrollbar.min.js"></script>
+
+<script src="assets/js/jquery-3.6.3.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/perfect-scrollbar.min.js"></script>
+<script src="assets/js/smooth-scrollbar.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="assets/js/custom.js"></script>
+
 
 <!-- AlertifyJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

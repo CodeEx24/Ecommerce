@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 include('../functions/myfunctions.php');
 include('../config/dbcon.php');
 
@@ -96,9 +95,11 @@ if (isset($_POST['add_category_btn'])) {
         if (file_exists("../uploads/" . $image)) {
             unlink("../uploads/" . $image);
         }
-        redirect("category.php", "Category Deleted Successfully.");
+        // redirect("category.php", "Category Deleted Successfully.");
+        echo 200;
     } else {
-        redirect("category.php", "Something Went Wrong");
+        // redirect("category.php", "Something Went Wrong");
+        echo 500;
     }
 } else if (isset($_POST['add_product_btn'])) {
     $category_id = $_POST['category_id'];
@@ -194,6 +195,27 @@ if (isset($_POST['add_category_btn'])) {
     } else {
         redirect("edit-product.php?id=$product_id", "Something went wrong.");
     }
+} else if (isset($_POST['delete_product_btn'])) {
+    $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
+
+    $product_query = "SELECT * FROM Products WHERE ID='$product_id'";
+    $product_query_run = mysqli_query($con, $product_query);
+    $product_data = mysqli_fetch_array($product_query_run);
+    $image = $product_data['Image'];
+
+    $delete_query = "DELETE FROM Products WHERE ID ='$product_id' ";
+    $delete_query_run = mysqli_query($con, $delete_query);
+
+    if ($delete_query_run) {
+        if (file_exists("../uploads/" . $image)) {
+            unlink("../uploads/" . $image);
+        }
+        // redirect("products.php", "Product Deleted Successfully.");
+        echo 200;
+    } else {
+        redirect("products.php", "Something Went Wrong");
+    }
 } else {
-    redirect('../index.php', '');
+    // redirect('../index.php', '');
+    echo 500;
 }

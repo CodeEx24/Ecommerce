@@ -1,9 +1,9 @@
 <?php
-include('../middleware/adminMiddleware.php');
 include('includes/header.php');
+include('../middleware/adminMiddleware.php');
 ?>
 
-<div class="container-fluid py-5 ">
+<div class="container-fluid mt-5 mb-4">
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
