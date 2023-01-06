@@ -45,7 +45,7 @@ a {
 }
 
 .form-control {
-  background-color: white !important;
+  background-color: rgb(255, 255, 255) !important;
   border: 1px solid #b3a1a1 !important;
   padding: 8px 10px !important;
 }

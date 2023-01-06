@@ -1,7 +1,6 @@
 <?php
-include('includes/header.php');
 include('../middleware/adminMiddleware.php');
-
+include('includes/header.php');
 ?>
 
 <div class="container-fluid py-4">
@@ -18,7 +17,8 @@ include('../middleware/adminMiddleware.php');
             ?>
                     <div class="card">
                         <div class="card-header">
-                            <h2>Edit Category</h2>
+                            <h2>Edit Category<a href="category.php" class="btn btn-primary shadow float-end button-text">Back</a></h2>
+
                         </div>
                         <hr class="light horizontal my-0">
                         <div class="card-body">

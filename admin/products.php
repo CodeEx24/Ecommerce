@@ -8,7 +8,7 @@ include('includes/header.php');
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Categories</h2>
+                    <h2>Products</h2>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered ">
@@ -22,10 +22,10 @@ include('includes/header.php');
                             </tr>
                         <tbody>
                             <?php
-                            $category = getAll("categories");
+                            $products = getAll("products");
 
-                            if (mysqli_num_rows($category) > 0) {
-                                foreach ($category as $item) {
+                            if (mysqli_num_rows($products) > 0) {
+                                foreach ($products as $item) {
                             ?>
 
                                     <tr>
@@ -34,10 +34,10 @@ include('includes/header.php');
                                         <td class="table-text"><?= $item['Name']; ?></td>
                                         <td class="table-text"><?= $item['Status'] == 0 ? "Visible" : "Hidden" ?></td>
                                         <td class="table-text">
-                                            <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-primary shadow button-text" style="width: 100px;">Edit</a>
+                                            <a href="edit-product.php?id=<?= $item['ID']; ?>" class="btn btn-primary shadow button-text" style="width: 100px; ">Edit</a>
                                             <form action="code.php" method="POST" style="display: inline-block">
-                                                <input type="hidden" name="category_id" value="<?= $item['ID']; ?>">
-                                                <button type="submit" name="delete_category_btn" class="btn btn-danger shadow button-text mx-2" style="width: 100px;">Delete</button>
+                                                <input type="hidden" name="product_id" value="<?= $item['ID']; ?>">
+                                                <button type="submit" name="delete_product_btn" class="btn btn-danger shadow button-text mx-2" style="width: 100px;">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

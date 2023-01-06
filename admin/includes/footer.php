@@ -39,20 +39,23 @@
 <!-- AlertifyJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+<!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
     <?php
-    if ($_SESSION['message'] == "Something Went Wrong In Adding Category.") {
+    if (isset($_SESSION['message'])) {
+        if ($_SESSION['message'] == "Category Added Successfully." || $_SESSION['message'] == "Category Updated Successfully." || $_SESSION['message'] == "Category Deleted Successfully." || $_SESSION['message'] == "Product Added Successfully." || $_SESSION['message'] == "Product Updated Successfully.") {
     ?>
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('<?= $_SESSION['message'] ?>');
-        unset($_SESSION['message']);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('<?= $_SESSION['message'] ?>');
+        <?php
+            unset($_SESSION['message']);
+        } else {
+        ?>
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('<?= $_SESSION['message'] ?>');
     <?php
-        unset($_SESSION['message']);
-    } else if ($_SESSION['message'] != "") { ?>
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.success('<?= $_SESSION['message'] ?>');
-        unset($_SESSION['message']);
-    <?php
+            unset($_SESSION['message']);
+        }
     }
     ?>
 </script>

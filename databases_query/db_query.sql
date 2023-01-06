@@ -13,11 +13,31 @@ CREATE TABLE Categories (
     Image VARCHAR(255),
     Name VARCHAR(255) NOT NULL,
     Slug VARCHAR(255) NOT NULL,
-    Description TEXT,
+    Description MEDIUMTEXT,
     Status TINYINT DEFAULT 0,
     Popular TINYINT DEFAULT 0,
     Meta_Title VARCHAR(255),
-    Meta_Description TEXT,
+    Meta_Description MEDIUMTEXT,
     Meta_Keywords VARCHAR(255),
     Created_At DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Products (
+  ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+  CategoryID INTEGER NOT NULL,
+  Name VARCHAR(255) NOT NULL,
+  Slug VARCHAR(255) NOT NULL,
+  Small_Description MEDIUMTEXT,
+  Description MEDIUMTEXT NOT NULL,
+  Original_Price DECIMAL(10,2) NOT NULL,
+  Selling_Price DECIMAL(10,2) NOT NULL,
+  Image VARCHAR(255) NOT NULL,
+  Quantity INTEGER NOT NULL,
+  Status TINYINT,
+  Trending TINYINT,
+  Meta_Title VARCHAR(255),
+  Meta_Keywords MEDIUMTEXT,
+  Meta_Description MEDIUMTEXT,
+  Created_At DATETIME DEFAULT CURRENT_TIMESTAMP,
+  
 );
