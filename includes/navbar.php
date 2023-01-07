@@ -9,7 +9,7 @@
                 <!-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
-                <li class="nav-item"><a class="nav-link" href="collections.php">Collections</a></li>
+                <li class="nav-item"><a class="nav-link" href="categories.php">Collections</a></li>
             </ul>
             <a href="contacts.html" class="me-md-2 me-lg-4">Cart</a>
 

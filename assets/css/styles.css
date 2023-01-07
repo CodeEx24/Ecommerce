@@ -12,3 +12,30 @@
   color: black;
   font-weight: bold;
 }
+
+.ref-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.ref-sale-badge {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  background-color: #20be8a;
+  border-radius: 25px;
+  padding: 3px 10px;
+  color: white;
+}
+
+.ref-original-price {
+  color: gray;
+}
+
+.ref-selling-price {
+  color: white;
+  margin-left: 10px;
+}

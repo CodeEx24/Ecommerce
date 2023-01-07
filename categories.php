@@ -21,12 +21,14 @@ include('functions/userfunctions.php');
                 foreach ($categories as $item) {
             ?>
                     <div class="col-md-3 my-4 ">
-                        <div class="card h-100">
-                            <div class="card-body ">
-                                <img class="w-100" src="uploads/<?= $item['Image'] ?>" alt="">
-                                <h5 class="mt-3 text-center"><?= $item['Name'] ?></h5>
+                        <a href="products.php?category=<?= $item['Slug'] ?>">
+                            <div class="card h-100">
+                                <div class="card-body ">
+                                    <img class="w-100" src="uploads/<?= $item['Image'] ?>" alt="">
+                                    <h5 class="mt-3 text-center"><?= $item['Name'] ?></h5>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
             <?php
                 }
