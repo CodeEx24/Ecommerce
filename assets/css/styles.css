@@ -29,6 +29,7 @@
   border-radius: 25px;
   padding: 3px 10px;
   color: white;
+  z-index: 999;
 }
 
 .ref-original-price {
@@ -38,4 +39,49 @@
 .ref-selling-price {
   color: white;
   margin-left: 10px;
+}
+
+.selling-price {
+  color: #04ffab !important;
+  margin-left: 20px;
+}
+
+.orig-price h5 {
+  font-size: 18px;
+}
+
+.product-badge {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  background-color: #20be8a;
+  border-radius: 25px;
+  padding: 3px 10px;
+  color: white;
+  z-index: 999;
+}
+
+.card {
+  /* background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%); */
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.card2 {
+  width: 190px;
+  height: 254px;
+  background-color: #1a1a1a;
+  border-radius: ;
+  transition: all 0.2s;
+}
+
+.card2:hover {
+  transform: scale(0.98);
+  border-radius: 20px;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
 }

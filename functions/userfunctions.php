@@ -30,6 +30,7 @@ function getProductByCategory($category_id)
     return $query_run = mysqli_query($con, $query);
 }
 
+
 function redirect($url, $message)
 {
     $_SESSION['message'] = $message;

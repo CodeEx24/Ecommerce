@@ -24,7 +24,7 @@ if (isset($_GET['category'])) {
         } ?>
         <div class="container pt-2">
             <div class="row pt-5">
-                <h1><?= $category['Name'] ?></h1>
+                <h1 class="fw-bold"><?= $category['Name'] ?></h1>
                 <hr>
                 <?php
                 $products = getProductByCategory($category_id);
@@ -33,27 +33,25 @@ if (isset($_GET['category'])) {
                     foreach ($products as $item) {
                 ?>
                         <div class="col-lg-4 col-md-6 col-sm-12  my-3 mb-4">
-                            <a href="#">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex flex-column">
-                                        <a class="ref-product" href="/product.html?product=43218622">
-                                            <img class="ref-image mb-3" src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" loading="lazy" />
-                                            <p class=" <?= $item['Trending']  ? "ref-sale-badge" : "" ?>"><?= $item['Trending'] ? "TRENDING" : "" ?></p>
-                                            <div class="ref-product-info d-flex justify-content-between">
-                                                <h5 class="ref-name"><?= $item['Name'] ?></h5>
-                                                <strong class="ref-price ref-on-sale">
-                                                    <s class="ref-original-price"><?= $item['Original_Price'] ?> </s>
-                                                    <span class="ref-selling-price"> <?= $item['Selling_Price'] ?> </span>
-                                                </strong>
-                                            </div>
-                                            <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>
-                                        </a>
-                                        <div class="ref-addons mt-auto">
-                                            <a class=" btn btn-info" href="#">Add to Cart</a>
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <a class="ref-product" href="product-view.php?product=<?= $item['Slug'] ?>">
+                                        <img class="ref-image mb-3" src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" loading="lazy" />
+                                        <p class="<?= $item['Trending']  ? "ref-sale-badge" : "" ?>"><?= $item['Trending'] ? "TRENDING" : "" ?></p>
+                                        <div class="ref-product-info d-flex justify-content-between">
+                                            <h5 class="ref-name fw-bold"><?= $item['Name'] ?></h5>
+                                            <strong class="ref-price ref-on-sale">
+                                                <s class="ref-original-price"><?= $item['Original_Price'] ?> </s>
+                                                <span class="ref-selling-price"> <?= $item['Selling_Price'] ?> </span>
+                                            </strong>
                                         </div>
+                                        <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>
+                                    </a>
+                                    <div class="ref-addons mt-auto">
+                                        <a class=" btn btn-primary" href="#">Add to Cart</a>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                 <?php
                     }
