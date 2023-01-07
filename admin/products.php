@@ -34,7 +34,7 @@ include('../middleware/adminMiddleware.php');
                                         <td class="table-text"><?= $item['Name']; ?></td>
                                         <td class="table-text"><?= $item['Status'] == 0 ? "Visible" : "Hidden" ?></td>
                                         <td class="table-text">
-                                            <a href="edit-product.php?id=<?= $item['ID']; ?>" class="btn btn-primary shadow button-text" style="width: 100px; ">Edit</a>
+                                            <a href="edit-product.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px; ">Edit</a>
                                             <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_product_btn" style="width: 100px;">Delete</button>
 
                                         </td>

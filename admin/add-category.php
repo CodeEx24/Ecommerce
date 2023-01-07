@@ -53,7 +53,7 @@ include('../middleware/adminMiddleware.php');
                                 <label class="checkbox-label" for="">Popular</label>
                             </div>
                             <div class="col-md-12">
-                                <div class="mt-4"><button class="btn btn-primary shadow d-block w-100" type="submit" name="add_category_btn">Add Category</button></div>
+                                <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="add_category_btn">Add Category</button></div>
                             </div>
                         </div>
                     </form>

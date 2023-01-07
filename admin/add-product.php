@@ -93,7 +93,7 @@ include('../middleware/adminMiddleware.php');
 
 
                             <div class="col-md-12">
-                                <div class="mt-4"><button class="btn btn-primary shadow d-block w-100" type="submit" name="add_product_btn">Add Product</button></div>
+                                <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="add_product_btn">Add Product</button></div>
                             </div>
                         </div>
                     </form>
