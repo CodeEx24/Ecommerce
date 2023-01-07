@@ -5,13 +5,13 @@
                 </svg></span><span>Brand</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-                <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-                <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="collections.php">Collections</a></li>
             </ul>
-            <a href="contacts.html" class="me-md-2 me-lg-4">Contacts</a>
+            <a href="contacts.html" class="me-md-2 me-lg-4">Cart</a>
 
             <?php
             if (isset($_SESSION['auth'])) {

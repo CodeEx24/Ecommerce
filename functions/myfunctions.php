@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../config/dbcon.php');
 
 function getAll($table)
@@ -7,6 +8,7 @@ function getAll($table)
     $query = "SELECT * FROM $table";
     return $query_run = mysqli_query($con, $query);
 }
+
 
 function getByID($table, $id)
 {

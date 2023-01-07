@@ -3,6 +3,12 @@
   background-color: #2d2c38; /* light grey background */
 }
 
-.dropdown-item {
+.dropdown-menu .dropdown-item {
   color: white;
+  border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  color: black;
+  font-weight: bold;
 }

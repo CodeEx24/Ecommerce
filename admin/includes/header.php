@@ -20,8 +20,8 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="assets/css/styles.css" rel="stylesheet" />
-    <link id="pagestyle3" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
+    <link id="pagestyle1" href="assets/css/styles.css" rel="stylesheet" />
+    <link id="pagestyle2" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
 
     <!-- AlertifyJs -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
@@ -35,6 +35,6 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-    <?php session_start();
+    <?php
     include('sidebar.php') ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

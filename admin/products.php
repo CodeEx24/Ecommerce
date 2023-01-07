@@ -1,6 +1,6 @@
 <?php
-include('includes/header.php');
 include('../middleware/adminMiddleware.php');
+include('includes/header.php');
 ?>
 
 <div class="container-fluid mt-3 mb-4">
@@ -32,11 +32,10 @@ include('../middleware/adminMiddleware.php');
                                         <td class="table-text"><?= $item['ID']; ?></td>
                                         <td class="table-text"><img src="../uploads/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" width="100px" height="100px"></td>
                                         <td class="table-text"><?= $item['Name']; ?></td>
-                                        <td class="table-text"><?= $item['Status'] == 0 ? "Visible" : "Hidden" ?></td>
+                                        <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                         <td class="table-text">
                                             <a href="edit-product.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px; ">Edit</a>
                                             <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_product_btn" style="width: 100px;">Delete</button>
-
                                         </td>
                                     </tr>
                             <?php
