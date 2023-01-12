@@ -1,6 +1,7 @@
 <?php
-include('includes/header.php');
 include('functions/userfunctions.php');
+include('includes/header.php');
+
 
 if (isset($_GET['product'])) {
     $product_slug = $_GET['product'];
@@ -10,7 +11,7 @@ if (isset($_GET['product'])) {
     if ($product) {
 ?>
         <div class="bg-dark">
-            <div class="container ">
+            <div class="container product-data">
                 <div class="row">
                     <div class="col-md-4 col-sm-12 my-5 ">
                         <div class="d-flex flex-column">
@@ -31,14 +32,24 @@ if (isset($_GET['product'])) {
                             </div>
                         </div>
                         <!-- The input field with the spinner -->
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-4">
-                                <input type="number" name="" id="">
+                                <div class="input-group mb-3 ">
+                                    <button class="input-group-text bg-dark text-white decrement-btn">-</button>
+                                    <input type="number" class="form-control bg-dark text-white text-center input-quantity" value="1" disabled>
+                                    <button class="input-group-text text-white bg-dark increment-btn">+</button>
+                                </div>
+
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="btn-group d-flex m" role="group">
-                                <div class=""><button class="btn btn-primary"> <i class="fa fa-shopping-cart me-2"></i>Add to Cart</button></div>
+                                <div class="">
+                                    <button class="btn btn-primary addToCart-btn" value="<?= $product['ID'] ?>">
+                                        <i class="fa fa-shopping-cart me-2"></i>
+                                        Add to Cart
+                                    </button>
+                                </div>
                                 <div class="mx-3"> <button class="btn btn-danger"><i class="fa fa-heart me-2"></i>Add to Wishlist</button></div>
                             </div>
                         </div>

@@ -64,24 +64,36 @@
 }
 
 .card {
-  /* background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%); */
   border-radius: 20px;
   transition: all 0.3s;
 }
-
 .card2 {
   width: 190px;
   height: 254px;
   background-color: #1a1a1a;
-  border-radius: ;
+
   transition: all 0.2s;
 }
 
 .card2:hover {
-  transform: scale(0.98);
+}
+
+.bg-card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
+  transform: scale(1.02);
   border-radius: 20px;
 }
 
-.card:hover {
+input.input-quantity[type='number']::-webkit-inner-spin-button,
+input.input-quantity[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-group-text:hover {
   box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
+}
+
+.cart-text-sm {
+  font-size: 12px;
 }

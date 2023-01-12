@@ -1,6 +1,7 @@
 <?php
-include('includes/header.php');
 include('functions/userfunctions.php');
+include('includes/header.php');
+
 
 if (isset($_GET['category'])) {
 
@@ -33,7 +34,7 @@ if (isset($_GET['category'])) {
                     foreach ($products as $item) {
                 ?>
                         <div class="col-lg-4 col-md-6 col-sm-12  my-3 mb-4">
-                            <div class="card h-100">
+                            <div class="card bg-card h-100">
                                 <div class="card-body d-flex flex-column">
                                     <a class="ref-product" href="product-view.php?product=<?= $item['Slug'] ?>">
                                         <img class="ref-image mb-3" src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" loading="lazy" />

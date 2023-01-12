@@ -1,6 +1,7 @@
 <?php
-include('includes/header.php');
 include('functions/userfunctions.php');
+include('includes/header.php');
+
 ?>
 
 <header class="bg-dark">
@@ -22,7 +23,7 @@ include('functions/userfunctions.php');
             ?>
                     <div class="col-md-3 my-4 ">
                         <a href="products.php?category=<?= $item['Slug'] ?>">
-                            <div class="card h-100">
+                            <div class="bg-card card h-100">
                                 <div class="card-body ">
                                     <img class="w-100" src="uploads/<?= $item['Image'] ?>" alt="">
                                     <h5 class="mt-3 text-center"><?= $item['Name'] ?></h5>

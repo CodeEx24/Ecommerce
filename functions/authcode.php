@@ -51,11 +51,13 @@ if (isset($_POST['register_btn'])) {
             $_SESSION['auth'] = true;
 
             //Fetching the data for the backend
+            $userid = $userdata['ID'];
             $username = $userdata['Name'];
             $useremail = $userdata['Email'];
             $role_as = $userdata['Role_As'];
 
             $_SESSION['auth_user'] = [
+                'user_id' => $userid,
                 'name' => $username,
                 'email' => $useremail
             ];

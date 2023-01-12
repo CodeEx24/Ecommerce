@@ -11,7 +11,7 @@
                 <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="categories.php">Collections</a></li>
             </ul>
-            <a href="contacts.html" class="me-md-2 me-lg-4">Cart</a>
+            <a href="cart.php" class="me-md-2 me-lg-4">Cart</a>
 
             <?php
             if (isset($_SESSION['auth'])) {
