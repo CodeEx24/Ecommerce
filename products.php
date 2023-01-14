@@ -49,7 +49,10 @@ if (isset($_GET['category'])) {
                                         <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>
                                     </a>
                                     <div class="ref-addons mt-auto">
-                                        <a class=" btn btn-primary" href="#">Add to Cart</a>
+                                        <button class="btn btn-primary addToCart-btn" value="<?= $item['ID'] ?>">
+                                            <i class="fa fa-shopping-cart me-2"></i>
+                                            Add to Cart
+                                        </button>
                                     </div>
                                 </div>
                             </div>
