@@ -50,6 +50,33 @@ CREATE TABLE Carts (
     Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE Orders (
+  ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  Tracking_No VARCHAR(255) NOT NULL,
+  User_ID INT NOT NULL,
+  Name VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) NOT NULL,
+  Phone VARCHAR(255) NOT NULL,
+  Address VARCHAR(500) NOT NULL,
+  Pincode INT NOT NULL,
+  Total_Price FLOAT NOT NULL,
+  Payment_Mode VARCHAR(255) NOT NULL,
+  Payment_ID VARCHAR(255) NULL,
+  Status TINYINT(1) DEFAULT 0 NOT NULL,
+  Comments VARCHAR(500),
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE Order_Items (
+  ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  Order_ID INT NOT NULL,
+  Product_ID INT NOT NULL,
+  Quantity INT NOT NULL,
+  Price INT NOT NULL,
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  FOREIGN KEY (Order_ID) REFERENCES orders(ID) ON DELETE CASCADE,
+  FOREIGN KEY (Product_ID) REFERENCES products(ID)
+);
 
 -- INSERT VALUES
 INSERT INTO Categories (Image, Name, Slug, Description, Status, Popular, Meta_Title, Meta_Description, Meta_Keywords) VALUES ('footwear.jpg', 'Footwear', 'footwear', 'A variety of footwear options for men, women, and children', 1, 1, 'Footwear for everyone', 'Shop our selection of footwear for men, women, and children', 'footwear, shoes, boots, sandals'), ('fashion.jpg', 'Fashion', 'fashion', 'Trendy clothing and accessories for men and women', 1, 1, 'Fashion for everyone', 'Stay on trend with our selection of fashion for men and women', 'fashion, clothing, accessories'), ('mobiles.jpg', 'Mobiles', 'mobiles', 'A wide selection of smartphones and mobile devices', 1, 1, 'Mobile phones and devices', 'Shop our selection of smartphones and mobile devices', 'mobiles, phones, devices'), ('groceries.jpg', 'Groceries', 'groceries', 'A wide variety of groceries and household items', 1, 1, 'Groceries and household items', 'Shop our selection of groceries and household items', 'groceries, household items'), ('laptops.jpg', 'Laptops & Computers', 'laptops', 'A wide selection of laptops, computers, and accessories', 1, 1, 'Laptops and computers', 'Shop our selection of laptops, computers, and accessories', 'laptops, computers, accessories'), ('accessories.jpg', 'Accessories', 'accessories', 'A wide selection of accessories for men, women, and children', 1, 1, 'Accessories for everyone', 'Shop our selection of accessories for men, women, and children', 'accessories, jewelry, bags'), ('entertainment.jpg', 'Home Entertainment', 'entertainment', 'A wide selection of home entertainment options', 1, 1, 'Home entertainment', 'Shop our selection of home entertainment options', 'entertainment, TVs, speakers');
