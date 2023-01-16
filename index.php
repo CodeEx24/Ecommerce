@@ -70,6 +70,8 @@ include('includes/header.php')
     </div>
 </section>
 
-<h1>Hello, world!</h1>
-<button class="btn btn-primary">Testing</button>
-<?php include('includes/footer.php') ?>
+
+<?php
+
+include('includes/footer.php')
+?>

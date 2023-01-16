@@ -122,3 +122,7 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
 .checkout .product-data p {
   margin: 0;
 }
+
+.bg-light-dark {
+  background-color: rgb(36, 36, 41);
+}

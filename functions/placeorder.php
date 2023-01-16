@@ -10,7 +10,7 @@ if (isset($_SESSION['auth'])) {
 
 
         //Address details
-        $address = "(" . $_POST['province'] . "), " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . ", " . $_POST['city'] . ", " . $_POST['city'];
+        $address = "(" . $_POST['province'] . "), " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . " Street, " . $_POST['city'] . " City, Barangay " . $_POST['barangay'];
 
         $name = mysqli_real_escape_string($con, $_POST['name']);
         $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -56,6 +56,17 @@ if (isset($_SESSION['auth'])) {
 
                 $insert_items_query = "INSERT INTO Order_Items (Order_ID, Product_ID, Quantity, Price) VALUES ('$order_id', '$product_id', '$quantity', '$price')";
                 $insert_items_query_run = mysqli_query($con, $insert_items_query);
+
+                $product_query =  "SELECT * FROM Products WHERE id='$product_id'";
+                $product_query_run = mysqli_query($con, $product_query);
+
+                $productData = mysqli_fetch_array($product_query_run);
+                $current_qty = $productData['Quantity'];
+
+                $new_qty = $current_qty - $quantity;
+
+                $update_qty_query = "UPDATE Products SET Quantity='$new_qty' WHERE id='$product_id'";
+                $update_qty_query_run = mysqli_query($con, $update_qty_query);
             }
 
             $deleteCart_query = "DELETE FROM Carts WHERE user_id='$user_id';";
