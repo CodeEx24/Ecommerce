@@ -67,14 +67,14 @@ include('authenticate.php')
                                 $subtotal = $item['selling_price'] * $item['product_qty'];
                             ?>
                                 <div class="row align-items-center py-3 product-data border border-gray m-1 mt-3">
-                                    <div class="col-md-3 text-center">
+                                    <div class="col-md-2 text-center">
                                         <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" class="img-fluid" style="object-fit: fill; width: 60px; height: 60px;">
                                     </div>
-                                    <div class="col-md-5 text-center">
+                                    <div class="col-md-4 text-center">
                                         <p><?= $item['name'] ?></p>
                                     </div>
-                                    <div class="col-md-2 text-center">
-                                        <p><?= $item['selling_price'] ?></p>
+                                    <div class="col-md-4 text-center">
+                                        <p>$<?= $item['selling_price'] ?></p>
                                     </div>
                                     <div class="col-md-2 text-center">
                                         <p>x<?= $item['product_qty'] ?></p>

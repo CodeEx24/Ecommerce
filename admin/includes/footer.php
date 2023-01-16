@@ -48,7 +48,7 @@
 <script>
     <?php
     if (isset($_SESSION['message'])) {
-        if ($_SESSION['message'] == "Category Added Successfully." || $_SESSION['message'] == "Category Updated Successfully." || $_SESSION['message'] == "Category Deleted Successfully." || $_SESSION['message'] == "Product Added Successfully." || $_SESSION['message'] == "Product Updated Successfully.") {
+        if ($_SESSION['message'] == "Category Added Successfully." || $_SESSION['message'] == "Category Updated Successfully." || $_SESSION['message'] == "Category Deleted Successfully." || $_SESSION['message'] == "Product Added Successfully." || $_SESSION['message'] == "Product Updated Successfully." || $_SESSION['message'] == "Order status updated successfully.") {
     ?>
             alertify.set('notifier', 'position', 'top-right');
             alertify.success('<?= $_SESSION['message'] ?>');

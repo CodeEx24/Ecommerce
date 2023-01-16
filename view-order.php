@@ -104,13 +104,13 @@ $data = mysqli_fetch_array($orderData);
                                     foreach ($order_query_run as $item) {
                                 ?>
                                         <tr>
-                                            <td class="d-flex align-items-center">
-                                                <img src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="70px" height="70px">
+                                            <td class="">
+                                                <img src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="80px" height="80px">
                                                 <span style="margin-left: 20px; "> <?= $item['Name'] ?></span>
                                             </td>
-
                                             <td class="align-middle"><?= $item['Price'] ?></td>
                                             <td class="align-middle"><?= $item['Order_Quantity'] ?></td>
+
                                         </tr>
                                 <?php
                                     }

@@ -94,3 +94,29 @@ hr.horizontal.light {
     transparent
   ) !important;
 }
+
+.form-check:not(.form-switch) .form-check-input2[type='radio']:checked {
+  border-color: yellow;
+}
+
+.form-check:not(.form-switch) .form-check-input2[type='radio']:after {
+  transition: opacity 0.25s ease-in-out;
+  content: '';
+  position: absolute;
+  width: 0.8375rem;
+  height: 0.8375rem;
+  border-radius: 50%;
+  background-image: linear-gradient(195deg, #ec407a, #d81b60),
+    var(--bs-gradient);
+  opacity: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.order-details table tr th {
+  padding: 0 !important;
+  color: red !important;
+}
