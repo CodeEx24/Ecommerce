@@ -126,3 +126,11 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
 .bg-light-dark {
   background-color: rgb(36, 36, 41);
 }
+
+.text-aqua {
+  color: #04ffab !important;
+}
+
+.text-gray {
+  color: #8db6d3 !important;
+}

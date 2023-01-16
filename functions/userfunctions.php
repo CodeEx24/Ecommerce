@@ -9,6 +9,14 @@ function getAllActive($table)
     return $active_query_run = mysqli_query($con, $active_query);
 }
 
+function getAllTrending()
+{
+    global $con;
+    $active_query = "SELECT * FROM Products WHERE trending='1' AND status='1'";
+    return mysqli_query($con, $active_query);
+}
+
+
 function getIDActive($table, $id)
 {
     global $con;
