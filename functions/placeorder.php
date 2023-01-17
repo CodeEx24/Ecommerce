@@ -7,22 +7,20 @@ include('../config/dbcon.php');
 if (isset($_SESSION['auth'])) {
     if (isset($_POST['placeOrderBtn'])) {
         // $province = isset($_POST['province']) ? $_POST['province'] : "";
-
-
         //Address details
         $address = "(" . $_POST['province'] . "), " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . " Street, " . $_POST['city'] . " City, Barangay " . $_POST['barangay'];
-
+        $_SESSION['message'] = $address;
         $name = mysqli_real_escape_string($con, $_POST['name']);
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $phone = mysqli_real_escape_string($con, $_POST['phone']);
         $pincode = mysqli_real_escape_string($con, $_POST['pincode']);
         $payment_mode = mysqli_real_escape_string($con, $_POST['payment_mode']);
-        $payment_id = null;
-        $payment_id = $payment_id ? $payment_id : null;
+        // $payment_id = null;
+        $payment_id = mysqli_real_escape_string($con, $_POST['payment_id']);
 
         $address = mysqli_real_escape_string($con, $address);
 
-        if ($name == "" || $email == "" || $phone == "" || $pincode == "" || $address == "" || $_POST['bldg_houseno'] == "" || $_POST['street'] == "" || $_POST['city'] == "" || $_POST['province'] == "") {
+        if ($name == "" || $email == "" || $phone == "" || $pincode == "" || $_POST['bldg_houseno'] == "" || $_POST['street'] == "" || $_POST['city'] == "" || $_POST['province'] == "" || $_POST['barangay'] == "") {
             $_SESSION['message'] = "All fields are required.";
             header('Location: ../checkout.php');
             exit(0);
@@ -39,7 +37,6 @@ if (isset($_SESSION['auth'])) {
         foreach ($items as $item) {
             $total += $item['selling_price'] * $item['product_qty'];
         }
-        echo $address;
 
         $tracking_no = "TrackNo" . rand(1111, 9999) . substr($phone, 2);
         $insert_order_query = "INSERT INTO orders (Tracking_No, User_ID, Name, Email, Phone, Address, Pincode, Total_Price, Payment_Mode, Payment_ID)
@@ -47,6 +44,7 @@ if (isset($_SESSION['auth'])) {
         $insert_order_query_run = mysqli_query($con, $insert_order_query);
 
         if ($insert_order_query_run) {
+
             $order_id = mysqli_insert_id($con); // Give the latest inserted ID in db
 
             foreach ($items as $item) {
@@ -72,9 +70,13 @@ if (isset($_SESSION['auth'])) {
             $deleteCart_query = "DELETE FROM Carts WHERE user_id='$user_id';";
             $deleteCart_query_run = mysqli_query($con, $deleteCart_query);
 
-            $_SESSION['message'] = "Order placed successfully.";
-            header('Location: ../my-orders.php');
-            die();
+            if ($payment_mode == "COD") {
+                $_SESSION['message'] = "Order placed successfully.";
+                header('Location: ../my-orders.php');
+                die();
+            } else if ($payment_mode == "PayPal") {
+                echo 201;
+            }
         }
     }
 } else {
