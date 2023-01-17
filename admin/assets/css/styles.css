@@ -3,6 +3,14 @@ h2,
   color: white !important;
 }
 
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
 a {
   color: #419bef !important;
 }
@@ -119,4 +127,36 @@ hr.horizontal.light {
 .order-details table tr th {
   padding: 0 !important;
   color: red !important;
+}
+
+input,
+textarea,
+select {
+  color: black !important;
+  font-size: 16px !important;
+}
+
+input[type='file'] {
+  color: white !important;
+}
+
+th {
+  background-color: #1615158f !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-color: #161515b0 !important;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: #24232b;
+  border-color: #000000b0 !important;
+}
+
+tr:nth-child(even) {
+  background-color: #212029;
+}
+
+th {
+  padding: 8px !important;
 }

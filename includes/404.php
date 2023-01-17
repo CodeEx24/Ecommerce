@@ -1,4 +1,4 @@
-<div class="card text-center card-404">
+<div class="card text-center card-404 bg-dark pb-5">
     <div class="container">
         <svg width="800px" id="ghostsSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 375">
             <defs>
@@ -115,10 +115,11 @@
     </div>
     <div class="containter--text mt-4">
         <div class="text">
-            <h1>404</h1>
-            <h2>Page Not Found.</h2>
+            <h1 class="fw-bold">404</h1>
+            <h2 class="fw-bold">Page Not Found.</h2>
             <p class="my-4">The page you are looking for has slipped into an unknown realm. Click the button below to go back to the category page.</p>
-            <a class="btn btn-primary shadow button-text" href="categories.php">Collection Page</a>
+            <a class="btn btn-primary shadow button-text" href="index.php">Home Page</a>
         </div>
     </div>
 </div><!-- /.svg-container -->
+<?php include('includes/footer.php') ?>

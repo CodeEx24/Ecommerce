@@ -106,8 +106,8 @@ if (mysqli_num_rows($cartItems) === 0) {
                             <div class="order-button">
                                 <input type="hidden" name="payment_mode" value="COD">
                                 <button type="submit" name="placeOrderBtn" class="btn btn-primary text-white w-100">Confirm and place order | COD</button>
-                                <div class="mt-3" id="paypal-button-container"></div>
 
+                                <div class="mt-3" id="paypal-button-container"></div>
                             </div>
                         </div>
                     </div>

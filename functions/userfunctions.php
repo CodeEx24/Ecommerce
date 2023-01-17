@@ -6,7 +6,7 @@ function getAllActive($table)
 {
     global $con;
     $active_query = "SELECT * FROM $table WHERE status='1'";
-    return $active_query_run = mysqli_query($con, $active_query);
+    return mysqli_query($con, $active_query);
 }
 
 function getAllTrending()
@@ -54,7 +54,7 @@ function getOrders()
     $user_id = $_SESSION['auth_user']['user_id'];
 
     $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY id DESC;";
-    return $query_run = mysqli_query($con, $query);
+    return mysqli_query($con, $query);
 }
 
 function redirect($url, $message)

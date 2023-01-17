@@ -9,17 +9,18 @@ if (isset($_GET['tracking'])) {
 
     $orderData = checkTrackingNoValid($tracking_no);
 
-    if (mysqli_num_rows($orderData) < 0) {
+    if (mysqli_num_rows($orderData) == 0) {
 ?>
-        <h4>Something went wrong</h4>
+        <h4 class="bg-dark text-center pt-5" style="margin: 0;">It seems that you don't have existing orders for the tracking number</h4>
     <?php
+        include('includes/404.php');
         die();
     }
 } else {
     ?>
-    <h4>Something went wrong</h4>;
-
+    <h4 class="bg-dark text-center pt-5" style="margin: 0;">Tracking number is missing in parameter of url</h4>
 <?php
+    include('includes/404.php');
     die();
 }
 $data = mysqli_fetch_array($orderData);

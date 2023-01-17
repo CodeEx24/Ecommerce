@@ -13,7 +13,7 @@ include('includes/header.php');
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                        <h4 class="mb-0">$53k</h4>
+                        <h4 class="mb-0 text-white">$53k</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -30,7 +30,7 @@ include('includes/header.php');
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                        <h4 class="mb-0">2,300</h4>
+                        <h4 class="mb-0 text-white">2,300</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -47,7 +47,7 @@ include('includes/header.php');
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                        <h4 class="mb-0">3,462</h4>
+                        <h4 class="mb-0 text-white">3,462</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -64,7 +64,7 @@ include('includes/header.php');
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">Sales</p>
-                        <h4 class="mb-0">$103,430</h4>
+                        <h4 class="mb-0 text-white">$103,430</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">

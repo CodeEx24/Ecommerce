@@ -3,6 +3,16 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 
 include('authenticate.php');
+
+$orders = getOrders();
+
+if (mysqli_num_rows($orders) == 0) {
+?>
+    <h4 class="bg-dark text-center pt-5 fw-bold" style="margin: 0;">You don't have orders yet</h4>
+<?php
+    include('includes/404.php');
+    die();
+}
 ?>
 
 <section class="bg-dark">
@@ -21,7 +31,7 @@ include('authenticate.php');
                     </thead>
                     <tbody>
                         <?php
-                        $orders = getOrders();
+
 
                         if (mysqli_num_rows($orders) > 0) {
                             foreach ($orders as $item) {

@@ -8,54 +8,56 @@ include('includes/header.php');
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h2>Categories</h2>
-                </div>
-                <div class="card-body" id="category_table">
-                    <table class="table table-bordered ">
-                        <thead>
-                            <tr>
-                                <th class="table-text">ID</th>
-                                <th class="table-text">Image</th>
-                                <th class="table-text">Name</th>
-                                <th class="table-text">Status</th>
-                                <th class="table-text">Action</th>
-                            </tr>
-                        <tbody>
-                            <?php
-                            $category = getAll("categories");
+                <div class="col-md-8 p-3">
+                    <div class="card-header" style="padding-bottom: 0;">
+                        <h2>Categories</h2>
+                    </div>
+                    <div class="card-body" id="category_table">
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <th class="table-text p-4">ID</th>
+                                    <th class="table-text p-4" style="width: 120px;">Image</th>
+                                    <th class="table-text p-4">Name</th>
+                                    <th class="table-text p-4">Status</th>
+                                    <th class="table-text p-4">Action</th>
+                                </tr>
+                            <tbody>
+                                <?php
+                                $category = getAll("categories");
 
-                            if (mysqli_num_rows($category) > 0) {
-                                foreach ($category as $item) {
-                            ?>
+                                if (mysqli_num_rows($category) > 0) {
+                                    foreach ($category as $item) {
+                                ?>
 
-                                    <tr>
-                                        <td class="table-text"><?= $item['ID']; ?></td>
-                                        <td class="table-text"><img src="../uploads/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" width="100px" height="100px"></td>
-                                        <td class="table-text"><?= $item['Name']; ?></td>
-                                        <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
-                                        <td class="table-text">
-                                            <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px;">Edit</a>
-                                            <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px;">Delete</button>
-                                            <!-- <form action="code.php" method="POST" style="display: inline-block">
+                                        <tr>
+                                            <td class="table-text p-4"><?= $item['ID']; ?></td>
+                                            <td class="table-text p-4" style="width: 120px;"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" width="100px" height="100px"></td>
+                                            <td class="table-text p-4"><?= $item['Name']; ?></td>
+                                            <td class="table-text p-4"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
+                                            <td class="table-text p-4">
+                                                <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px;">Edit</a>
+                                                <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px;">Delete</button>
+                                                <!-- <form action="code.php" method="POST" style="display: inline-block">
                                                 <input type="hidden" name="category_id" value="<?= $item['ID']; ?>">
                                                 <button type="submit" name="delete_category_btn" class="btn btn-danger shadow button-text mx-2" style="width: 100px;">Delete</button>
                                             </form> -->
-                                        </td>
-                                    </tr>
-                            <?php
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                } else {
+                                    echo "No records found";
                                 }
-                            } else {
-                                echo "No records found";
-                            }
-                            ?>
+                                ?>
 
 
-                            <tr>
-                            </tr>
-                        </tbody>
-                        </thead>
-                    </table>
+                                <tr>
+                                </tr>
+                            </tbody>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

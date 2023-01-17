@@ -12,14 +12,15 @@ if (isset($_GET['product'])) {
 ?>
         <div class="bg-dark">
             <div class="container product-data">
-                <div class="row">
-                    <div class="col-md-4 col-sm-12 my-5 ">
+                <div class="row ">
+
+                    <div class="col-md-4 col-sm-12 my-5 mx-1 ">
                         <div class="d-flex flex-column">
                             <img class="ref-image rounded " src="uploads/<?= $product['Image'] ?>" alt="<?= $product['Name'] ?>" loading="lazy" />
                             <p class="<?= $product['Trending']  ? "ref-sale-badge" : "" ?>"><?= $product['Trending'] ? "TRENDING" : "" ?></p>
                         </div>
                     </div>
-                    <div class="col-md-6 mx-3 my-5">
+                    <div class="col-md-6 mx-1 my-5">
                         <h4 class="fw-bold"><?= $product['Name'] ?></h4>
                         <hr>
                         <p><?= $product['Description'] ?></p>
@@ -54,11 +55,22 @@ if (isset($_GET['product'])) {
                             </div>
                         </div>
                     </div>
-                    <p><?= $product['Small_Description'] ?></p>
+
                 </div>
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <hr>
+                        <p><?= $product['Small_Description'] ?></p>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
-        </div>
+
 
 <?php
     } else {

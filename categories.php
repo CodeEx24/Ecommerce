@@ -13,7 +13,7 @@ include('includes/header.php');
     } ?>
     <div class="container pt-4 pt-xl-5">
         <div class="row pt-5">
-            <h1>Our Collections</h1>
+            <h1 class='fw-bold'>Our Collections</h1>
             <hr>
             <?php
             $categories = getAllActive("Categories");
@@ -25,7 +25,7 @@ include('includes/header.php');
                         <a href="products.php?category=<?= $item['Slug'] ?>">
                             <div class="bg-card card h-100">
                                 <div class="card-body ">
-                                    <img class="w-100" src="uploads/<?= $item['Image'] ?>" alt="">
+                                    <img class="w-100" src="uploads/category/<?= $item['Image'] ?>" alt="">
                                     <h5 class="mt-3 text-center"><?= $item['Name'] ?></h5>
                                 </div>
                             </div>
