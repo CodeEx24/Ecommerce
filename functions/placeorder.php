@@ -9,6 +9,7 @@ if (isset($_SESSION['auth'])) {
         // $province = isset($_POST['province']) ? $_POST['province'] : "";
         //Address details
         $address = "(" . $_POST['province'] . "), " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . " Street, " . $_POST['city'] . " City, Barangay " . $_POST['barangay'];
+
         $_SESSION['message'] = $address;
         $name = mysqli_real_escape_string($con, $_POST['name']);
         $email = mysqli_real_escape_string($con, $_POST['email']);

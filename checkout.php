@@ -4,10 +4,10 @@ include('includes/header.php');
 
 include('authenticate.php');
 
+//Check if the user have a cart items
 $cartItems = getCartItems();
-
 if (mysqli_num_rows($cartItems) === 0) {
-    header('Location: index.php');
+    header('Location: index.php'); //If no cart items redirect to home page
 }
 ?>
 
@@ -120,6 +120,7 @@ if (mysqli_num_rows($cartItems) === 0) {
 
 <?php include('includes/footer.php') ?>
 
+<!-- Provinces option of a user -->
 <script>
     var provinces = ['Abra', 'Agusan del Norte', 'Agusan del Sur', 'Aklan', 'Albay', 'Antique', 'Apayao', 'Aurora', 'Basilan', 'Bataan', 'Batanes', 'Batangas', 'Benguet', 'Biliran', 'Bohol', 'Bukidnon', 'Bulacan', 'Cagayan', 'Camarines Norte', 'Camarines Sur', 'Camiguin', 'Capiz', 'Catanduanes', 'Cavite', 'Cebu', 'Compostela Valley', 'Cotabato', 'Davao del Norte', 'Davao del Sur', 'Davao Occidental', 'Davao Oriental', 'Dinagat Islands', 'Eastern Samar', 'Guimaras', 'Ifugao', 'Ilocos Norte', 'Ilocos Sur', 'Iloilo', 'Isabela', 'Kalinga', 'La Union', 'Laguna', 'Lanao del Norte', 'Lanao del Sur', 'Leyte', 'Maguindanao', 'Marinduque', 'Masbate', 'Metro Manila', 'Misamis Occidental', 'Misamis Oriental', 'Mountain Province', 'Negros Occidental', 'Negros Oriental', 'Northern Samar', 'Nueva Ecija', 'Nueva Vizcaya', 'Occidental Mindoro', 'Oriental Mindoro', 'Palawan', 'Pampanga', 'Pangasinan', 'Quezon', 'Quirino', 'Rizal', 'Romblon', 'Samar', 'Sarangani', 'Siquijor', 'Sorsogon', 'South Cotabato', 'Southern Leyte', 'Sultan Kudarat', 'Sulu', 'Surigao del Norte', 'Surigao del Sur', 'Tarlac', 'Tawi-Tawi', 'Zambales', 'Zamboanga del Norte', 'Zamboanga del Sur', 'Zamboanga Sibugay'];
 
@@ -132,76 +133,31 @@ if (mysqli_num_rows($cartItems) === 0) {
         select.appendChild(el);
     }
 </script>
+
 <!-- Replace "test" with your own sandbox Business account app client ID -->
 <script src="https://www.paypal.com/sdk/js?client-id=ActZNAmGgUgPbTFaT1BeyxwxTuTgLVk6fOq8sFcOqMMnoc--p7WPGJuwTqXnmh18pYi9JBi-QdPc0pX2&currency=USD"></script>
 
+<!-- Paypal process and rendering the details in the database -->
 <script>
     paypal.Buttons({
         onClick() {
-            var name = $('#name').val();
-            var email = $('#email').val();
-            var phone = $('#phone').val();
-            //Address details
-            var pincode = $('#pincode').val();
-            var street = $('#street').val();
-            var city = $('#city').val();
-            var bldg_houseno = $('#bldg_houseno').val();
-            var barangay = $('#barangay').val();
-            var province = $("#province-select option:selected").val();
-
-
-            if (name.length == 0) {
-                $('.name').text("*This field is required");
-            } else {
-                $('.name').text("")
-            }
-            if (email.length == 0) {
-                $('.email').text("*This field is required");
-            } else {
-                $('.email').text("")
-            }
-            if (phone.length == 0) {
-                $('.phone').text("*This field is required");
-            } else {
-                $('.phone').text("")
-            }
-            if (pincode.length == 0) {
-                $('.pincode').text("*This field is required");
-            } else {
-                $('.pincode').text("")
-            }
-
-            if (street.length == 0) {
-                $('.street').text("*This field is required");
-            } else {
-                $('.street').text("")
-            }
-            if (city.length == 0) {
-                $('.city').text("*This field is required");
-            } else {
-                $('.city').text("")
-            }
-            if (barangay.length == 0) {
-                $('.barangay').text("*This field is required");
-            } else {
-                $('.barangay').text("")
-            }
-            if (bldg_houseno.length == 0) {
-                $('.bldg_houseno').text("*This field is required");
-            } else {
-                $('.bldg_houseno').text("")
-            }
-            if (province.length == 0) {
-                $('.province').text("*This field is required");
-            } else {
-                $('.province').text("")
-            }
-
-            if (name.length == 0 || email.length == 0 || phone.length == 0 || pincode.length == 0 || street.length == 0 || city.length == 0 || barangay.length == 0 || bldg_houseno.length == 0 || province.length == 0) {
+            var fields = ['name', 'email', 'phone', 'pincode', 'street', 'city', 'barangay', 'bldg_houseno', 'province-select option:selected'];
+            var validation = true;
+            fields.forEach(function(field) {
+                if (field == 'province-select option:selected' && !$('#' + field).val()) {
+                    validation = false;
+                    $('.province').text("*This field is required");
+                } else if (!$('#' + field).val()) {
+                    validation = false;
+                    $('.' + field).text("*This field is required");
+                } else {
+                    $('.' + field).text("");
+                }
+            });
+            if (!validation) {
                 return false;
             }
         },
-        // Sets up the transaction when a payment button is clicked
         createOrder: (data, actions) => {
             return actions.order.create({
                 purchase_units: [{
@@ -211,39 +167,26 @@ if (mysqli_num_rows($cartItems) === 0) {
                 }]
             });
         },
-        // Finalize the transaction after payer approval
         onApprove: (data, actions) => {
             return actions.order.capture().then(function(orderData) {
-                // Successful capture! For dev/demo purposes:
-                // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 const transaction = orderData.purchase_units[0].payments.captures[0];
-                var name = $('#name').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
-                //Address details
-                var pincode = $('#pincode').val();
-                var street = $('#street').val();
-                var city = $('#city').val();
-                var bldg_houseno = $('#bldg_houseno').val();
-                var barangay = $('#barangay').val();
+                var fields = ['name', 'email', 'phone', 'pincode', 'street', 'city', 'barangay', 'bldg_houseno', 'province'];
                 var province = $("#province-select option:selected").val();
-
-
                 var data = {
-                    'name': name,
-                    'email': email,
-                    'phone': phone,
-                    'pincode': pincode,
-                    'street': street,
-                    'city': city,
-                    'bldg_houseno': bldg_houseno,
-                    'barangay': barangay,
-                    'province': province,
+                    'placeOrderBtn': true,
                     'payment_mode': "PayPal",
                     'payment_id': transaction.id,
-                    'placeOrderBtn': true
-                }
+                };
+                fields.forEach(function(field) {
+                    if (field == 'province') {
+                        data[field] = province;
 
+                    } else {
+                        data[field] = $('#' + field).val();
+                    }
+
+                });
+                console.log(data)
                 $.ajax({
                     type: "POST",
                     url: "functions/placeorder.php",
@@ -255,10 +198,6 @@ if (mysqli_num_rows($cartItems) === 0) {
                         }
                     }
                 });
-                // When ready to go live, remove the alert and show a success message within this page. For example:
-                // const element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
             });
         }
     }).render('#paypal-button-container');
