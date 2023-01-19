@@ -66,7 +66,7 @@
 
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
-    alertify.set('notifier', 'position', 'top-right');
+    alertify.set('notifier', 'position', 'bottom-right');
     <?php
     if (isset($_SESSION['message'])) {
         if ($_SESSION['message']) {

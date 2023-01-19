@@ -21,7 +21,7 @@ include('includes/header.php');
             if (mysqli_num_rows($categories) > 0) {
                 foreach ($categories as $item) {
             ?>
-                    <div class="col-md-3 my-4 ">
+                    <div class="col-md-3 my-3 ">
                         <a href="products.php?category=<?= $item['Slug'] ?>">
                             <div class="bg-card card h-100">
                                 <div class="card-body ">

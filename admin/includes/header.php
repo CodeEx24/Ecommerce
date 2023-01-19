@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <!-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"> -->
+    <link rel="icon" type="image/png" href="../assets/img/trendycart.png">
     <title>
         Trendy Cart
     </title>
@@ -29,7 +29,9 @@
 
     <!-- SweetAlert Dark Theme -->
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-
+    <!-- 
+SAMPLE -->
+    <!-- <script src="/path/to/cdn/jquery.min.js"></script> -->
 
 
 </head>

@@ -43,20 +43,26 @@
 
 <!-- AlertifyJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+<script src="assets/js/notification.js"></script>
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
     <?php
     if (isset($_SESSION['message'])) {
         if ($_SESSION['message'] == "Category Added Successfully." || $_SESSION['message'] == "Category Updated Successfully." || $_SESSION['message'] == "Category Deleted Successfully." || $_SESSION['message'] == "Product Added Successfully." || $_SESSION['message'] == "Product Updated Successfully." || $_SESSION['message'] == "Order status updated successfully.") {
     ?>
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success('<?= $_SESSION['message'] ?>');
+            $.notification(
+                ["<?= $_SESSION['message'] ?>"], {
+                    position: ['top', 'right'],
+                    timeView: 5000,
+                    messageType: 'success'
+                }
+            )
+
         <?php
             unset($_SESSION['message']);
         } else {
         ?>
-            alertify.set('notifier', 'position', 'top-right');
+            alertify.set('notifier', 'position', 'bottom-center');
             alertify.error('<?= $_SESSION['message'] ?>');
     <?php
             unset($_SESSION['message']);

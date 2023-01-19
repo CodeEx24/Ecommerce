@@ -38,10 +38,6 @@ include('includes/header.php');
                                             <td class="table-text p-4">
                                                 <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px;">Edit</a>
                                                 <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px;">Delete</button>
-                                                <!-- <form action="code.php" method="POST" style="display: inline-block">
-                                                <input type="hidden" name="category_id" value="<?= $item['ID']; ?>">
-                                                <button type="submit" name="delete_category_btn" class="btn btn-danger shadow button-text mx-2" style="width: 100px;">Delete</button>
-                                            </form> -->
                                             </td>
                                         </tr>
                                 <?php

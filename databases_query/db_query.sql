@@ -78,6 +78,21 @@ CREATE TABLE Order_Items (
   FOREIGN KEY (Product_ID) REFERENCES products(ID) ON DELETE CASCADE
 );
 
+CREATE TABLE Posts (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    CategoryID INT NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Image VARCHAR(255),
+    Slug VARCHAR(255) NOT NULL,
+    Description TEXT NOT NULL,
+    Status TINYINT,
+    Meta_Title VARCHAR(255),
+    Meta_Keywords MEDIUMTEXT,
+    Meta_Description MEDIUMTEXT,
+    Created_At DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(ID)
+);
+
 -- INSERT VALUES
 INSERT INTO Categories (Image, Name, Slug, Description, Status, Popular, Meta_Title, Meta_Description, Meta_Keywords) VALUES ('footwear.jpg', 'Footwear', 'footwear', 'A variety of footwear options for men, women, and children', 1, 1, 'Footwear for everyone', 'Shop our selection of footwear for men, women, and children', 'footwear, shoes, boots, sandals'), ('fashion.jpg', 'Fashion', 'fashion', 'Trendy clothing and accessories for men and women', 1, 1, 'Fashion for everyone', 'Stay on trend with our selection of fashion for men and women', 'fashion, clothing, accessories'), ('mobiles.jpg', 'Mobiles', 'mobiles', 'A wide selection of smartphones and mobile devices', 1, 1, 'Mobile phones and devices', 'Shop our selection of smartphones and mobile devices', 'mobiles, phones, devices'), ('groceries.jpg', 'Groceries', 'groceries', 'A wide variety of groceries and household items', 1, 1, 'Groceries and household items', 'Shop our selection of groceries and household items', 'groceries, household items'), ('laptops.jpg', 'Laptops & Computers', 'laptops', 'A wide selection of laptops, computers, and accessories', 1, 1, 'Laptops and computers', 'Shop our selection of laptops, computers, and accessories', 'laptops, computers, accessories'), ('accessories.jpg', 'Accessories', 'accessories', 'A wide selection of accessories for men, women, and children', 1, 1, 'Accessories for everyone', 'Shop our selection of accessories for men, women, and children', 'accessories, jewelry, bags'), ('entertainment.jpg', 'Home Entertainment', 'entertainment', 'A wide selection of home entertainment options', 1, 1, 'Home entertainment', 'Shop our selection of home entertainment options', 'entertainment, TVs, speakers');
 
