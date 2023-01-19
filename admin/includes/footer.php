@@ -40,10 +40,13 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script src="assets/js/custom.js"></script>
 
-
-<!-- AlertifyJS -->
+<!-- NotifyJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="assets/js/notification.js"></script>
+
+<!-- Data Tables -->
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
     <?php
@@ -76,8 +79,6 @@
 
     ?>
 </script>
-
-
 
 </body>
 

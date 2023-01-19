@@ -134,3 +134,7 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
 .text-gray {
   color: #8db6d3 !important;
 }
+
+/* .owl-carousel .owl-nav button.owl-prev {
+  display: none !important;
+} */

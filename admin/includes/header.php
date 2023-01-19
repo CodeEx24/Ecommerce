@@ -29,11 +29,31 @@
 
     <!-- SweetAlert Dark Theme -->
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <!-- 
-SAMPLE -->
-    <!-- <script src="/path/to/cdn/jquery.min.js"></script> -->
 
+    <!-- DATA TABLES PAGINATION -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 
+    <style>
+        /* Some modification for data tables because we use the cdn link for datatables */
+        .dataTables_length label,
+        .dataTables_filter label {
+            color: white;
+
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            background-color: white;
+        }
+
+        .dataTables_filter input[type="search"] {
+            background-color: white;
+            margin-bottom: 10px
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+            color: white !important;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

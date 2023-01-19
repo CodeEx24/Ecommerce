@@ -13,7 +13,7 @@ include('includes/header.php');
                         <h2>Categories</h2>
                     </div>
                     <div class="card-body" id="category_table">
-                        <table class="table table-bordered ">
+                        <table id="category" class="display" class="table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="table-text p-4">ID</th>
@@ -46,10 +46,6 @@ include('includes/header.php');
                                     echo "No records found";
                                 }
                                 ?>
-
-
-                                <tr>
-                                </tr>
                             </tbody>
                             </thead>
                         </table>
@@ -60,6 +56,10 @@ include('includes/header.php');
     </div>
 </div>
 
-
-
 <?php include('includes/footer.php') ?>
+
+<script>
+    $(document).ready(function() {
+        $('#category').DataTable();
+    });
+</script>

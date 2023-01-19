@@ -61,16 +61,10 @@
 <!-- Owl Carousel -->
 <script src="assets/js/owl.carousel.min.js"></script>
 
-<!-- NotidficationJS -->
+<!-- NotificationJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="assets/js/notification.js"></script>
-<!-- alertify.success('Product added to cart successfully');
-} else if (response == 'existing') {
-alertify.error('Product already existing in the cart'); //warning only
-} else if (response == 401) {
-alertify.error('Login to continue');
-} else if (response == 500) {
-alertify.error('Something went wrong'); -->
+
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
     <?php

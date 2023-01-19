@@ -17,7 +17,7 @@ include('includes/header.php');
 
                 </div>
                 <div class="card-body" id="">
-                    <table class="table table-bordered ">
+                    <table id="orders" class="display" class="table-dark table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="table-text">ID</th>
@@ -58,7 +58,7 @@ include('includes/header.php');
                             <?php
                             }
                             ?>
-                            <tr></tr>
+
                         </tbody>
                         </thead>
                     </table>
@@ -69,3 +69,9 @@ include('includes/header.php');
 </div>
 
 <?php include('includes/footer.php') ?>
+
+<script>
+    $(document).ready(function() {
+        $('#orders').DataTable();
+    });
+</script>

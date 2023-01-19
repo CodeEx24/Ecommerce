@@ -1,5 +1,6 @@
 h2,
-.text h1 {
+.text h1,
+.dataTables_length label {
   color: white !important;
 }
 
