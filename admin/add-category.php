@@ -18,15 +18,15 @@ include('includes/header.php');
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="category-label my-2" for="">Name</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Enter Category Name"></div>
+                                        <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Enter Category Name" required></div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="category-label my-2" for="">Slug</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug"></div>
+                                        <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" required></div>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="category-label my-2" for="">Description</label><br>
-                                        <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3"></textarea>
+                                        <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required></textarea>
                                     </div>
 
                                     <div class="col-md-12">
@@ -47,7 +47,7 @@ include('includes/header.php');
                         </div> -->
                                     <div class="col-md-6">
                                         <label class="category-label" for="">Upload Image</label><br>
-                                        <input type="file" name="image"></input>
+                                        <input type="file" name="image" required></input>
                                     </div>
                                     <div class="col-md-6 category-checkbox-div flex-container">
                                         <input type="checkbox" class="category-checkbox" name="status">
@@ -67,7 +67,6 @@ include('includes/header.php');
                             <h4 class="text-white">Some Details Here</h4>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

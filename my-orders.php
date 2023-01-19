@@ -31,8 +31,6 @@ if (mysqli_num_rows($orders) == 0) {
                     </thead>
                     <tbody>
                         <?php
-
-
                         if (mysqli_num_rows($orders) > 0) {
                             foreach ($orders as $item) {
                         ?>

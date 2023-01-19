@@ -26,10 +26,10 @@ if (isset($_GET['tracking'])) {
 $data = mysqli_fetch_array($orderData);
 ?>
 
-<section class="bg-dark">
+<section class="">
     <div class="container py-5 ">
         <div class="row">
-            <div class="col-md-12 p-5 bg-light-dark" style="border-radius: 14px;">
+            <div class="col-md-12 p-5 bg-dark" style="border-radius: 14px;">
 
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="fw-bold">View Order</h3>
@@ -44,37 +44,37 @@ $data = mysqli_fetch_array($orderData);
                     <div class="col-md-6">
                         <h5>Delivery Details</h5>
                         <div class="row">
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Name</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Name']; ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Email</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Email']; ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Phone</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Phone']; ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Tracking No.</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Tracking_No']; ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Address</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Address']; ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Pin Code</label>
                                 <div class="border p-2 form-control" style="border-radius: 5px;">
                                     <?= $data['Pincode']; ?>

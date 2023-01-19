@@ -19,7 +19,7 @@ include('includes/header.php');
                                     <div class="col-md-4">
                                         <label class="category-label my-2" for="">Select Category</label>
                                         <select name="category_id" class="form-select form-control form-control-lg" required>
-                                            <option selected disabled>Select Category</option>
+                                            <option selected disabled value="">Select Category</option>
                                             <?php
                                             $categories = getAll("categories");
                                             if (mysqli_num_rows($categories) > 0) {
@@ -82,19 +82,16 @@ include('includes/header.php');
 
                                     <div class="col-md-12">
                                         <label class="category-label my-2" for="">Meta Title</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="meta_title" placeholder="Enter Meta Title" required></div>
+                                        <div class="mb-3"><input class="form-control" type="text" name="meta_title" placeholder="Enter Meta Title"></div>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="category-label my-2" for="">Meta Description</label><br>
-                                        <textarea class="form-control mb-2" name="meta_description" placeholder="Enter Meta Description" rows="3" required></textarea>
+                                        <textarea class="form-control mb-2" name="meta_description" placeholder="Enter Meta Description" rows="3"></textarea>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="category-label my-2" for="">Meta Keywords</label><br>
-                                        <textarea class="form-control mb-2" name="meta_keywords" placeholder="Enter Meta Keywords" rows="3" required></textarea>
+                                        <textarea class="form-control mb-2" name="meta_keywords" placeholder="Enter Meta Keywords" rows="3"></textarea>
                                     </div>
-
-
-
                                     <div class="col-md-12">
                                         <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="add_product_btn">Add Product</button></div>
                                     </div>

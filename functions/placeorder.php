@@ -72,7 +72,7 @@ if (isset($_SESSION['auth'])) {
             $deleteCart_query_run = mysqli_query($con, $deleteCart_query);
 
             if ($payment_mode == "COD") {
-                $_SESSION['message'] = "Order placed successfully.";
+                $_SESSION['message'] = "Order placed successfully";
                 header('Location: ../my-orders.php');
                 die();
             } else if ($payment_mode == "PayPal") {

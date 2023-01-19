@@ -28,12 +28,7 @@ include('includes/header.php')
                         <form action="functions/authcode.php" method="POST">
                             <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
                             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                            <?php if (isset($_SESSION['message'])) { ?>
 
-                                <p class="text-danger"><?= $_SESSION['message']; ?></p>
-                            <?php
-                                unset($_SESSION['message']);
-                            } ?>
                             <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit" name="login_btn">Log In</button></div>
                             <p class="text-muted">Doesn't have an account?&nbsp;<a href="register.php">Sign Up</a></p>
                         </form>

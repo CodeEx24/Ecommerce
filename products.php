@@ -17,12 +17,7 @@ if (isset($_GET['category'])) {
 ?>
 
     <div class="bg-dark">
-        <?php if (isset($_SESSION['message'])) { ?>
 
-            <h2 class="text-danger text-center"><?= $_SESSION['message']; ?></h2>
-        <?php
-            unset($_SESSION['message']);
-        } ?>
         <div class="container pt-2">
             <div class="row pt-5">
                 <h1 class="fw-bold"><?= $category['Name'] ?></h1>

@@ -26,7 +26,7 @@ if (isset($_POST['register_btn'])) {
         $insert_query_run = mysqli_query($con, $insert_query);
 
         if ($insert_query_run) {
-            redirect('../login.php', "");
+            redirect('../login.php', "Registered successfully");
         } else {
             redirect('../register.php', "Something went wrong!");
         }

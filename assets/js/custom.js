@@ -21,13 +21,29 @@ $(document).ready(function () {
 
       success: function (response) {
         if (response == 201) {
-          alertify.success('Product Added To Cart');
+          $.notification(['Product added to cart successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
         } else if (response == 'existing') {
-          alertify.error('Product already in cart');
+          $.notification(['Product already existing in the cart'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'warning',
+          });
         } else if (response == 401) {
-          alertify.error('Login To Continue');
+          $.notification(['You must log in first before adding into cart'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'warning',
+          });
         } else if (response == 500) {
-          alertify.error('Something went wrong');
+          $.notification(['Something went wrong'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'warning',
+          });
         }
       },
     });
@@ -177,10 +193,11 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response == 200) {
-          alertify.success('Item removed in cart successfully.');
+          $_SESSION['message'] = 'Item removed in cart successfully';
+          // alertify.success('Item removed in cart successfully');
           $('#mycart').load(location.href + ' #mycart');
         } else {
-          alertify.error(response);
+          $_SESSION['message'] = response;
         }
       },
     });

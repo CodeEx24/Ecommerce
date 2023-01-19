@@ -61,20 +61,53 @@
 <!-- Owl Carousel -->
 <script src="assets/js/owl.carousel.min.js"></script>
 
-<!-- AlertifyJS -->
+<!-- NotidficationJS -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+<script src="assets/js/notification.js"></script>
+<!-- alertify.success('Product added to cart successfully');
+} else if (response == 'existing') {
+alertify.error('Product already existing in the cart'); //warning only
+} else if (response == 401) {
+alertify.error('Login to continue');
+} else if (response == 500) {
+alertify.error('Something went wrong'); -->
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
-    alertify.set('notifier', 'position', 'bottom-right');
     <?php
     if (isset($_SESSION['message'])) {
-        if ($_SESSION['message']) {
+        //Success message
+        if ($_SESSION['message'] == "Logged In Successfully." || $_SESSION['message'] == "Registered successfully" || $_SESSION['message'] == "Order placed successfully" ||  $_SESSION['message'] == "Product added to cart successfully") {
     ?>
-            alertify.success('<?= $_SESSION['message'] ?>');
+            $.notification(
+                ["<?= $_SESSION['message'] ?>"], {
+                    position: ['bottom', 'right'],
+                    timeView: 3000,
+                    messageType: 'success'
+                }
+            )
+        <?php
+        } else if ($_SESSION['message'] == "Product already existing in the cart") {
+        ?>
+            $.notification(
+                ["<?= $_SESSION['message'] ?>"], {
+                    position: ['bottom', 'right'],
+                    timeView: 3000,
+                    messageType: 'warning'
+                }
+            )
+        <?php
+        } else {
+        ?>
+            $.notification(
+                ["<?= $_SESSION['message'] ?>"], {
+                    position: ['bottom', 'right'],
+                    timeView: 3000,
+                    messageType: 'error'
+                }
+            )
     <?php
-            unset($_SESSION['message']);
         }
+        unset($_SESSION['message']);
     }
     ?>
 </script>

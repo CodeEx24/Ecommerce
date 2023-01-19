@@ -5,12 +5,7 @@ include('includes/header.php')
 ?>
 
 <header class="bg-dark">
-    <?php if (isset($_SESSION['message'])) { ?>
 
-        <h2 class="text-danger text-center"><?= $_SESSION['message']; ?></h2>
-    <?php
-        unset($_SESSION['message']);
-    } ?>
     <div class="container pt-4 pt-xl-5">
         <div class="row pt-5">
             <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
@@ -52,22 +47,6 @@ include('includes/header.php')
     </div>
 </header>
 
-<!-- <section class="container py-5">
-
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <?php if (isset($_SESSION['message'])) { ?>
-                    <p class="text-danger">
-                        <?= $_SESSION['message']; ?>
-                    </p>
-                <?php
-                    unset($_SESSION['message']);
-                } ?>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 <section class="py-5">
     <div class="container text-center py-5">
