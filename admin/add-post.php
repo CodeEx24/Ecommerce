@@ -16,6 +16,7 @@ include('includes/header.php');
                         <div class="card-body">
                             <form action="code.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm(event)">
                                 <div class="row">
+
                                     <div class="col-md-4">
                                         <label class="category-label my-2" for="">Select Category</label>
                                         <select name="category_id" class="form-select form-control form-control-lg" pattern="^(?!Select Category$).+" title="Please select a category" required>
@@ -83,10 +84,10 @@ include('includes/header.php');
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
 <script>
     function validateForm(event) {
         var select = document.querySelector("select[name='category_id']");

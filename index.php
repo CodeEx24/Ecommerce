@@ -1,11 +1,9 @@
 <?php
-
 include('functions/userfunctions.php');
-include('includes/header.php')
+include('includes/header.php');
 ?>
 
 <header class="bg-dark">
-
     <div class="container pt-4 pt-xl-5">
         <div class="row pt-5">
             <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
@@ -197,7 +195,7 @@ include('includes/header.php')
                         <div class="mb-3"><input id="name-1" class="form-control" type="text" name="name" placeholder="Name" /></div>
                         <div class="mb-3"><input id="email-1" class="form-control" type="email" name="email" placeholder="Email" /></div>
                         <div class="mb-3"><textarea id="message-1" class="form-control" name="message" rows="6" placeholder="Message"></textarea></div>
-                        <div><button class="btn btn-primary shadow d-block w-100" type="submit">Send </button></div>
+                        <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="send">Send </button></div>
                     </form>
                 </div>
             </div>
@@ -243,15 +241,15 @@ include('includes/header.php')
                 <h2 class="fw-bold mb-2">Subscribe to our newsletter</h2>
                 <p class="mb-0">Imperdiet consectetur dolor.</p>
             </div>
-            <form class="d-flex justify-content-center flex-wrap flex-lg-nowrap" method="post">
-                <div class="my-2"><input class="border rounded-pill shadow-sm form-control" type="email" name="email" placeholder="Your Email" /></div>
-                <div class="my-2"><button class="btn btn-primary shadow ms-2" type="submit">Subscribe </button></div>
+            <form class="d-flex justify-content-center flex-wrap flex-lg-nowrap subscribe-data" method="post">
+                <div class="my-2"><input class="border rounded-pill shadow-sm form-control email" type="email" name="email" placeholder="Your Email" /></div>
+                <div class="my-2"><button class="btn btn-primary shadow ms-2 subscribe-btn">Subscribe</button></div>
             </form>
         </div>
     </div>
 </section>
-<?php
 
+<?php
 include('includes/footer.php')
 ?>
 

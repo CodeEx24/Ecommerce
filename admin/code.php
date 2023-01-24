@@ -242,7 +242,7 @@ if (isset($_POST['add_category_btn'])) {
 
     if ($query_run) {
         move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $filename);
-        redirect('add-post.php', "post Added Successfully");
+        redirect('add-post.php', "Post Added Successfully");
     } else {
         redirect('add-post.php', "Something went wrong in adding blog post");
     }

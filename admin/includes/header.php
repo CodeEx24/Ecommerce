@@ -33,6 +33,8 @@
     <!-- DATA TABLES PAGINATION -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 
+
+    <!-- Styles for data table label, input etc. -->
     <style>
         /* Some modification for data tables because we use the cdn link for datatables */
         .dataTables_length label,

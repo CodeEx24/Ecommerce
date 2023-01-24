@@ -15,6 +15,15 @@ if (isset($_GET['category'])) {
     }
     $category_id = $category['ID']; //
 ?>
+    <section id="collections" class="d-flex align-items-center justify-content-center" style="height: 50vh;">
+        <div class="overlay"></div>
+        <div class="d-inline">
+            <p class="text-center fw-bold text-success mb-2">Products</p>
+            <div class="container d-flex justify-content-center">
+                <h1 class="text-white fw-bold h1 text-center"><?= $category['Name'] ?></h1>
+            </div>
+        </div>
+    </section>
 
     <div class="bg-dark">
 

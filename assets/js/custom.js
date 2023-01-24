@@ -61,13 +61,14 @@ $(document).ready(function () {
     var pst = $(this).closest('.product-data').find('.subtotal').val(); //product subtotal
     var pp = $(this).closest('.product-data').find('.productPrice').val(); //product price
     const totalInput = document.querySelector('.total');
-
+    var st2 = document.querySelector('#st2');
     var subtotal = parseFloat(pst);
     var price = parseFloat(pp);
 
     value = isNaN(value) ? 0 : value;
     if (value < 10) {
       value++;
+      st2.value = 'New text for the paragraph';
       var newSubTotal = Number((subtotal + price).toFixed(2));
       var newTotal = Number((parseFloat(totalInput.value) + price).toFixed(2));
 
@@ -80,6 +81,7 @@ $(document).ready(function () {
         .closest('.product-data')
         .find('.subtotal')
         .val(newSubTotal);
+
       totalInput.value = newTotal;
     }
   });
@@ -198,6 +200,69 @@ $(document).ready(function () {
           $('#mycart').load(location.href + ' #mycart');
         } else {
           $_SESSION['message'] = response;
+        }
+      },
+    });
+  });
+
+  $(document).on('click', '.addToCart-btn', function (e) {
+    e.preventDefault();
+    var quantity = $(this)
+      .closest('.product-data')
+      .find('.input-quantity')
+      .val();
+    var product_id = $(this).val();
+
+    quantity = Number(quantity);
+    quantity = quantity ? quantity : 1;
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/handlecart.php',
+      data: {
+        product_id: product_id,
+        quantity: quantity,
+        scope: 'add',
+      },
+
+      success: function (response) {
+        if (response == 201) {
+          $.notification(['Product added to cart successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        } else {
+        }
+      },
+    });
+  });
+
+  $(document).on('click', '.subscribe-btn', function (e) {
+    e.preventDefault();
+    var email = $(this).closest('.subscribe-data').find('.email').val();
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/subscribe.php',
+      data: {
+        email,
+        subs: true,
+      },
+
+      success: function (response) {
+        if (response == 200) {
+          $.notification(['Email subscribe successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        } else {
+          $.notification(['Something went wrong'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'error',
+          });
         }
       },
     });

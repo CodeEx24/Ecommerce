@@ -10,6 +10,7 @@ if (isset($_GET['product'])) {
 
     if ($product) {
 ?>
+
         <div class="bg-dark">
             <div class="container product-data">
                 <div class="row ">
@@ -34,7 +35,7 @@ if (isset($_GET['product'])) {
                         </div>
                         <!-- The input field with the spinner -->
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-8 col-lg-5">
                                 <div class="input-group mb-3 ">
                                     <button class="input-group-text bg-dark text-white decrement-btn">-</button>
                                     <input type="number" class="form-control bg-dark text-white text-center input-quantity" value="1" disabled>
