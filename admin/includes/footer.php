@@ -14,16 +14,16 @@
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com" class="nav-link" target="_blank">About Us</a>
+                        <a href="../index.php" class="nav-link" target="_blank">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">Services</a>
+                        <a href="../about.php" class="nav-link" target="_blank">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/blog" class="nav-link" target="_blank">Contact</a>
+                        <a href="../categories.php" class="nav-link" target="_blank">Collections</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/license" class="nav-link pe-0" target="_blank">About</a>
+                        <a href="../blog.php" class="nav-link pe-0" target="_blank">Blog</a>
                     </li>
                 </ul>
             </div>

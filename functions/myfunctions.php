@@ -32,6 +32,50 @@ function getAllOrders()
     return mysqli_query($con, $query);
 }
 
+
+function getAllCompletedOrders()
+{
+    global $con;
+    $query = "SELECT * FROM Orders WHERE Status='1'";
+    return mysqli_query($con, $query);
+}
+
+function getCurrentWeekCompletedOrders()
+{
+    global $con;
+    $query = "SELECT SUM(Total_Price) as total_sales FROM Orders WHERE Status='1' AND WEEK(Updated_At) = WEEK(CURDATE())";
+    return mysqli_query($con, $query);
+}
+
+function getCurrentDayCompletedOrders()
+{
+    global $con;
+    $query = "SELECT SUM(Total_Price) as total_sales FROM Orders WHERE Status='1' AND DATE(Updated_At) = CURDATE()";
+    return mysqli_query($con, $query);
+}
+
+function getCurrentMonthCompletedOrders()
+{
+    global $con;
+    $query = "SELECT SUM(Total_Price) as total_sales FROM Orders WHERE Status='1' AND MONTH(Updated_At) = MONTH(CURDATE()) AND YEAR(Updated_At) = YEAR(CURDATE())";
+    return mysqli_query($con, $query);
+}
+
+function getUsersAddedThisMonth()
+{
+    global $con;
+    $query = "SELECT * FROM Users WHERE Role_As='0' AND MONTH(Created_At) = MONTH(CURDATE())";
+    return mysqli_query($con, $query);
+}
+
+function getCurrentOrdersThisDay()
+{
+    global $con;
+    $query = "SELECT * FROM Orders WHERE DAY(Created_At) = DAY(CURDATE())";
+    return mysqli_query($con, $query);
+}
+
+
 function getOrderHistory()
 {
     global $con;

@@ -31,7 +31,7 @@ $data = mysqli_fetch_array($orderData);
                     <div class="d-flex justify-content-between">
                         <h2>Orders</h2>
                         <div class="order-button">
-                            <a href="orders.php" class="btn btn-danger text-white">Back</a>
+                            <a href="order-history.php" class="btn btn-danger text-white">Back</a>
                         </div>
                     </div>
                 </div>

@@ -208,9 +208,7 @@ if (isset($_POST['add_category_btn'])) {
     $tracking_no = $_POST['tracking_no'];
     $order_status = $_POST['status'];
 
-
-
-    $update_order_query = "UPDATE orders SET Status='$order_status' WHERE Tracking_No='$tracking_no';";
+    $update_order_query = "UPDATE orders SET Status='$order_status', Updated_At=CURRENT_TIMESTAMP WHERE Tracking_No='$tracking_no';";
     $update_order_query_run = mysqli_query($con, $update_order_query);
 
     redirect("view-order.php?tracking=$tracking_no", "Order status updated successfully.");

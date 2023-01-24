@@ -50,7 +50,7 @@ include('includes/header.php');
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="5">No orders yet</td>
+                                    <td colspan="5">No completed orders yet</td>
                                 </tr>
                             <?php
                             }
