@@ -1,6 +1,8 @@
 <?php
 $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1);
 
+
+
 ?>
 <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3 sticky-top" id="mainNav">
     <div class="container">
@@ -15,7 +17,21 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
                 <li class="nav-item"><a class="nav-link <?= $page == "blog.php" ||  $page == "blog-view.php" ? "active text-aqua" : "" ?>" href="blog.php">Blog</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "about.php" ? "active text-aqua" : "" ?>" href="about.php">About</a></li>
             </ul>
-            <a href="cart.php" class="me-md-2 me-lg-4 <?= $page == "cart.php" ? "active text-aqua fw-bold" : "" ?>" href="cart.php"">Cart</a>
+            <a href="cart.php" id="cart" class=" <?= $page == "cart.php" ? "active text-aqua fw-bold" : "" ?>" href="cart.php"">
+                Cart 
+                <?php if (isset($_SESSION['auth'])) {
+                    $items = getCartItems();
+                    $items_number =  mysqli_num_rows($items);
+                    print("<sup class=' cart-length bg-primary text-white me-md-2 me-lg-4' id='cart'>
+                            $items_number
+                        </sup>");
+                } else {
+                    print("<sup class=' cart-length bg-primary text-white me-md-2 me-lg-4' id='cart'>
+                            0
+                        </sup>");
+                } ?>
+               
+            </a>
 
             <?php
             if (isset($_SESSION['auth'])) {

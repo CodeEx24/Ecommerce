@@ -21,6 +21,7 @@ $(document).ready(function () {
 
       success: function (response) {
         if (response == 201) {
+          $('#cart').load(location.href + ' #cart');
           $.notification(['Product added to cart successfully'], {
             position: ['bottom', 'right'],
             timeView: 3000,
@@ -195,11 +196,19 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response == 200) {
-          $_SESSION['message'] = 'Item removed in cart successfully';
-          // alertify.success('Item removed in cart successfully');
           $('#mycart').load(location.href + ' #mycart');
+          $('#cart').load(location.href + ' #cart');
+          $.notification(['Item removed in cart successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
         } else {
-          $_SESSION['message'] = response;
+          $.notification([response], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'warning',
+          });
         }
       },
     });

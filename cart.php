@@ -11,7 +11,7 @@ include('authenticate.php')
             <div class="col-md-12">
                 <div id="mycart">
                     <?php
-                    $items = getCartItems();
+                    $items = getCartItemsActiveStatus();
                     if (mysqli_num_rows($items) > 0) {
                     ?>
                         <h1>Shopping Cart</h1>

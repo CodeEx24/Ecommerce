@@ -158,3 +158,9 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
   position: relative;
   z-index: 1;
 }
+
+.cart-length {
+  border-radius: 20px;
+  padding: 1px 5px;
+  font-size: 12px;
+}

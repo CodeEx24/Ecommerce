@@ -52,11 +52,13 @@ if (isset($_POST['add_category_btn'])) {
     $old_image = $_POST['old_image'];
     $path = "../uploads/category";
 
+    $update_products = "UPDATE Products SET status='$status' WHERE CategoryID='$category_id'";
+    $update_products_run = mysqli_query($con, $update_products);
+
     if ($name == null || $slug == null || $description == null) {
         redirect('add-category.php', "Something Went Wrong In Updating Category.");
         exit();
     }
-
 
     if ($new_image != "") {
         // $update_filename = $new_image;
