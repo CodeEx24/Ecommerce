@@ -161,7 +161,7 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on('click', '.updateQty', function () {
+  $(document).on('click', '.updateQty', function (e) {
     var quantity = $(this)
       .closest('.product-data')
       .find('.input-quantity')
@@ -184,7 +184,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on('click', '.deleteItem', function () {
+  $(document).on('click', '.deleteItem', function (e) {
     var cart_id = $(this).val();
 
     $.ajax({
@@ -247,24 +247,66 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on('click', '.subscribe-btn', function (e) {
+  $(document).on('click', '.addToCartWishlist-btn', function (e) {
     e.preventDefault();
-    var email = $(this).closest('.subscribe-data').find('.email').val();
+
+    var product_id = $(this).val();
+    quantity = 1;
 
     $.ajax({
       type: 'POST',
-      url: 'functions/subscribe.php',
+      url: 'functions/handlecart.php',
       data: {
-        email,
-        subs: true,
+        product_id: product_id,
+        quantity: quantity,
+        scope: 'addWishlist',
       },
 
       success: function (response) {
-        if (response == 200) {
-          $.notification(['Email subscribe successfully'], {
+        if (response == 201) {
+          $('#wishlist').load(location.href + ' #wishlist');
+          $('#cart').load(location.href + ' #cart');
+          $.notification(['Product added to cart successfully'], {
             position: ['bottom', 'right'],
             timeView: 3000,
             messageType: 'success',
+          });
+        } else if (response == 'existing') {
+          $('#wishlist').load(location.href + ' #wishlist');
+          $.notification(['Product is already in cart'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        }
+      },
+    });
+  });
+
+  $(document).on('click', '.addToWishlist-btn', function (e) {
+    e.preventDefault();
+    var product_id = $(this).val();
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/handlewishlist.php',
+      data: {
+        product_id: product_id,
+        scope: 'addWishlist',
+      },
+
+      success: function (response) {
+        if (response == 201) {
+          $.notification(['Product added to your wishlist'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        } else if (response == 'existing') {
+          $.notification(['Product already in your wishlist'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'error',
           });
         } else {
           $.notification(['Something went wrong'], {
@@ -275,5 +317,76 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  $(document).on('click', '.deleteItemToWishlist-btn', function (e) {
+    var wishlist_id = $(this).val();
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/handlewishlist.php',
+      data: {
+        wishlist_id,
+        scope: 'deleteWishlist',
+      },
+      success: function (response) {
+        if (response == 200) {
+          $('#wishlist').load(location.href + ' #wishlist');
+          // $('#cart').load(location.href + ' #cart');
+          $.notification(['Item removed in wishlist successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        } else {
+          $.notification([response], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'warning',
+          });
+        }
+      },
+    });
+  });
+
+  $(document).on('click', '.subscribe-btn', function (e) {
+    e.preventDefault();
+    var email = $(this).closest('.subscribe-data').find('.email').val();
+    var emailRegex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (
+      emailRegex.test(email) &&
+      email.indexOf('@gmail.com') !== -1 &&
+      email.endsWith('@gmail.com')
+    ) {
+      //valid email
+      if (email) {
+        $.ajax({
+          type: 'POST',
+          url: 'functions/subscribe.php',
+          data: {
+            email,
+            subs: true,
+          },
+
+          success: function (response) {
+            if (response == 200) {
+              $.notification(['Email subscribe successfully'], {
+                position: ['bottom', 'right'],
+                timeView: 3000,
+                messageType: 'success',
+              });
+            } else {
+            }
+          },
+        });
+      }
+    } else {
+      $.notification(['Please enter an email'], {
+        position: ['bottom', 'right'],
+        timeView: 3000,
+        messageType: 'error',
+      });
+    }
   });
 });

@@ -41,7 +41,7 @@ function getProductByCategory($category_id)
 function getRelatedProduct($category_id, $product_id)
 {
     global $con;
-    $query = "SELECT * FROM Products WHERE categoryid='$category_id' AND status='1' AND id!='$product_id' LIMIT 6";
+    $query = "SELECT * FROM Products WHERE categoryid='$category_id' AND status='1' AND id!='$product_id' AND quantity!=0 LIMIT 6";
     return mysqli_query($con, $query);
 }
 
@@ -52,6 +52,16 @@ function getCartItemsActiveStatus()
     $query = "SELECT c.id as cid, c.product_id, c.product_qty, p.id as pid, p.name, p.image, p.selling_price 
     FROM Carts c, Products p
     WHERE c.product_id = p.id AND c.user_id='$user_id' AND p.status = 1 ORDER BY c.id DESC";
+    return mysqli_query($con, $query);
+}
+
+function getItemsWishlist()
+{
+    global $con;
+    $user_id = $_SESSION['auth_user']['user_id'];
+    $query = "SELECT w.id as wid, w.product_id, p.id as pid, p.name, p.image, p.selling_price, p.quantity as pqty
+    FROM Wishlist w, Products p
+    WHERE w.product_id = p.id AND w.user_id='$user_id' AND p.status = 1 ORDER BY w.id DESC";
     return mysqli_query($con, $query);
 }
 

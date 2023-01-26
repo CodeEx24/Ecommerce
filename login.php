@@ -32,7 +32,6 @@ include('includes/header.php')
                             <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit" name="login_btn">Log In</button></div>
                             <p class="text-muted">Doesn't have an account?&nbsp;<a href="register.php">Sign Up</a></p>
                         </form>
-
                     </div>
                 </div>
             </div>

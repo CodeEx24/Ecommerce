@@ -2,10 +2,11 @@
 include('functions/userfunctions.php');
 include('includes/header.php');
 
-include('authenticate.php')
+include('authenticate.php');
+
 ?>
 
-<section class="bg-dark">
+<section class="bg-dark py-5">
     <div class="container py-5">
         <div class="row">
             <div class="col-md-12">
@@ -97,6 +98,8 @@ include('authenticate.php')
         </div>
     </div>
 </section>
+
+<?php include('includes/trendprod-section.php') ?>
 
 <script>
     const decrementBtn = document.querySelector('.decrement-btn-cart');

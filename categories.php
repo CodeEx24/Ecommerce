@@ -4,7 +4,7 @@ include('includes/header.php');
 
 ?>
 
-<section id="collections" class="d-flex align-items-center justify-content-center" style="height: 50vh;">
+<section id="collections" class="d-flex align-items-center justify-content-center">
     <div class="overlay"></div>
     <div class="d-inline">
         <p class="text-center fw-bold text-success mb-2">Our Collections</p>
@@ -12,14 +12,14 @@ include('includes/header.php');
     </div>
 </section>
 
-<header class="bg-dark">
+<header class="bg-dark py-5">
     <?php if (isset($_SESSION['message'])) { ?>
 
         <h2 class="text-danger text-center"><?= $_SESSION['message']; ?></h2>
     <?php
         unset($_SESSION['message']);
     } ?>
-    <div class="container pt-4 pt-xl-5">
+    <div class="container py-5">
         <div class="row pt-5">
             <h1 class='fw-bold'>Our Collections</h1>
             <hr>
@@ -50,19 +50,8 @@ include('includes/header.php');
 </header>
 
 
-<section class="py-5">
-    <div class="container">
-        <div class="bg-dark border rounded border-dark d-flex flex-column justify-content-between align-items-center flex-lg-row p-4 p-lg-5">
-            <div class="text-center text-lg-start py-3 py-lg-1">
-                <h2 class="fw-bold mb-2">Subscribe to our newsletter</h2>
-                <p class="mb-0">Imperdiet consectetur dolor.</p>
-            </div>
-            <form class="d-flex justify-content-center flex-wrap flex-lg-nowrap" method="post">
-                <div class="my-2"><input class="border rounded-pill shadow-sm form-control" type="email" name="email" placeholder="Your Email" /></div>
-                <div class="my-2"><button class="btn btn-primary shadow ms-2" type="submit">Subscribe </button></div>
-            </form>
-        </div>
-    </div>
-</section>
 
-<?php include('includes/footer.php') ?>
+<?php
+include('includes/trendprod-section.php');
+include('includes/footer.php')
+?>

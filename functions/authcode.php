@@ -11,6 +11,8 @@ if (isset($_POST['register_btn'])) {
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
 
+
+
     $check_email_query = "SELECT Email FROM users WHERE email='$email'";
     $check_email_query_run = mysqli_query($con, $check_email_query);
 
@@ -36,6 +38,10 @@ if (isset($_POST['register_btn'])) {
 } else if (isset($_POST['login_btn'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    if ($email == '' || $password == '') {
+        redirect('../login.php', "Fill up all requirement fields");
+    }
 
     $login_query = "SELECT * FROM Users WHERE email='$email'";
     $login_query_run = mysqli_query($con, $login_query);

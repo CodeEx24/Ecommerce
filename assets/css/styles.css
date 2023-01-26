@@ -135,26 +135,45 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
   color: #8db6d3 !important;
 }
 
-#collections {
-  position: relative;
-  background-image: url('../img/products/1.jpg');
-  background-size: cover;
+#blog {
+  background-image: url('../img/background/blog-bg.jpg');
   background-position: center;
-  height: 50vh;
+}
+#collections {
+  background-image: url('../img/background/collections-bg.jpg');
+  background-position: bottom;
 }
 
-#collections .overlay {
+#trendproducts {
+  background-image: url('../img/background/td-bg.jpg');
+  background-position: center;
+}
+
+#collections,
+#trendproducts,
+#blog {
+  position: relative;
+  background-size: cover;
+  height: 70vh;
+  background-attachment: fixed;
+}
+
+#collections .overlay,
+#trendproducts .overlay,
+#blog .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: black;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 #collections .text-white,
-#collections .text-success {
+#collections .text-success,
+.tprod-div,
+.blog-main-div {
   position: relative;
   z-index: 1;
 }

@@ -3,125 +3,87 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 
 include('authenticate.php');
-include('functions/cartstockchecker.php');
-
-
-//Check if the user have a cart items
-$cartItems = getCartItems();
-if (mysqli_num_rows($cartItems) === 0) {
-    header('Location: index.php'); //If no cart items redirect to home page
-}
 ?>
-
-<section class="bg-dark checkout">
+<section class="">
     <div class="container py-5">
-        <div class="card">
-            <div class="card-body">
-                <form action="" method="POST">
-                    <div class="row p-3">
-                        <div class="col-md-7">
-                            <h5>Basic Details</h5>
-                            <hr>
+        <div class="row mb-4 mb-lg-1">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Set-up your order details</p>
+                <h2 class="fw-bold">Order Details</h2>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body text-start d-flex flex-column align-items-center">
+
+                        <div>
+                            <h5 class="mb-3 fw-bold">Basic Details</h5>
+
                             <div class="row">
+                                <hr class="mx-2">
                                 <div class="col-md-6">
                                     <h6>Name</h6>
-                                    <input class="form-2" name="name" id="name" type="text" placeholder="Enter your full name">
+                                    <input class="form-control" name="name" id="name" type="text" placeholder="Enter your full name" required>
                                     <small class="text-danger name"></small>
                                 </div>
-                                <div class="col-md-6">
-                                    <h6>Email</h6>
-                                    <input class="form-2" name="email" id="email" type="email" value="<?= $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email">
-                                    <small class="text-danger email"></small>
-                                </div>
-                                <div class="col-md-6 mt-3">
+                                <div class="col-md-6 ">
                                     <h6>Phone</h6>
-                                    <input class="form-2" name="phone" id="phone" type="text" placeholder="Enter your phone number">
+                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="Enter your phone number" required>
                                     <small class="text-danger phone"></small>
                                 </div>
-                                <h5 class="mt-4">Address Details</h5>
-                                <hr>
+                                <div class="col-md-12 mt-3">
+                                    <h6>Email</h6>
+                                    <input class="form-control" name="email" id="email" type="email" value="<?= $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email" required>
+                                    <small class="text-danger email"></small>
+                                </div>
+                                <h5 class="mt-5 mb-3 fw-bold">Address Details</h5>
+                                <hr class="mx-2">
                                 <div class="col-md-12">
                                     <h6>Provinces</h6>
-                                    <select class="form-2" name="province" id="province-select">
+                                    <select class="form-control" name="province" id="province-select" required>
                                         <option value="" disabled selected>Select a province</option>
                                     </select>
                                     <small class="text-danger province"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Street Name</h6>
-                                    <input class="form-2" name="street" id="street" type="text" placeholder="Enter the street name">
+                                    <input class="form-control" name="street" id="street" type="text" placeholder="Enter the street name" required>
                                     <small class="text-danger street"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>City</h6>
-                                    <input class="form-2" name="city" id="city" type="text" placeholder="Enter the city">
+                                    <input class="form-control" name="city" id="city" type="text" placeholder="Enter the city" required>
                                     <small class="text-danger city"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Pin Code</h6>
-                                    <input class="form-2 input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code">
+                                    <input class="form-control input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code" required>
                                     <small class="text-danger pincode"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Barangay</h6>
-                                    <input class="form-2" name="barangay" id="barangay" type="text" placeholder="Enter the barangay">
+                                    <input class="form-control" name="barangay" id="barangay" type="text" placeholder="Enter the barangay" required>
                                     <small class="text-danger barangay"></small>
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <h6>Building, House No.</h6>
-                                    <textarea class="form-2 mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3"></textarea>
+                                    <textarea class="form-control mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3" required></textarea>
                                     <small class="text-danger bldg_houseno"></small>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <h5>Order Details</h5>
-                            <hr>
-                            <?php
-                            $items = getCartItems();
-                            $total = 0;
-                            foreach ($items as $item) {
-                                $subtotal = $item['selling_price'] * $item['product_qty'];
-                            ?>
-                                <div class="row align-items-center py-3 product-data border border-gray m-1 mt-3">
-                                    <div class="col-md-2 text-center">
-                                        <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" class="img-fluid" style="object-fit: fill; width: 60px; height: 60px;">
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <p><?= $item['name'] ?></p>
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <p>$<?= $item['selling_price'] ?></p>
-                                    </div>
-                                    <div class="col-md-2 text-center">
-                                        <p>x<?= $item['product_qty'] ?></p>
-                                    </div>
+                                <div class="mt-3">
+                                    <button type="submit" name="updateDetailsBtn" class="btn btn-primary text-white w-100 ">Update Details</button>
                                 </div>
-
-                            <?php
-                                $total += $item['selling_price'] * $item['product_qty'];
-                            }
-                            ?>
-                            <div class="p-3">
-                                <h5>Total Price: <strong class="float-end">$<?= $total ?></strong></h5>
-                            </div>
-                            <div class="order-button">
-                                <input type="hidden" name="payment_mode" value="COD">
-                                <button type="submit" name="placeOrderBtn" class="btn btn-primary text-white w-100">Confirm and place order | COD</button>
-
-                                <div class="mt-3" id="paypal-button-container"></div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <?php include('includes/footer.php') ?>
-
-
 
 <!-- Provinces option of a user -->
 <script>
@@ -141,6 +103,11 @@ if (mysqli_num_rows($cartItems) === 0) {
 <script src="https://www.paypal.com/sdk/js?client-id=ActZNAmGgUgPbTFaT1BeyxwxTuTgLVk6fOq8sFcOqMMnoc--p7WPGJuwTqXnmh18pYi9JBi-QdPc0pX2&currency=USD"></script>
 
 <!-- Paypal process and rendering the details in the database -->
+PHP:
+<?php
+
+?>
+SCRIPT:
 <script>
     paypal.Buttons({
         onClick() {

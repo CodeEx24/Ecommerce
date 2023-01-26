@@ -17,6 +17,7 @@ if (mysqli_num_rows($orders) == 0) {
 
 <section class="bg-dark">
     <div class="container py-5">
+        <h1 class="my-4">Order Details</h1>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -26,6 +27,7 @@ if (mysqli_num_rows($orders) == 0) {
                             <th>Tracking No.</th>
                             <th>Price</th>
                             <th>Date</th>
+                            <th>Status</th>
                             <th>View</th>
                         </tr>
                     </thead>
@@ -39,6 +41,7 @@ if (mysqli_num_rows($orders) == 0) {
                                     <td><?= $item['Tracking_No'] ?></td>
                                     <td>$<?= $item['Total_Price'] ?></td>
                                     <td><?= $item['Created_At'] ?></td>
+                                    <td><?= $item['Status'] ? ($item['Status'] == 1 ? "Completed" : "Cancel") : "Under Process" ?></td>
                                     <td>
                                         <div class="order-button">
                                             <a href="view-order.php?tracking=<?= $item['Tracking_No']; ?>" class="btn btn-sm btn-primary text-white">View Details</a>
@@ -63,4 +66,7 @@ if (mysqli_num_rows($orders) == 0) {
     </div>
 </section>
 
-<?php include('includes/footer.php') ?>
+<?php
+include('includes/trendprod-section.php');
+include('includes/footer.php')
+?>
