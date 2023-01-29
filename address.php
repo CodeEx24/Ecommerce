@@ -3,6 +3,9 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 
 include('authenticate.php');
+
+$user_details = getDetails();
+$user_details_data = mysqli_fetch_array($user_details);
 ?>
 <section class="">
     <div class="container py-5">
@@ -16,66 +19,78 @@ include('authenticate.php');
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-body text-start d-flex flex-column align-items-center">
+                        <form method="POST">
+                            <div>
+                                <h5 class="mb-3 fw-bold">Basic Details</h5>
+                                <div class="row">
+                                    <hr class="mx-2">
+                                    <div class="col-md-6">
+                                        <input type="hidden" name="id" id='id' value="<?= $_SESSION['auth_user']['user_id'] ?>">
+                                        <h6>Name</h6>
+                                        <input class="form-control" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : '' ?>">
+                                        <small class=" text-danger name"></small>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <h6>Phone</h6>
+                                        <input class="form-control" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : '' ?>">
+                                        <small class="text-danger phone"></small>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <h6>Email</h6>
+                                        <input class="form-control" name="email" id="email" type="email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email">
+                                        <small class="text-danger email"></small>
+                                    </div>
+                                    <h5 class="mt-5 mb-3 fw-bold">Address Details</h5>
+                                    <hr class="mx-2">
+                                    <div class="col-md-12">
+                                        <h6>Provinces</h6>
+                                        <select class="form-control" name="province" id="province-select">
+                                            <?php
+                                            if (isset($user_details_data['Province'])) {
+                                            ?>
+                                                <option value="<?= $user_details_data['Province'] ?>" selected><?= $user_details_data['Province'] ?></option>
+                                            <?php
+                                            } else {
 
-                        <div>
-                            <h5 class="mb-3 fw-bold">Basic Details</h5>
-
-                            <div class="row">
-                                <hr class="mx-2">
-                                <div class="col-md-6">
-                                    <h6>Name</h6>
-                                    <input class="form-control" name="name" id="name" type="text" placeholder="Enter your full name" required>
-                                    <small class="text-danger name"></small>
-                                </div>
-                                <div class="col-md-6 ">
-                                    <h6>Phone</h6>
-                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="Enter your phone number" required>
-                                    <small class="text-danger phone"></small>
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <h6>Email</h6>
-                                    <input class="form-control" name="email" id="email" type="email" value="<?= $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email" required>
-                                    <small class="text-danger email"></small>
-                                </div>
-                                <h5 class="mt-5 mb-3 fw-bold">Address Details</h5>
-                                <hr class="mx-2">
-                                <div class="col-md-12">
-                                    <h6>Provinces</h6>
-                                    <select class="form-control" name="province" id="province-select" required>
-                                        <option value="" disabled selected>Select a province</option>
-                                    </select>
-                                    <small class="text-danger province"></small>
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <h6>Street Name</h6>
-                                    <input class="form-control" name="street" id="street" type="text" placeholder="Enter the street name" required>
-                                    <small class="text-danger street"></small>
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <h6>City</h6>
-                                    <input class="form-control" name="city" id="city" type="text" placeholder="Enter the city" required>
-                                    <small class="text-danger city"></small>
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <h6>Pin Code</h6>
-                                    <input class="form-control input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code" required>
-                                    <small class="text-danger pincode"></small>
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <h6>Barangay</h6>
-                                    <input class="form-control" name="barangay" id="barangay" type="text" placeholder="Enter the barangay" required>
-                                    <small class="text-danger barangay"></small>
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <h6>Building, House No.</h6>
-                                    <textarea class="form-control mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3" required></textarea>
-                                    <small class="text-danger bldg_houseno"></small>
-                                </div>
-                                <div class="mt-3">
-                                    <button type="submit" name="updateDetailsBtn" class="btn btn-primary text-white w-100 ">Update Details</button>
+                                            ?>
+                                                <option value="" disabled selected>Select a province</option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <small class="text-danger province"></small>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <h6>Street Name</h6>
+                                        <input class="form-control" name="street" id="street" type="text" placeholder="Enter the street name" value="<?= isset($user_details_data['Street']) ? $user_details_data['Street'] : '' ?>">
+                                        <small class="text-danger street"></small>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <h6>City</h6>
+                                        <input class="form-control" name="city" id="city" type="text" placeholder="Enter the city" value="<?= isset($user_details_data['City']) ? $user_details_data['City'] : '' ?>">
+                                        <small class="text-danger city"></small>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <h6>Pin Code</h6>
+                                        <input class="form-control input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code" value="<?= isset($user_details_data['Pincode']) ? $user_details_data['Pincode'] : '' ?>">
+                                        <small class="text-danger pincode"></small>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <h6>Barangay</h6>
+                                        <input class="form-control" name="barangay" id="barangay" type="text" placeholder="Enter the barangay" value="<?= isset($user_details_data['Barangay']) ? $user_details_data['Barangay'] : '' ?>">
+                                        <small class="text-danger barangay"></small>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <h6>Building, House No.</h6>
+                                        <textarea class="form-control mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3"><?= isset($user_details_data['Bldg_houseno']) ? $user_details_data['Bldg_houseno'] : '' ?></textarea>
+                                        <small class="text-danger bldg_houseno"></small>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary text-white w-100 saveDetails-btn"><?= isset($user_details_data['ID']) ? "Update Details" : "Save Details" ?></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

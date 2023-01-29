@@ -28,6 +28,7 @@ include('includes/header.php');
                                 <th class="table-text">Status</th>
                                 <th class="table-text">Action</th>
                             </tr>
+                        </thead>
                         <tbody>
                             <?php
                             $orders = getAllOrders();
@@ -43,7 +44,7 @@ include('includes/header.php');
                                         <td><?= $item['Created_At'] ?></td>
                                         <td><?= $item['Status'] ? "Cancelled" : "Under Process" ?></td>
                                         <td class="table-text">
-                                            <a href="view-order.php?tracking=<?= $item['Tracking_No']; ?>" class="btn btn-info shadow button-text">View Details</a>
+                                            <a href="view-order.php?tracking=<?= $item['Tracking_No']; ?>" class="btn btn-info shadow button-text" style="margin-bottom: 0;">View Details</a>
                                         </td>
 
                                     </tr>
@@ -60,7 +61,17 @@ include('includes/header.php');
                             ?>
 
                         </tbody>
-                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="table-text">ID</th>
+                                <th class="table-text">User</th>
+                                <th class="table-text">Tracking No.</th>
+                                <th class="table-text">Price</th>
+                                <th class="table-text">Date</th>
+                                <th class="table-text">Status</th>
+                                <th class="table-text">Action</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

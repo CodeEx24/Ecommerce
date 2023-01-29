@@ -36,8 +36,8 @@ include('includes/header.php');
                                             <td class="table-text p-4"><?= $item['Name']; ?></td>
                                             <td class="table-text p-4"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                             <td class="table-text p-4">
-                                                <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px;">Edit</a>
-                                                <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px;">Delete</button>
+                                                <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px; margin-bottom: 0;">Edit</a>
+                                                <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px; margin-bottom: 0;">Delete</button>
                                             </td>
                                         </tr>
                                 <?php
@@ -47,6 +47,15 @@ include('includes/header.php');
                                 }
                                 ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="table-text p-4">ID</th>
+                                    <th class="table-text p-4" style="width: 120px;">Image</th>
+                                    <th class="table-text p-4">Name</th>
+                                    <th class="table-text p-4">Status</th>
+                                    <th class="table-text p-4">Action</th>
+                                </tr>
+                            </tfoot>
                             </thead>
                         </table>
                     </div>

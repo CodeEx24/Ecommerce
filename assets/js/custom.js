@@ -389,4 +389,70 @@ $(document).ready(function () {
       });
     }
   });
+
+  $(document).on('click', '.saveDetails-btn', function (e) {
+    e.preventDefault();
+    var formData = {
+      user_id: $('#id').val(),
+      name: $('#name').val(),
+      phone: $('#phone').val(),
+      email: $('#email').val(),
+      province: $('#province-select').val(),
+      street: $('#street').val(),
+      city: $('#city').val(),
+      pincode: $('#pincode').val(),
+      barangay: $('#barangay').val(),
+      bldg_houseno: $('#bldg_houseno').val(),
+    };
+
+    var emailRegex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    Object.values(formData).some((val) => val === '')
+      ? $.notification(['All fields are required'], {
+          position: ['bottom', 'right'],
+          timeView: 3000,
+          messageType: 'error',
+        })
+      : emailRegex.test(formData.email) && formData.email.endsWith('@gmail.com')
+      ? ''
+      : $.notification(['Please enter a valid email'], {
+          position: ['bottom', 'right'],
+          timeView: 3000,
+          messageType: 'error',
+        });
+
+    //condition to stop the ajax request if the email or some of the data is no value
+    if (
+      Object.values(formData).some((val) => val === '') ||
+      !(
+        emailRegex.test(formData.email) && formData.email.endsWith('@gmail.com')
+      )
+    ) {
+      return;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/savedetails.php',
+      data: {
+        ...formData,
+        updateDetailsBtn: true,
+      },
+      success: function (response) {
+        if (response == 200) {
+          $.notification(['Details save successfully'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'success',
+          });
+        } else {
+          $.notification(['An error occurred'], {
+            position: ['bottom', 'right'],
+            timeView: 3000,
+            messageType: 'error',
+          });
+        }
+      },
+    });
+  });
 });

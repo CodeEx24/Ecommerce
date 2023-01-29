@@ -308,6 +308,22 @@ if (isset($_POST['add_category_btn'])) {
         // redirect("category.php", "Something Went Wrong");
         echo 500;
     }
+} else if (isset($_POST['delete_client_btn'])) {
+    $user_id = mysqli_real_escape_string($con, $_POST['user_id']);
+
+    $delete_user_address_query = "DELETE FROM Address WHERE UserID='$user_id'";
+    $delete_user_address_query_run = mysqli_query($con, $delete_user_address_query);
+
+    $delete_query = "DELETE FROM Users WHERE ID='$user_id' ";
+    $delete_query_run = mysqli_query($con, $delete_query);
+
+
+    if ($delete_query_run && $delete_user_address_query_run) {
+        echo 200;
+    } else {
+        // redirect("category.php", "Something Went Wrong");
+        echo 500;
+    }
 } else {
     // redirect('../index.php', '');
     echo 500;

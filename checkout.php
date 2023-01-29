@@ -5,6 +5,8 @@ include('includes/header.php');
 include('authenticate.php');
 include('functions/cartstockchecker.php');
 
+$user_details = getDetails();
+$user_details_data = mysqli_fetch_array($user_details);
 
 //Check if the user have a cart items
 $cartItems = getCartItems();
@@ -17,7 +19,7 @@ if (mysqli_num_rows($cartItems) === 0) {
     <div class="container py-5">
         <div class="card">
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="functions/placeorder.php" method="POST">
                     <div class="row p-3">
                         <div class="col-md-7">
                             <h5>Basic Details</h5>
@@ -25,17 +27,17 @@ if (mysqli_num_rows($cartItems) === 0) {
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6>Name</h6>
-                                    <input class="form-2" name="name" id="name" type="text" placeholder="Enter your full name">
+                                    <input class="form-2" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : '' ?>">
                                     <small class="text-danger name"></small>
                                 </div>
                                 <div class="col-md-6">
                                     <h6>Email</h6>
-                                    <input class="form-2" name="email" id="email" type="email" value="<?= $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email">
+                                    <input class="form-2" name="email" id="email" type="email" placeholder="Enter your email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $_SESSION['auth_user']['email'] ?>">
                                     <small class="text-danger email"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Phone</h6>
-                                    <input class="form-2" name="phone" id="phone" type="text" placeholder="Enter your phone number">
+                                    <input class="form-2" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : '' ?>">
                                     <small class="text-danger phone"></small>
                                 </div>
                                 <h5 class="mt-4">Address Details</h5>
@@ -43,33 +45,44 @@ if (mysqli_num_rows($cartItems) === 0) {
                                 <div class="col-md-12">
                                     <h6>Provinces</h6>
                                     <select class="form-2" name="province" id="province-select">
-                                        <option value="" disabled selected>Select a province</option>
+                                        <?php
+                                        if (isset($user_details_data['Province'])) {
+                                        ?>
+                                            <option value="<?= $user_details_data['Province'] ?>" selected><?= $user_details_data['Province'] ?></option>
+                                        <?php
+                                        } else {
+
+                                        ?>
+                                            <option value="" disabled selected>Select a province</option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                     <small class="text-danger province"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Street Name</h6>
-                                    <input class="form-2" name="street" id="street" type="text" placeholder="Enter the street name">
+                                    <input class="form-2" name="street" id="street" type="text" placeholder="Enter the street name" value="<?= isset($user_details_data['Street']) ? $user_details_data['Street'] : '' ?>">
                                     <small class="text-danger street"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>City</h6>
-                                    <input class="form-2" name="city" id="city" type="text" placeholder="Enter the city">
+                                    <input class="form-2" name="city" id="city" type="text" placeholder="Enter the city" value="<?= isset($user_details_data['City']) ? $user_details_data['City'] : '' ?>">
                                     <small class="text-danger city"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Pin Code</h6>
-                                    <input class="form-2 input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code">
+                                    <input class="form-2 input-pincode" id="pincode" name="pincode" type="text" placeholder="Enter your pin code" value="<?= isset($user_details_data['Pincode']) ? $user_details_data['Pincode'] : '' ?>">
                                     <small class="text-danger pincode"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Barangay</h6>
-                                    <input class="form-2" name="barangay" id="barangay" type="text" placeholder="Enter the barangay">
+                                    <input class="form-2" name="barangay" id="barangay" type="text" placeholder="Enter the barangay" value="<?= isset($user_details_data['Barangay']) ? $user_details_data['Barangay'] : '' ?>">
                                     <small class="text-danger barangay"></small>
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <h6>Building, House No.</h6>
-                                    <textarea class="form-2 mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3"></textarea>
+                                    <textarea class="form-2 mb-2" name="bldg_houseno" id="bldg_houseno" placeholder="Enter the building house number" rows="3"><?= isset($user_details_data['Bldg_houseno']) ? $user_details_data['Bldg_houseno'] : '' ?></textarea>
                                     <small class="text-danger bldg_houseno"></small>
                                 </div>
                             </div>

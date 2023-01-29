@@ -17,18 +17,18 @@ if (mysqli_num_rows($orders) == 0) {
 
 <section class="bg-dark">
     <div class="container py-5">
-        <h1 class="my-4">Order Details</h1>
+        <h1 class="my-4 fw-bold">Order Details</h1>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Tracking No.</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>View</th>
+                            <th class="h4 fw-bold">ID</th>
+                            <th class="h4 fw-bold">Tracking No.</th>
+                            <th class="h4 fw-bold">Price</th>
+                            <th class="h4 fw-bold">Date</th>
+                            <th class="h4 fw-bold">Status</th>
+                            <th class="h4 fw-bold">View</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,8 +37,8 @@ if (mysqli_num_rows($orders) == 0) {
                             foreach ($orders as $item) {
                         ?>
                                 <tr>
-                                    <td><?= $item['ID'] ?></td>
-                                    <td><?= $item['Tracking_No'] ?></td>
+                                    <td class="fw-bold"><?= $item['ID'] ?></td>
+                                    <td class="fw-bold"><?= $item['Tracking_No'] ?></td>
                                     <td>$<?= $item['Total_Price'] ?></td>
                                     <td><?= $item['Created_At'] ?></td>
                                     <td><?= $item['Status'] ? ($item['Status'] == 1 ? "Completed" : "Cancel") : "Under Process" ?></td>

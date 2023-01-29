@@ -35,8 +35,8 @@ include('includes/header.php');
                                             <td class="table-text"><?= $item['Title']; ?></td>
                                             <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                             <td class="table-text my-auto">
-                                                <a href="edit-post.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px;">Edit</a>
-                                                <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_post_btn" style="width: 100px;">Delete</button>
+                                                <a href="edit-post.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px; margin-bottom: 0;">Edit</a>
+                                                <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_post_btn" style="width: 100px; margin-bottom: 0;">Delete</button>
                                             </td>
                                         </tr>
                                 <?php
@@ -47,6 +47,15 @@ include('includes/header.php');
                                 ?>
 
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="table-text">ID</th>
+                                    <th class="table-text" style="width: 120px;">Image</th>
+                                    <th class="table-text">Title</th>
+                                    <th class="table-text">Status</th>
+                                    <th class="table-text">Action</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

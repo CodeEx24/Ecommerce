@@ -3,7 +3,7 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 ?>
 
-<section class="py-5">
+<section class=" py-5">
     <div class="container py-5">
         <div class="row mb-4 mb-lg-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">

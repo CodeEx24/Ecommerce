@@ -3,7 +3,7 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 
 ?>
-<section id="collections" class="d-flex align-items-center justify-content-center" style="height: 50vh;">
+<section id="collections" class="d-flex align-items-center justify-content-center">
     <div class="overlay"></div>
     <div class="d-inline">
         <p class="text-center fw-bold text-success mb-2">Trending Products</p>
@@ -13,9 +13,8 @@ include('includes/header.php');
     </div>
 </section>
 
-<div class="bg-dark">
-
-    <div class="container pt-2">
+<div class="bg-dark py-5">
+    <div class="container py-5">
         <div class="row pt-5">
             <h1 class="fw-bold">Trending Products</h1>
             <hr>

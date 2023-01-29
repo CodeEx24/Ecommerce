@@ -80,7 +80,15 @@ function getOrders()
     global $con;
     $user_id = $_SESSION['auth_user']['user_id'];
 
-    $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY id DESC;";
+    $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY Status ASC;";
+    return mysqli_query($con, $query);
+}
+
+function getDetails()
+{
+    global $con;
+    $user_id = $_SESSION['auth_user']['user_id'];
+    $query = "SELECT * FROM Address WHERE UserID='$user_id';";
     return mysqli_query($con, $query);
 }
 

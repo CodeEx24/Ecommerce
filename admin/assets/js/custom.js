@@ -159,4 +159,58 @@ $(document).ready(function () {
         }
       });
   });
+
+  $(document).on('click', '.delete_client_btn', function (e) {
+    e.preventDefault();
+
+    var id = $(this).val();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-primary shadow',
+        cancelButton: 'btn btn-danger shadow mx-3',
+        htmlContainer: 'text-center',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            method: 'POST',
+            url: 'code.php',
+            data: {
+              user_id: id,
+              delete_client_btn: true,
+            },
+            success: function (response) {
+              if (response == 200) {
+                swalWithBootstrapButtons.fire(
+                  'Deleted!',
+                  'Post Deleted Successfully.',
+                  'success'
+                );
+                $('#clients_table').load(location.href + ' #clients_table');
+              } else {
+                swalWithBootstrapButtons.fire(
+                  'Error',
+                  'Something went wrong.',
+                  'error'
+                );
+              }
+            },
+          });
+        }
+      });
+  });
 });

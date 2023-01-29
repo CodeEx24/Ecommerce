@@ -107,8 +107,22 @@ $orders_this_day = mysqli_num_rows($orders_num);
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div class="my-4 card">
+        <div class="row my-4 mx-4">
+            <div class="col-md-4">
+                <img src="assets/image/mainpage.jpg" alt="" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="col-md-4">
+                <img src="assets/image/mainpage2.jpg" alt="" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="col-md-4">
+                <img src="assets/image/mainpage3.jpg" alt="" class="w-100 h-100" style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <?php include('includes/footer.php') ?>
