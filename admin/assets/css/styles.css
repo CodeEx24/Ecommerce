@@ -1,4 +1,3 @@
-h2,
 .text h1,
 .dataTables_length label {
   color: white !important;
@@ -12,9 +11,9 @@ h2,
   display: block;
 }
 
-a {
+/* a {
   color: #419bef !important;
-}
+} */
 
 .table {
   color: white !important;
@@ -160,4 +159,75 @@ tr:nth-child(even) {
 
 th {
   padding: 8px !important;
+}
+
+/* .note-editor.note-airframe.codeview .note-editing-area .note-codable {
+  color: white !important;
+}
+
+.note-editor.note-airframe .note-editing-area .note-editable,
+.note-editor.note-frame .note-editing-area .note-editable,
+.note-editor.note-frame.codeview .note-editing-area .note-codable {
+  background-color: white !important;
+  color: black !important;
+}
+
+.panel-heading {
+  background-color: white !important;
+}
+
+.btn-group-sm > .btn i,
+.btn.btn-sm i {
+  color: black;
+}
+
+.note-current-fontname,
+.note-icon-caret {
+  color: black;
+}
+
+button.note-btn.btn.btn-default.btn-sm.dropdown-toggle::after {
+  color: white !important;
+}
+.note-popover .popover-content > .note-btn-group {
+  color: black !important;
+} */
+
+.note-editor .note-toolbar .note-dropdown-menu,
+.note-popover .popover-content .note-dropdown-menu {
+  background-color: #282736;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: white !important;
+}
+
+.note-dropdown-menu a {
+  color: white;
+}
+
+.note-popover.popover,
+.note-editor.note-airframe.fullscreen,
+.note-editor.note-frame.fullscreen {
+  background-color: #282736;
+  padding: 0 500px;
+}
+
+.modal-open {
+  z-index: 99 !important;
+}
+
+.modal-backdrop.show {
+  z-index: 1;
 }

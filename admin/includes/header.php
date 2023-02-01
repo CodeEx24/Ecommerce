@@ -33,6 +33,12 @@
     <!-- DATA TABLES PAGINATION -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 
+    <!-- SUMMER NOTES -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+
+
+
 
     <!-- Styles for data table label, input etc. -->
     <style>

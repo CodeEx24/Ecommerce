@@ -44,9 +44,10 @@ include('includes/header.php');
                                         <label class="category-label my-2" for="">Slug</label>
                                         <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" required></div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label class="category-label my-2" for="">Description</label><br>
-                                        <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required></textarea>
+                                    <div class="col-md-12 mb-4">
+                                        <label class="category-label my-2" for="">Content</label><br>
+                                        <textarea class=" mb-2" id="summernote" name="description"></textarea>
+                                        <!-- <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required></textarea> -->
                                     </div>
 
                                     <div class="col-md-6 ">
@@ -97,4 +98,33 @@ include('includes/header.php');
         }
     }
 </script>
-<?php include('includes/footer.php') ?>
+
+
+<?php include('includes/footer.php') ?>\
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+
+        $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+
+    });
+</script>

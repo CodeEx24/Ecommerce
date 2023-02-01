@@ -89,14 +89,14 @@ CREATE TABLE Order_Items (
   FOREIGN KEY (Product_ID) REFERENCES products(ID) ON DELETE CASCADE
 );
 
---FIXED TABLE
+--FIXED TABLE `content` text COLLATE utf8_unicode_ci NOT NULL,
 CREATE TABLE Posts (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     CategoryID INT NOT NULL,
     Title VARCHAR(255) NOT NULL,
     Image VARCHAR(255) NOT NULL,
     Slug VARCHAR(255) NOT NULL,
-    Description TEXT NOT NULL,
+    Description MEDIUMTEXT COLLATE utf8_unicode_ci NOT NULL,
     Status TINYINT,
     Meta_Title VARCHAR(255),
     Meta_Keywords MEDIUMTEXT,
@@ -105,6 +105,20 @@ CREATE TABLE Posts (
     FOREIGN KEY (CategoryID) REFERENCES Categories(ID)
 );
 
+CREATE TABLE Posts (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    CategoryID INT NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Image VARCHAR(255) NOT NULL,
+    Slug VARCHAR(255) NOT NULL,
+    Description TEXT COLLATE utf8_unicode_ci NOT NULL,
+    Status TINYINT,
+    Meta_Title VARCHAR(255),
+    Meta_Keywords MEDIUMTEXT,
+    Meta_Description MEDIUMTEXT,
+    Created_At DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(ID)
+);
 
 CREATE TABLE Subscribers (
     ID INT PRIMARY KEY,

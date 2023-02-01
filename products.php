@@ -26,47 +26,16 @@ if (isset($_GET['category'])) {
     </section>
 
     <div class="bg-dark py-5">
-
         <div class="container pt-2">
             <div class="row pt-5">
-                <h1 class="fw-bold"><?= $category['Name'] ?></h1>
-                <hr>
-                <?php
-                $products = getProductByCategory($category_id);
+                <div class="col d-flex justify-content-between py-3">
+                    <h1 class="fw-bold float-left"><?= $category['Name'] ?></h1>
+                    <input type="text" class="form-control float-right w-25" oninput="change()" id="live_search" autocomplete="off" placeholder="Search ... ">
+                    <input type="hidden" id="category_id" value="<?= $category['ID']; ?>">
+                </div>
 
-                if (mysqli_num_rows($products) > 0) {
-                    foreach ($products as $item) {
-                ?>
-                        <div class="col-lg-4 col-md-6 col-sm-12  my-3 mb-4">
-                            <div class="card bg-card h-100">
-                                <div class="card-body d-flex flex-column">
-                                    <a class="ref-product" href="product-view.php?product=<?= $item['Slug'] ?>">
-                                        <img class="ref-image mb-3" src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" loading="lazy" />
-                                        <p class="<?= $item['Trending']  ? "ref-sale-badge" : "" ?>"><?= $item['Trending'] ? "TRENDING" : "" ?></p>
-                                        <div class="ref-product-info d-flex justify-content-between">
-                                            <h5 class="ref-name fw-bold"><?= $item['Name'] ?></h5>
-                                            <strong class="ref-price ref-on-sale">
-                                                <s class="ref-original-price"><?= $item['Original_Price'] ?> </s>
-                                                <span class="ref-selling-price"> <?= $item['Selling_Price'] ?> </span>
-                                            </strong>
-                                        </div>
-                                        <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>
-                                    </a>
-                                    <div class="ref-addons mt-auto">
-                                        <button class="btn btn-primary addToCart-btn" value="<?= $item['ID'] ?>">
-                                            <i class="fa fa-shopping-cart me-2"></i>
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                <?php
-                    }
-                } else {
-                    echo "No Product Available.";
-                }
-                ?>
+                <hr>
+                <div id='searchresult' class="row"></div>
             </div>
         </div>
     </div>
@@ -77,3 +46,25 @@ if (isset($_GET['category'])) {
 }
 include('includes/trendprod-section.php');
 include('includes/footer.php') ?>
+
+<script>
+    $(document).ready(function() {
+        $("#live_search").on('input', function() {
+            var input = $(this).val();
+            var category_id = $('#category_id').val();
+
+            $.ajax({
+                url: "functions/livesearch.php",
+                method: "POST",
+                data: {
+                    input: input,
+                    category_id: category_id
+                },
+
+                success: function(data) {
+                    $("#searchresult").html(data);
+                }
+            });
+        }).trigger('input');
+    });
+</script>

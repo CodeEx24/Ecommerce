@@ -14,6 +14,15 @@ if (mysqli_num_rows($orders) == 0) {
     die();
 }
 ?>
+<section id="orders" class="d-flex align-items-center justify-content-center">
+    <div class="overlay"></div>
+    <div class="d-inline blog-main-div">
+        <p class="text-center fw-bold text-success mb-2">Orders</p>
+        <div class="container d-flex justify-content-center">
+            <h1 class="text-white fw-bold h1 text-center w-75">Check your transactions in this page
+        </div>
+</section>
+
 
 <section class="bg-dark">
     <div class="container py-5">

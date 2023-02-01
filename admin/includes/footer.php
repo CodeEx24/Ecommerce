@@ -47,6 +47,11 @@
 <!-- Data Tables -->
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
+<!-- SUMMER NOTES -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+
 <!-- Display messages if category is successfully added or updated and if there is an error. -->
 <script>
     <?php

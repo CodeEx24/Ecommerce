@@ -34,10 +34,10 @@ include('includes/header.php');
                         <a href="blog-view.php?post=<?= $item['Slug'] ?>">
                             <div class="bg-card card h-100">
                                 <div class="card-body ">
-                                    <img class="w-100" src="uploads/blog/<?= $item['Image'] ?>" alt="">
+                                    <img src="uploads/blog/<?= $item['Image'] ?>" width="100%" height="70%" style="object-fit: cover">
                                     <h4 class="mt-3 text-white fw-bold"><?= $item['Title'] ?></h4>
-                                    <p class="ref-excerpt text-muted"><?= substr($item['Description'], 0, 125) . '...' ?></p>
-                                    <a class="text-success" href="blog-view.php?post=<?= $item['Slug'] ?>">Read More &#x000BB;</a>
+                                    <p class="ref-excerpt text-muted"><?= substr($item['Meta_Description'], 0, 125) . '...' ?></p>
+                                    <a class="text-success" style="font-size: 16px !important;" href="blog-view.php?post=<?= $item['Slug'] ?>">Read More &#x000BB;</a>
                                 </div>
                             </div>
                         </a>

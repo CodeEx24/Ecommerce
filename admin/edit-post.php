@@ -51,9 +51,10 @@ include('includes/header.php');
                                         <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" required value="<?= $data['Slug'] ?>"></div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <label class="category-label my-2" for="">Description</label><br>
-                                        <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required><?= $data['Description'] ?></textarea>
+                                    <div class="col-md-12 mb-4" style="z-index: 999;">
+                                        <label class="category-label my-2" for="">Content</label><br>
+                                        <textarea class=" mb-2" id="summernote" name="description"><?= $data['Description'] ?></textarea>
+                                        <!-- <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required></textarea> -->
                                     </div>
 
                                     <div class="col-md-6 d-flex align-items-center">
@@ -101,15 +102,46 @@ include('includes/header.php');
                 include('includes/404.php');
             }
             ?>
-
-
-
         </div>
-
     </div>
 </div>
 
+<!-- <div class="summernote">
+    <form action="submit.php" method="post">
+        <textarea id="summernote" name="content"></textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div> -->
 
-</div>
+
+
 
 <?php include('includes/footer.php') ?>
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+
+        $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+
+    });
+</script>

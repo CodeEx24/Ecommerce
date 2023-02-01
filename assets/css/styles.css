@@ -1,3 +1,12 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: white;
+}
+
 .darker-item {
   color: #000; /* black text */
   background-color: #2d2c38; /* light grey background */
@@ -149,18 +158,34 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
   background-position: center;
 }
 
+#orders {
+  background-image: url('../img/background/td-bg.jpg');
+  background-position: center;
+}
+
+#collections,
+#trendproducts,
+#blog,
+#orders {
+  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 #collections,
 #trendproducts,
 #blog {
-  position: relative;
-  background-size: cover;
   height: 70vh;
-  background-attachment: fixed;
+}
+
+#orders {
+  height: 50vh;
 }
 
 #collections .overlay,
 #trendproducts .overlay,
-#blog .overlay {
+#blog .overlay,
+#orders .overlay {
   position: absolute;
   top: 0;
   left: 0;
