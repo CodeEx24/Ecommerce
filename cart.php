@@ -60,8 +60,8 @@ include('authenticate.php');
                                     <div class="col-md-2">
                                         <div class="d-flex text-center justify-content-center justify-content-md-end">
                                             <span>$</span>
-                                            <input type="hidden" class="bg-dark text-white email form-control" style="border: none; padding: 0;" value="<?= $subtotal ?>" disabled>
-                                            <p class="bg-dark text-white subtotal-text" id="st2" style=""><?= $subtotal ?></p>
+                                            <input type="hidden" class="bg-dark text-white email form-control subtotal" style="border: none; padding: 0;" value="<?= $subtotal ?>" disabled>
+                                            <p class="bg-dark text-white subtotal-text" style=""><?= $subtotal ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,8 @@ include('authenticate.php');
                                 </div>
                                 <div class="col-md-2 d-flex justify-content-end totals align-items-start">
                                     <span>$</span>
-                                    <input type="number" class="bg-dark text-white text-end total" style="border: none; padding: 0; width:46%" value="<?= $total ?>" disabled>
+                                    <input type="hidden" class="bg-dark text-white text-end total" style="border: none; padding: 0; width:46%" value="<?= $total ?>" disabled>
+                                    <p class="bg-dark text-white total-text" style="" id="total"><?= $total ?></p>
                                 </div>
                             </div>
                             <div class="float-end mt-3 text-center w-100 w-md-25">

@@ -14,7 +14,6 @@ include('includes/header.php');
 
 <header class="bg-dark py-5">
     <?php if (isset($_SESSION['message'])) { ?>
-
         <h2 class="text-danger text-center"><?= $_SESSION['message']; ?></h2>
     <?php
         unset($_SESSION['message']);
@@ -25,15 +24,15 @@ include('includes/header.php');
             <hr>
             <?php
             $categories = getAllActive("Categories");
-
             if (mysqli_num_rows($categories) > 0) {
                 foreach ($categories as $item) {
             ?>
-                    <div class="col-md-3 my-3 ">
+                    <div class="col-md-3 my-3">
                         <a href="products.php?category=<?= $item['Slug'] ?>">
                             <div class="bg-card card h-100">
-                                <div class="card-body ">
-                                    <img class="w-100" src="uploads/category/<?= $item['Image'] ?>" alt="">
+                                <div class="card-img-top" style="background-image: url('uploads/category/<?= $item['Image'] ?>'); background-size: cover; background-position: center; height: 250px;">
+                                </div>
+                                <div class="card-body">
                                     <h5 class="mt-3 text-center"><?= $item['Name'] ?></h5>
                                 </div>
                             </div>
@@ -48,6 +47,7 @@ include('includes/header.php');
         </div>
     </div>
 </header>
+
 
 
 

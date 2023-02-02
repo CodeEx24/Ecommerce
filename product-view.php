@@ -48,12 +48,12 @@ if (isset($_GET['product'])) {
                         <div class="row mt-3">
                             <div class="btn-group d-flex m" role="group">
                                 <div class=''>
-                                    <button class='btn btn-primary <?= $product['Quantity'] ? "addToCart-btn" : "disabled" ?> ' value='<?= $product['ID'] ?>'>
+                                    <button class='btn btn-primary <?= $product['Quantity'] ? "addToCart-btn" : "disabled" ?> ' value='<?= $product['ID'] ?>' style="width: 250px;">
                                         <i class='fa fa-shopping-cart me-2'></i>
                                         Add to Cart
                                     </button>
                                 </div>
-                                <div class='mx-3'> <button class='btn btn-danger addToWishlist-btn' value='<?= $product['ID'] ?>'><i class='fa fa-heart me-2'></i>Add to Wishlist</button></div>
+                                <div class='mx-3'> <button class='btn btn-danger addToWishlist-btn' value='<?= $product['ID'] ?>' style="width: 250px;"><i class='fa fa-heart me-2'></i>Add to Wishlist</button></div>
                             </div>
                         </div>
                     </div>
