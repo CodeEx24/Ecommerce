@@ -30,18 +30,19 @@ include('includes/header.php');
             if (mysqli_num_rows($blog) > 0) {
                 foreach ($blog as $item) {
             ?>
-                    <div class="col-md-3 my-3 ">
+                    <div class="col-md-3 my-3">
                         <a href="blog-view.php?post=<?= $item['Slug'] ?>">
-                            <div class="bg-card card h-100">
-                                <div class="card-body ">
-                                    <img src="uploads/blog/<?= $item['Image'] ?>" width="100%" height="70%" style="object-fit: cover">
+                            <div class="bg-card card h-100" style="position: relative;">
+                                <div class="card-body">
+                                    <img src="uploads/blog/<?= $item['Image'] ?>" width="100%" height="250px" style="object-fit: cover">
                                     <h4 class="mt-3 text-white fw-bold"><?= $item['Title'] ?></h4>
-                                    <p class="ref-excerpt text-muted"><?= substr($item['Meta_Description'], 0, 125) . '...' ?></p>
-                                    <a class="text-success" style="font-size: 16px !important;" href="blog-view.php?post=<?= $item['Slug'] ?>">Read More &#x000BB;</a>
+                                    <p class="ref-excerpt text-muted mb-5"><?= substr($item['Meta_Description'], 0, 130) . '...' ?></p>
                                 </div>
+                                <a class="text-success" style="font-size: 16px !important; position: absolute; bottom: 10px; left: 16px;" href="blog-view.php?post=<?= $item['Slug'] ?>">Read More &#x000BB;</a>
                             </div>
                         </a>
                     </div>
+
             <?php
                 }
             } else {

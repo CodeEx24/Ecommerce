@@ -57,11 +57,12 @@ include('includes/header.php');
                                     </div>
                                     <div class="col-md-4">
                                         <label class="category-label my-2" for="">Original Price</label>
-                                        <div class="mb-3"><input class="form-control" type="number" name="original_price" placeholder="Enter Original Price" required value="<?= $data['Original_Price'] ?>"></div>
+                                        <div class="mb-3"><input class="form-control" type="number" step="0.01" name="original_price" placeholder="Enter Original Price" value="<?= $data['Original_Price'] ?>" required></div>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="category-label my-2" for="">Selling Price</label>
-                                        <div class="mb-3"><input class="form-control" type="number" name="selling_price" placeholder="Enter Selling Price" required value="<?= $data['Selling_Price'] ?>"></div>
+                                        <div class="mb-3"> <input class="form-control" type="number" step="0.01" name="selling_price" placeholder="Enter Selling Price" value="<?= $data['Selling_Price'] ?>" required>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">

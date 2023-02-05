@@ -28,6 +28,11 @@ h6 {
   object-fit: cover;
 }
 
+.prod-view-img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .ref-sale-badge {
   font-size: 12px;
   font-weight: bold;
@@ -159,7 +164,7 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
 }
 
 #orders {
-  background-image: url('../img/background/td-bg.jpg');
+  background-image: url('../img/background/pattern.jpg');
   background-position: center;
 }
 

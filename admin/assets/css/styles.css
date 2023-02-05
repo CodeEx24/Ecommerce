@@ -221,7 +221,11 @@ h6 {
 .note-editor.note-airframe.fullscreen,
 .note-editor.note-frame.fullscreen {
   background-color: #282736;
-  padding: 0 500px;
+}
+
+.note-editor.note-frame .note-editing-area .note-codable {
+  background-color: #2d2c38 !important;
+  color: white !important;
 }
 
 .modal-open {

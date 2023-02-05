@@ -1,3 +1,16 @@
+FIX Orders Image
+
+
+
+
+
+=========================================================================================================================
+Admin Side
+TextEditor: https://www.jqueryscript.net/demo/easy-rich-text-editor/
+
+
+
+
 CHANGE WISHLIST TO BUYNOW
 
 Orders
@@ -17,16 +30,6 @@ JQUERY:
 
 
   IN Database query cascade all the references
-
-
-=========================================================================================================================
-Admin Side
-TextEditor: https://www.jqueryscript.net/demo/easy-rich-text-editor/
-
-
-
-
-
 
 
 

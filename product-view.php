@@ -18,7 +18,7 @@ if (isset($_GET['product'])) {
                 <div class="row ">
                     <div class="col-md-4 col-sm-12 my-5 mx-1 ">
                         <div class="d-flex flex-column">
-                            <img class="ref-image rounded " src="uploads/<?= $product['Image'] ?>" alt="<?= $product['Name'] ?>" loading="lazy" />
+                            <img class="prod-view-image rounded " src="uploads/<?= $product['Image'] ?>" alt="<?= $product['Name'] ?>" loading="lazy" />
                             <p class="<?= $product['Trending']  ? "ref-sale-badge" : "" ?>"><?= $product['Trending'] ? "TRENDING" : "" ?></p>
                         </div>
                     </div>
@@ -88,8 +88,8 @@ if (isset($_GET['product'])) {
                                             <div class="ref-product-info d-flex justify-content-between">
                                                 <h5 class="ref-name fw-bold"><?= $item['Name'] ?></h5>
                                                 <strong class="ref-price ref-on-sale">
-                                                    <s class="ref-original-price"><?= $item['Original_Price'] ?> </s>
-                                                    <span class="ref-selling-price"> <?= $item['Selling_Price'] ?> </span>
+                                                    <s class="ref-original-price">$<?= $item['Original_Price'] ?> </s>
+                                                    <span class="ref-selling-price"> $<?= $item['Selling_Price'] ?> </span>
                                                 </strong>
                                             </div>
                                             <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>

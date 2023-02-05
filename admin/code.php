@@ -4,12 +4,12 @@ include('../functions/myfunctions.php');
 include('../config/dbcon.php');
 
 if (isset($_POST['add_category_btn'])) {
-    $name = $_POST['name'];
-    $slug = $_POST['slug'];
-    $description = $_POST['description'];
-    $meta_title = $_POST['meta_title'];
-    $meta_description = $_POST['meta_description'];
-    $meta_keywords = $_POST['meta_keywords'];
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_keywords']);
     $status = isset($_POST['status']) ? '1' : '0';
     $popular = isset($_POST['popular']) ? '1' : '0';
 
@@ -37,19 +37,19 @@ if (isset($_POST['add_category_btn'])) {
         redirect('add-category.php', "Something Went Wrong In Adding Category.");
     }
 } else if (isset($_POST['update_category_btn'])) {
-    $category_id = $_POST['category_id'];
-    $name = $_POST['name'];
-    $slug = $_POST['slug'];
-    $description = $_POST['description'];
-    $meta_title = $_POST['meta_title'];
-    $meta_description = $_POST['meta_description'];
-    $meta_keywords = $_POST['meta_keywords'];
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_keywords']);
     $status = isset($_POST['status']) ? '1' : '0';
     $popular = isset($_POST['popular']) ? '1' : '0';
 
     //Getting the Image
-    $new_image = $_FILES['image']['name'];
-    $old_image = $_POST['old_image'];
+    $new_image = mysqli_real_escape_string($con, $_FILES['image']['name']);
+    $old_image = mysqli_real_escape_string($con, $_POST['old_image']);
     $path = "../uploads/category";
 
     $update_products = "UPDATE Products SET status='$status' WHERE CategoryID='$category_id'";
@@ -104,23 +104,22 @@ if (isset($_POST['add_category_btn'])) {
         echo 500;
     }
 } else if (isset($_POST['add_product_btn'])) {
-    $category_id = $_POST['category_id'];
-    $name = $_POST['name'];
-    $slug = $_POST['slug'];
-    $small_description = $_POST['small_description'];
-    $description = $_POST['description'];
-    $original_price = $_POST['original_price'];
-    $selling_price = $_POST['selling_price'];
-    $quantity = $_POST['quantity'];
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $small_description = mysqli_real_escape_string($con, $_POST['small_description']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $original_price = mysqli_real_escape_string($con, $_POST['original_price']);
+    $selling_price = mysqli_real_escape_string($con, $_POST['selling_price']);
+    $quantity = mysqli_real_escape_string($con, $_POST['quantity']);
     $status = isset($_POST['status']) ? '1' : '0';
     $trending = isset($_POST['trending']) ? '1' : '0';
-    $meta_title = $_POST['meta_title'];
-    $meta_keywords = $_POST['meta_description'];
-    $meta_description = $_POST['meta_keywords'];
-    echo ($category_id);
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
+
     //Getting the Image
-    //Getting the Image
-    $image = $_FILES['image']['name'];
+    $image = mysqli_real_escape_string($con, $_FILES['image']['name']);
     $path = "../uploads/category";
 
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
@@ -143,20 +142,20 @@ if (isset($_POST['add_category_btn'])) {
         redirect('add-product.php', "Something Went Wrong In Adding Product.");
     }
 } else if (isset($_POST['update_product_btn'])) {
-    $product_id = $_POST['product_id'];
-    $category_id = $_POST['category_id'];
-    $name = $_POST['name'];
-    $slug = $_POST['slug'];
-    $small_description = $_POST['small_description'];
-    $description = $_POST['description'];
-    $original_price = $_POST['original_price'];
-    $selling_price = $_POST['selling_price'];
-    $quantity = $_POST['quantity'];
+    $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $small_description = mysqli_real_escape_string($con, $_POST['small_description']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $original_price = mysqli_real_escape_string($con, $_POST['original_price']);
+    $selling_price = mysqli_real_escape_string($con, $_POST['selling_price']);
+    $quantity = mysqli_real_escape_string($con, $_POST['quantity']);
     $status = isset($_POST['status']) ? '1' : '0';
     $trending = isset($_POST['trending']) ? '1' : '0';
-    $meta_title = $_POST['meta_title'];
-    $meta_keywords = $_POST['meta_description'];
-    $meta_description = $_POST['meta_keywords'];
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
 
 
     $path = "../uploads";
@@ -207,25 +206,25 @@ if (isset($_POST['add_category_btn'])) {
         redirect("products.php", "Something Went Wrong");
     }
 } else if (isset($_POST['update_order_btn'])) {
-    $tracking_no = $_POST['tracking_no'];
-    $order_status = $_POST['status'];
+    $tracking_no = mysqli_real_escape_string($con, $_POST['tracking_no']);
+    $order_status = mysqli_real_escape_string($con, $_POST['status']);
 
     $update_order_query = "UPDATE orders SET Status='$order_status', Updated_At=CURRENT_TIMESTAMP WHERE Tracking_No='$tracking_no';";
     $update_order_query_run = mysqli_query($con, $update_order_query);
 
     redirect("view-order.php?tracking=$tracking_no", "Order status updated successfully.");
 } else if (isset($_POST['add_post_btn'])) {
-    $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : "";
-    $title = $_POST['title'];
-    $slug = $_POST['slug'];
-    $description = $_POST['description'];
-    $status = isset($_POST['status']) ? '1' : '0';
-    $meta_title = $_POST['meta_title'];
-    $meta_keywords = $_POST['meta_description'];
-    $meta_description = $_POST['meta_keywords'];
+    $category_id = mysqli_real_escape_string($con, isset($_POST['category_id']) ? $_POST['category_id'] : "");
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $status = mysqli_real_escape_string($con, isset($_POST['status']) ? '1' : '0');
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
 
     $path = "../uploads/blog";
-    $image = $_FILES['image']['name'];
+    $image = mysqli_real_escape_string($con, $_FILES['image']['name']);
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
     //The image filename
     $filename = time() . '.' . $image_ext;
@@ -247,23 +246,20 @@ if (isset($_POST['add_category_btn'])) {
         redirect('add-post.php', "Something went wrong in adding blog post");
     }
 } else if (isset($_POST['update_post_btn'])) {
-    $post_id = $_POST['post_id'];
-    $category_id = $_POST['category_id'];
-    $title = $_POST['title'];
-    $slug = $_POST['slug'];
-    $description = $_POST['description'];
+    $post_id = mysqli_real_escape_string($con, $_POST['post_id']);
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $slug = mysqli_real_escape_string($con, $_POST['slug']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
     $status = isset($_POST['status']) ? '1' : '0';
-    $meta_title = $_POST['meta_title'];
-    $meta_keywords = $_POST['meta_description'];
-    $meta_description = $_POST['meta_keywords'];
-
+    $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
+    $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
+    $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
 
     $path = "../uploads/blog";
 
-    $new_image = $_FILES['image']['name'];
-    $old_image = $_POST['old_image'];
-
-
+    $new_image = mysqli_real_escape_string($con, $_FILES['image']['name']);
+    $old_image = mysqli_real_escape_string($con, $_POST['old_image']);
 
     if ($new_image != "") {
         // $update_filename = $new_image;
