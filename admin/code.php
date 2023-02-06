@@ -151,7 +151,7 @@ if (isset($_POST['add_category_btn'])) {
 
     //Get the Image
     $image = mysqli_real_escape_string($con, $_FILES['image']['name']);
-    $path = "../uploads/category";
+    $path = "../uploads";
     // Get the image extension and generate a filename using time()
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
     $filename = time() . '.' . $image_ext;

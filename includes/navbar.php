@@ -13,7 +13,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link <?= $page == "index.php" ? "active text-aqua" : "" ?>"" href=" index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link <?= $page == "categories.php" ||  $page == "products-view.php" ||  $page == "products.php" || $page == "trending-products.php" ? "active text-aqua" : "" ?>" href="categories.php">Collections</a></li>
+                <li class="nav-item"><a class="nav-link <?= $page == "categories.php" ||  $page == "product-view.php" ||  $page == "products.php" || $page == "trending-products.php" ? "active text-aqua" : "" ?>" href="categories.php">Collections</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "blog.php" ||  $page == "blog-view.php" ? "active text-aqua" : "" ?>" href="blog.php">Blog</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "about.php" ? "active text-aqua" : "" ?>" href="about.php">About</a></li>
             </ul>

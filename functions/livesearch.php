@@ -30,8 +30,8 @@ if (isset($_POST['input'])) {
                             <div class="ref-product-info d-flex justify-content-between">
                                 <h5 class="ref-name fw-bold"><?= $item['Name'] ?></h5>
                                 <strong class="ref-price ref-on-sale">
-                                    <s class="ref-original-price"><?= $item['Original_Price'] ?> </s>
-                                    <span class="ref-selling-price"> <?= $item['Selling_Price'] ?> </span>
+                                    <s class="ref-original-price">$<?= $item['Original_Price'] ?> </s>
+                                    <span class="ref-selling-price"> $<?= $item['Selling_Price'] ?> </span>
                                 </strong>
                             </div>
                             <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>

@@ -36,17 +36,12 @@
     <!-- SUMMER NOTES -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
-
-
-
-
     <!-- Styles for data table label, input etc. -->
     <style>
         /* Some modification for data tables because we use the cdn link for datatables */
         .dataTables_length label,
         .dataTables_filter label {
             color: white;
-
         }
 
         .dataTables_wrapper .dataTables_length select {
