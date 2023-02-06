@@ -2,6 +2,7 @@
 session_start();
 include('../config/dbcon.php');
 
+// get all records from a table
 function getAll($table)
 {
     global $con;
@@ -9,7 +10,7 @@ function getAll($table)
     return mysqli_query($con, $query);
 }
 
-
+// get a record by ID from a table
 function getByID($table, $id)
 {
     global $con;
@@ -17,7 +18,7 @@ function getByID($table, $id)
     return mysqli_query($con, $query);
 }
 
-
+// redirect to a URL with a message
 function redirect($url, $message)
 {
     $_SESSION['message'] = $message;
@@ -25,6 +26,7 @@ function redirect($url, $message)
     exit();
 }
 
+// get all unfulfilled orders
 function getAllOrders()
 {
     global $con;
@@ -32,7 +34,7 @@ function getAllOrders()
     return mysqli_query($con, $query);
 }
 
-
+// get all fulfilled orders
 function getAllCompletedOrders()
 {
     global $con;
@@ -40,6 +42,7 @@ function getAllCompletedOrders()
     return mysqli_query($con, $query);
 }
 
+// get total sales for the current week
 function getCurrentWeekCompletedOrders()
 {
     global $con;
@@ -47,6 +50,7 @@ function getCurrentWeekCompletedOrders()
     return mysqli_query($con, $query);
 }
 
+// get total sales for the current day
 function getCurrentDayCompletedOrders()
 {
     global $con;
@@ -54,6 +58,7 @@ function getCurrentDayCompletedOrders()
     return mysqli_query($con, $query);
 }
 
+// get total sales for the current month
 function getCurrentMonthCompletedOrders()
 {
     global $con;
@@ -61,6 +66,7 @@ function getCurrentMonthCompletedOrders()
     return mysqli_query($con, $query);
 }
 
+// get all users added this month
 function getUsersAddedThisMonth()
 {
     global $con;
@@ -68,6 +74,7 @@ function getUsersAddedThisMonth()
     return mysqli_query($con, $query);
 }
 
+// get all current orders for the day
 function getCurrentOrdersThisDay()
 {
     global $con;
@@ -75,17 +82,18 @@ function getCurrentOrdersThisDay()
     return mysqli_query($con, $query);
 }
 
-
+// get order history which is status is not equal to 0
 function getOrderHistory()
 {
     global $con;
     $query = "SELECT * FROM Orders WHERE Status!='0'";
     return mysqli_query($con, $query);
 }
+
+//Check the tracking no. validation for orders
 function checkTrackingNoValid($tracking_no)
 {
     global $con;
-
     $query = "SELECT * FROM Orders WHERE tracking_no='$tracking_no'";
     return mysqli_query($con, $query);
 }

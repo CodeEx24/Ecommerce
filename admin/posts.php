@@ -45,7 +45,6 @@ include('includes/header.php');
                                     print("<tr><td class='table-text fw-bold'>No Records Found</td> </tr>");
                                 }
                                 ?>
-
                             </tbody>
                             <tfoot>
                                 <tr>

@@ -4,15 +4,18 @@ include('includes/header.php');
 
 include('authenticate.php');
 
+// Check if tracking number of an order is existing
 if (isset($_GET['tracking'])) {
+    // Getting the value of tracking coming from URL
     $tracking_no = $_GET['tracking'];
-
     $orderData = checkTrackingNoValid($tracking_no);
 
+    // If there are no data in order data it will display the message that tracking number is not existing
     if (mysqli_num_rows($orderData) == 0) {
 ?>
         <h4 class="bg-dark text-center pt-5" style="margin: 0;">It seems that you don't have existing orders for the tracking number</h4>
     <?php
+        // Throw and error page
         include('includes/404.php');
         die();
     }
@@ -96,13 +99,14 @@ $data = mysqli_fetch_array($orderData);
 
 
                                 <?php
+                                // Get the user_id from the session
                                 $user_id = $_SESSION['auth_user']['user_id'];
+                                // Call the function
+                                $order_items = getOrderDetails($con, $user_id, $tracking_no);
 
-                                $order_query = "SELECT o.id as oid, o.tracking_no, o.user_id, oi.*, oi.quantity as Order_Quantity, p.* FROM orders o, order_items oi, products p WHERE o.user_id='$user_id' AND oi.order_id=o.id AND p.id=oi.product_id AND o.tracking_no='$tracking_no'";
-                                $order_query_run = mysqli_query($con, $order_query);
-
-                                if (mysqli_num_rows($order_query_run) > 0) {
-                                    foreach ($order_query_run as $item) {
+                                // Check if the result is not empty
+                                if (!empty($order_items)) {
+                                    foreach ($order_items as $item) {
                                 ?>
                                         <tr>
                                             <td class="">

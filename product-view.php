@@ -2,13 +2,11 @@
 include('functions/userfunctions.php');
 include('includes/header.php');
 
-
+// Check if product is set in the URL
 if (isset($_GET['product'])) {
     $product_slug = $_GET['product'];
     $product_data = getSlugActive("Products", $product_slug); //Calling Function to get active product
     $product = mysqli_fetch_array($product_data); //Fetching Data
-
-
 
     if ($product) {
 ?>

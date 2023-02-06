@@ -45,21 +45,28 @@ include('includes/header.php');
 include('includes/footer.php') ?>
 
 <script>
+    // Wait for the document to be ready before running any code
     $(document).ready(function() {
+
+        // Listen for input changes in the element with id "live_search"
         $("#live_search").on('input', function() {
+
+            // Store the current input value in a variable
             var input = $(this).val();
 
+            // Make an AJAX request to the server-side script "livesearch.php"
             $.ajax({
-                url: "functions/livesearch.php",
-                method: "POST",
+                url: "functions/livesearch.php", // URL of the script
+                method: "POST", // Request method
                 data: {
-                    trending_input: input,
+                    trending_input: input, // Send the input value as data under the name "trending_input"
                 },
 
+                // If the request is successful, replace the content of the element with id "searchresult" with the returned data
                 success: function(data) {
                     $("#searchresult").html(data);
                 }
             });
-        }).trigger('input');
+        }).trigger('input'); // Trigger the input event immediately on page load
     });
 </script>

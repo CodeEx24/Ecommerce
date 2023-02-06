@@ -1,26 +1,31 @@
 <?php
 include('../middleware/adminMiddleware.php');
 include('includes/header.php');
-
+//Check if tracking number is set in URL
 if (isset($_GET['tracking'])) {
+    //Assign the tracking number to a variable
     $tracking_no = $_GET['tracking'];
 
+    //Get order data with the provided tracking number
     $orderData = checkTrackingNoValid($tracking_no);
 
+    //Check if the query returned any results
     if (mysqli_num_rows($orderData) < 0) {
-?>
-        <h4>Something went wrong</h4>
-    <?php
+        //Display error message if no data is found
+        echo "<h4>Something went wrong</h4>";
+        //Terminate the script
         die();
     }
 } else {
-    ?>
-    <h4>Something went wrong</h4>;
-
-<?php
+    //Display error message if tracking number is not provided in URL
+    echo "<h4>Something went wrong</h4>";
+    //Terminate the script
     die();
 }
+
+//Fetch the order data as an array
 $data = mysqli_fetch_array($orderData);
+
 ?>
 
 <div class="container-fluid mt-3 mb-4">

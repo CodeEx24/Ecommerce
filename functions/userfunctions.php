@@ -2,6 +2,7 @@
 session_start();
 include('config/dbcon.php');
 
+// This function retrieves all records with a "status" of 1 from the specified table
 function getAllActive($table)
 {
     global $con;
@@ -9,6 +10,7 @@ function getAllActive($table)
     return mysqli_query($con, $active_query);
 }
 
+// This function retrieves all trending products with a "status" of 1 and with a quantity greater than 0
 function getAllTrending()
 {
     global $con;
@@ -17,6 +19,7 @@ function getAllTrending()
 }
 
 
+// This function retrieves a record from the specified table with the given id and status of 1
 function getIDActive($table, $id)
 {
     global $con;
@@ -24,6 +27,7 @@ function getIDActive($table, $id)
     return mysqli_query($con, $query);
 }
 
+// This function retrieves a record from the specified table with the given slug and status of 1
 function getSlugActive($table, $slug)
 {
     global $con;
@@ -31,6 +35,7 @@ function getSlugActive($table, $slug)
     return mysqli_query($con, $query);
 }
 
+// This function retrieves all products with the given category id and with a status of 1 and a quantity greater than 0
 function getProductByCategory($category_id)
 {
     global $con;
@@ -38,6 +43,7 @@ function getProductByCategory($category_id)
     return mysqli_query($con, $query);
 }
 
+// This function retrieves up to 6 related products with the same category id, but not the product with the given id, and with a status of 1 and a quantity greater than 0
 function getRelatedProduct($category_id, $product_id)
 {
     global $con;
@@ -45,6 +51,7 @@ function getRelatedProduct($category_id, $product_id)
     return mysqli_query($con, $query);
 }
 
+// This function returns the cart items of the logged in user that have active status
 function getCartItemsActiveStatus()
 {
     global $con;
@@ -55,6 +62,7 @@ function getCartItemsActiveStatus()
     return mysqli_query($con, $query);
 }
 
+// This function returns the wishlist items of the logged in user that have active status
 function getItemsWishlist()
 {
     global $con;
@@ -65,6 +73,7 @@ function getItemsWishlist()
     return mysqli_query($con, $query);
 }
 
+// This function returns the cart items of the logged in user regardless of the active status
 function getCartItems()
 {
     global $con;
@@ -75,15 +84,16 @@ function getCartItems()
     return mysqli_query($con, $query);
 }
 
+// This function returns the order history of the logged in user
 function getOrders()
 {
     global $con;
     $user_id = $_SESSION['auth_user']['user_id'];
-
     $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY Status ASC;";
     return mysqli_query($con, $query);
 }
 
+// This function returns the address details of the logged in user
 function getDetails()
 {
     global $con;
@@ -92,6 +102,19 @@ function getDetails()
     return mysqli_query($con, $query);
 }
 
+function getOrderDetails($con, $user_id, $tracking_no)
+{
+    // The query
+    $order_query = "SELECT o.id as oid, o.tracking_no, o.user_id, oi.*, oi.quantity as Order_Quantity, p.* FROM orders o, order_items oi, products p WHERE o.user_id='$user_id' AND oi.order_id=o.id AND p.id=oi.product_id AND o.tracking_no='$tracking_no'";
+
+    // Execute the query
+    $order_query_run = mysqli_query($con, $order_query);
+
+    // Return the result
+    return mysqli_fetch_all($order_query_run, MYSQLI_ASSOC);
+}
+
+// function to redirect to a URL with a message
 function redirect($url, $message)
 {
     $_SESSION['message'] = $message;
@@ -99,12 +122,16 @@ function redirect($url, $message)
     exit();
 }
 
+// function to redirect to a URL without a message
 function redirectNoMess($url)
 {
     header('Location: ' . $url);
     exit();
 }
 
+
+
+// function to check if the tracking number is valid for the current user
 function checkTrackingNoValid($tracking_no)
 {
     global $con;

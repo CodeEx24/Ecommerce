@@ -1,39 +1,56 @@
 <?php
 include('../middleware/adminMiddleware.php');
 include('includes/header.php');
-
-//Users Data
+// Retrieve all users data
 $users = getAll('Users');
-$user_number =  mysqli_num_rows($users);
+// Get the number of rows returned from the query
+$user_number = mysqli_num_rows($users);
 
+// Retrieve the number of users added this month
 $users_num = getUsersAddedThisMonth();
-$users_this_month =  mysqli_num_rows($users_num);
+// Get the number of rows returned from the query
+$users_this_month = mysqli_num_rows($users_num);
 
-//Sales
+// Retrieve all completed orders data
 $sales = getAllCompletedOrders();
+// Fetch all the rows as associative arrays
 $sales_data = mysqli_fetch_all($sales, MYSQLI_ASSOC);
+// Extract the 'Total_Price' column from the $sales_data array
 $total_prices = array_column($sales_data, 'Total_Price');
+// Calculate the total sales from all the 'Total_Price' values
 $total_sales = array_sum($total_prices);
 
+// Retrieve all completed orders for the current day
 $get_sale_today = getCurrentDayCompletedOrders();
+// Fetch all the rows as associative arrays
 $sales_data_today = mysqli_fetch_all($get_sale_today, MYSQLI_ASSOC);
+// Extract the 'total_sales' column from the $sales_data_today array
 $total_prices_today = array_column($sales_data_today, 'total_sales');
+// Calculate the total sales for today from all the 'total_sales' values
 $total_sales_today = array_sum($total_prices_today);
 
+// Retrieve all completed orders for the current month
 $get_sale_month = getCurrentMonthCompletedOrders();
+// Fetch all the rows as associative arrays
 $sales_data_month = mysqli_fetch_all($get_sale_month, MYSQLI_ASSOC);
+// Extract the 'total_sales' column from the $sales_data_month array
 $total_prices_month = array_column($sales_data_month, 'total_sales');
+// Calculate the total sales for the current month from all the 'total_sales' values
 $total_sales_month = array_sum($total_prices_month);
 
+// Retrieve all completed orders for the current week
 $get_week_sale = getCurrentWeekCompletedOrders();
+// Fetch the first row as an associative array
 $weekly_sales = mysqli_fetch_assoc($get_week_sale);
 
-
-//Orders
+// Retrieve all orders
 $orders = getAllOrders();
-$orders_number =  mysqli_num_rows($orders);
+// Get the number of rows returned from the query
+$orders_number = mysqli_num_rows($orders);
 
+// Retrieve the number of current day's orders
 $orders_num = getCurrentOrdersThisDay();
+// Get the number of rows returned from the query
 $orders_this_day = mysqli_num_rows($orders_num);
 ?>
 

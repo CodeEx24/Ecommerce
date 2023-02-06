@@ -240,6 +240,7 @@ include('includes/subscribe-section.php');
 include('includes/footer.php')
 ?>
 
+<!-- Owl Carousel changing values of style for its responsiveness -->
 <script>
     $(document).ready(function() {
         $('.owl-carousel').owlCarousel({

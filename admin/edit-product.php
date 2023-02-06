@@ -124,9 +124,6 @@ include('includes/header.php');
                 include('includes/404.php');
             }
             ?>
-
-
-
         </div>
 
     </div>

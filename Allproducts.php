@@ -29,20 +29,24 @@ include('includes/footer.php') ?>
 
 <script>
     $(document).ready(function() {
+        // Select the input element with id "live_search"
         $("#live_search").on('input', function() {
+            // Get the input value
             var input = $(this).val();
+
+            // Perform an AJAX request to the "livesearch.php" file
             $.ajax({
                 url: "functions/livesearch.php",
                 method: "POST",
                 data: {
                     input: input
                 },
-
+                // If the request is successful
                 success: function(data) {
+                    // Update the contents of the element with id "searchresult" with the response data
                     $("#searchresult").html(data);
                 }
-            })
-
+            });
         });
-    })
+    });
 </script>

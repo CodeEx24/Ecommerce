@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Check if the user is logged in
 if (isset($_SESSION['auth'])) {
     $_SESSION['message'] = "You are already logged in.";
     header('Location: index.php');

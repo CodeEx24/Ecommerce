@@ -101,48 +101,4 @@ include('authenticate.php');
 </section>
 
 <?php include('includes/trendprod-section.php') ?>
-
-<script>
-    const decrementBtn = document.querySelector('.decrement-btn-cart');
-    const incrementBtn = document.querySelector('.increment-btn-cart');
-
-    decrementBtn.addEventListener('click', function() {
-        const input_quantity = document.querySelector('.input-quantity');
-        const quantity = input_quantity.value;
-
-        const input_sellingPrice = document.querySelector('.productPrice');
-        const sellingPrice = input_sellingPrice.value;
-        console.log("SELLING PRICE " + sellingPrice);
-
-        var st2 = document.querySelector('#st2');
-        if (quantity > 1) {
-            console.log("Quantity - 1: " + (quantity - 1));
-            var val = sellingPrice * (quantity - 1);
-            console.log("SAD")
-            st2.innerHTML = val.toFixed(2);
-
-        }
-    });
-
-    incrementBtn.addEventListener('click', function() {
-        const input_quantity = document.querySelector('.input-quantity');
-        var quantity = Number(input_quantity.value);
-
-        const input_sellingPrice = document.querySelector('.productPrice');
-        const sellingPrice = input_sellingPrice.value;
-        console.log("SELLING PRICE " + sellingPrice);
-
-        var st2 = document.querySelector('#st2');
-
-        if (quantity < 10) {
-            quantity = quantity + 1;
-            console.log("Quantity + 1: " + (quantity));
-            var val = sellingPrice * (quantity);
-            console.log("SAD")
-            st2.innerHTML = val.toFixed(2);
-        }
-    });
-</script>
-
-
 <?php include('includes/footer.php') ?>

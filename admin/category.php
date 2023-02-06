@@ -68,6 +68,7 @@ include('includes/header.php');
 <?php include('includes/footer.php') ?>
 
 <script>
+    // Data tables for category
     $(document).ready(function() {
         $('#category').DataTable();
     });

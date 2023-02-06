@@ -59,7 +59,6 @@ include('includes/header.php');
                             <?php
                             }
                             ?>
-
                         </tbody>
                         <tfoot>
                             <tr>

@@ -102,27 +102,30 @@ $user_details_data = mysqli_fetch_array($user_details);
 
 <!-- Provinces option of a user -->
 <script>
+    // array of all the provinces in the Philippines
     var provinces = ['Abra', 'Agusan del Norte', 'Agusan del Sur', 'Aklan', 'Albay', 'Antique', 'Apayao', 'Aurora', 'Basilan', 'Bataan', 'Batanes', 'Batangas', 'Benguet', 'Biliran', 'Bohol', 'Bukidnon', 'Bulacan', 'Cagayan', 'Camarines Norte', 'Camarines Sur', 'Camiguin', 'Capiz', 'Catanduanes', 'Cavite', 'Cebu', 'Compostela Valley', 'Cotabato', 'Davao del Norte', 'Davao del Sur', 'Davao Occidental', 'Davao Oriental', 'Dinagat Islands', 'Eastern Samar', 'Guimaras', 'Ifugao', 'Ilocos Norte', 'Ilocos Sur', 'Iloilo', 'Isabela', 'Kalinga', 'La Union', 'Laguna', 'Lanao del Norte', 'Lanao del Sur', 'Leyte', 'Maguindanao', 'Marinduque', 'Masbate', 'Metro Manila', 'Misamis Occidental', 'Misamis Oriental', 'Mountain Province', 'Negros Occidental', 'Negros Oriental', 'Northern Samar', 'Nueva Ecija', 'Nueva Vizcaya', 'Occidental Mindoro', 'Oriental Mindoro', 'Palawan', 'Pampanga', 'Pangasinan', 'Quezon', 'Quirino', 'Rizal', 'Romblon', 'Samar', 'Sarangani', 'Siquijor', 'Sorsogon', 'South Cotabato', 'Southern Leyte', 'Sultan Kudarat', 'Sulu', 'Surigao del Norte', 'Surigao del Sur', 'Tarlac', 'Tawi-Tawi', 'Zambales', 'Zamboanga del Norte', 'Zamboanga del Sur', 'Zamboanga Sibugay'];
 
+    // select the HTML element with id "province-select"
     var select = document.getElementById("province-select");
+
+    // loop through the provinces array
     for (var i = 0; i < provinces.length; i++) {
         var opt = provinces[i];
+        // create a new HTML "option" element
         var el = document.createElement("option");
+        // set the text content and value of the "option" element to the current province
         el.textContent = opt;
         el.value = opt;
+        // add the "option" element to the "select" element
         select.appendChild(el);
     }
 </script>
+
 
 <!-- Replace "test" with your own sandbox Business account app client ID -->
 <script src="https://www.paypal.com/sdk/js?client-id=ActZNAmGgUgPbTFaT1BeyxwxTuTgLVk6fOq8sFcOqMMnoc--p7WPGJuwTqXnmh18pYi9JBi-QdPc0pX2&currency=USD"></script>
 
 <!-- Paypal process and rendering the details in the database -->
-PHP:
-<?php
-
-?>
-SCRIPT:
 <script>
     paypal.Buttons({
         onClick() {
@@ -174,6 +177,7 @@ SCRIPT:
 
                 });
 
+                // Ajax POST Requery for saving the orders of user to the database
                 $.ajax({
                     type: "POST",
                     url: "functions/placeorder.php",

@@ -72,7 +72,9 @@ include('includes/header.php');
 
 <?php include('includes/footer.php') ?>
 
+
 <script>
+    // Data tables for clients
     $(document).ready(function() {
         $('#clients').DataTable();
     });

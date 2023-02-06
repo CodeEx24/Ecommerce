@@ -48,9 +48,6 @@ include('includes/header.php');
     </div>
 </header>
 
-
-
-
 <?php
 include('includes/trendprod-section.php');
 include('includes/footer.php')

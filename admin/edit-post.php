@@ -106,26 +106,10 @@ include('includes/header.php');
     </div>
 </div>
 
-<!-- <div class="summernote">
-    <form action="submit.php" method="post">
-        <textarea id="summernote" name="content"></textarea>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
-</div> -->
-
-
-
-
 <?php include('includes/footer.php') ?>
 
 <script>
-    $(document).ready(function() {
-        $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
-    });
-</script>
-
-<script>
+    // Summernote for the contents
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 200,
@@ -141,6 +125,7 @@ include('includes/header.php');
             ]
         });
 
+        // Modify all the classes attribute that has dropdown-toggle and change it into data-bs-toggle.
         $('.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
 
     });
