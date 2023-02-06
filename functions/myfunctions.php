@@ -97,3 +97,12 @@ function checkTrackingNoValid($tracking_no)
     $query = "SELECT * FROM Orders WHERE tracking_no='$tracking_no'";
     return mysqli_query($con, $query);
 }
+
+// Get the latest added in different table
+function getLatestAdded($table)
+{
+    global $con;
+
+    $query = "SELECT * FROM $table ORDER BY Created_At DESC LIMIT 1";
+    return mysqli_query($con, $query);
+}

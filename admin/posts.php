@@ -31,7 +31,7 @@ include('includes/header.php');
                                 ?>
                                         <tr>
                                             <td class="table-text"><?= $item['ID']; ?></td>
-                                            <td class="table-text" style="width: 120px;"><img src="../uploads/blog/<?= $item['Image']; ?>" alt="<?= $item['Title']; ?>" width="100px" height="100px"></td>
+                                            <td class="table-text" style="width: 120px;"><img src="../uploads/blog/<?= $item['Image']; ?>" alt="<?= $item['Title']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Title']; ?></td>
                                             <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                             <td class="table-text my-auto">

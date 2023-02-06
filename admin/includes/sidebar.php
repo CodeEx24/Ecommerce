@@ -13,6 +13,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+
             <li class="nav-item ">
                 <a class="nav-link text-white <?= $page == "index.php" ? "active bg-gradient-info" : "" ?>" href="index.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -21,15 +22,50 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
                     <span class="nav-link-text ms-1 ">Dashboard</span>
                 </a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "category.php" ? "active bg-gradient-info" : "" ?>" href="category.php">
+                <a class="nav-link text-white <?= $page == "orders.php" ? "active bg-gradient-info" : "" ?>" href="orders.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">shopping_cart</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Orders</span>
+                </a>
+            </li>
+            <hr class="horizontal light mt-0 mb-2">
+            <h6 class="px-4 pt-2">Listing</h6>
+            <li class="nav-item">
+                <a class="nav-link text-white <?= $page == "category.php" || $page == "edit-category.php" ? "active bg-gradient-info" : "" ?>" href="category.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
                     <span class="nav-link-text ms-1">Category List</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white <?= $page == "products.php" || $page == "edit-product.php" ? "active bg-gradient-info" : "" ?>" href="products.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Product List</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white <?= $page == "posts.php" || $page == "edit-post.php" ? "active bg-gradient-info" : "" ?>" href="posts.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Post List</span>
+                </a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-white <?= $page == "clients.php" ? "active bg-gradient-info" : "" ?>" href="clients.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Client List</span>
+                </a>
+            </li>
+            <hr class="horizontal light mt-0 mb-2">
+            <h6 class="px-4 pt-2">Adding in the List</h6>
             <li class="nav-item">
                 <a class="nav-link text-white <?= $page == "add-category.php" ? "active bg-gradient-info" : "" ?>" href="add-category.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -38,14 +74,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
                     <span class="nav-link-text ms-1">Add Category</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "products.php" ? "active bg-gradient-info" : "" ?>" href="products.php">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Product List</span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white <?= $page == "add-product.php" ? "active bg-gradient-info" : "" ?>" href="add-product.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -54,38 +83,17 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
                     <span class="nav-link-text ms-1">Add Products</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "posts.php" ? "active bg-gradient-info" : "" ?>" href="posts.php">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Post List</span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white <?= $page == "add-post.php" ? "active bg-gradient-info" : "" ?>" href="add-post.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add post</span>
+                    <span class="nav-link-text ms-1">Add Post</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "clients.php" ? "active bg-gradient-info" : "" ?>" href="clients.php">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Client List</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "orders.php" ? "active bg-gradient-info" : "" ?>" href="orders.php">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Orders</span>
-                </a>
-            </li>
+
+
 
         </ul>
     </div>

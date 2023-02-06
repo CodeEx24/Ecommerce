@@ -169,12 +169,16 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
 }
 
 #collections,
-#trendproducts,
 #blog,
 #orders {
   position: relative;
   background-size: cover;
   background-attachment: fixed;
+}
+
+#trendproducts {
+  position: relative;
+  background-size: cover;
 }
 
 #collections,

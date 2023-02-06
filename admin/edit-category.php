@@ -27,49 +27,60 @@ include('includes/header.php');
                                 <div class="row">
                                     <div class="col-md-6">
                                         <input type="hidden" name="category_id" value="<?= $data['ID'] ?>">
-                                        <label class="category-label my-2" for="">Name</label>
+                                        <label class="text-white my-2" for="">Name</label>
                                         <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Enter Category Name" value="<?= $data['Name'] ?>" required></div>
                                     </div>
-                                    <div class="col-md-6"></div>
-                                    <label class="category-label my-2" for="">Slug</label>
-                                    <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" value="<?= $data['Slug'] ?>" required></div>
+                                    <div class="col-md-6">
+                                        <label class="text-white my-2" for="">Slug</label>
+                                        <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" value="<?= $data['Slug'] ?>" required></div>
+                                    </div>
+
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="category-label my-2" for="">Description</label><br>
+                                    <label class="text-white my-2" for="">Description</label><br>
                                     <textarea class="form-control mb-2" name="description" placeholder="Enter Description" rows="3" required><?= $data['Description'] ?></textarea>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="category-label my-2" for="">Meta Title</label>
+                                    <label class="text-white my-2" for="">Meta Title</label>
                                     <div class="mb-3"><input class="form-control" type="text" name="meta_title" placeholder="Enter Meta Title" value="<?= $data['Meta_Title'] ?>"></div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="category-label my-2" for="">Meta Description</label><br>
+                                    <label class="text-white my-2" for="">Meta Description</label><br>
                                     <textarea class="form-control mb-2" name="meta_description" placeholder="Enter Meta Description" rows="3"><?= $data['Meta_Description'] ?></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="category-label my-2" for="">Meta Keywords</label><br>
+                                    <label class="text-white my-2" for="">Meta Keywords</label><br>
                                     <textarea class="form-control mb-2" name="meta_keywords" placeholder="Enter Meta Keywords" rows="3"><?= $data['Meta_Keywords'] ?></textarea>
                                 </div>
 
-                                <div class="col-md-6 mt-3">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="../uploads/category/<?= $data['Image'] ?>" alt="" width="100px" height="100px">
-                                        </div>
-                                        <div class="col-md-9 my-auto">
-                                            <label class="category-label" for="">Change Image</label><br>
-                                            <input type="file" name="image" ?></input>
-                                            <input type="hidden" name="old_image" value="<?= $data['Image'] ?>">
+                                <div class="row">
+                                    <div class="col-md-6 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="text-white" for="">Current Image</label><br>
+                                                <img src="../uploads/category/<?= $data['Image'] ?>" alt="" width="100px" height="100px" style="object-fit: cover;">
+                                            </div>
+                                            <div class="col-md-8 my-auto">
+                                                <label class="text-white" for="">Change Image</label><br>
+                                                <input type="file" name="image" ?></input>
+                                                <input type="hidden" name="old_image" value="<?= $data['Image'] ?>">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mt-5 my-auto">
+                                        <label class="text-white" for="">Visibility & Popularity</label><br>
+                                        <div class="mt-2">
+                                            <input type="checkbox" <?= $data['Status'] ? "checked" : "" ?> class="category-checkbox" name="status">
+                                            <label class="checkbox-label" for="">Status</label>
+                                            <input type="checkbox" <?= $data['Popular'] ? "checked" : "" ?> class="category-checkbox" name="popular">
+                                            <label class="checkbox-label" for="">Popular</label>
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                                <div class="col-md-6 category-checkbox-div flex-container my-auto">
-                                    <input type="checkbox" <?= $data['Status'] ? "checked" : "" ?> class="category-checkbox" name="status">
-                                    <label class="checkbox-label" for="">Status</label>
-                                    <input type="checkbox" <?= $data['Popular'] ? "checked" : "" ?> class="category-checkbox" name="popular">
-                                    <label class="checkbox-label" for="">Popular</label>
-                                </div>
+
                                 <div class="col-md-12">
                                     <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="update_category_btn">Update Category</button></div>
                                 </div>

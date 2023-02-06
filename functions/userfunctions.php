@@ -129,8 +129,6 @@ function redirectNoMess($url)
     exit();
 }
 
-
-
 // function to check if the tracking number is valid for the current user
 function checkTrackingNoValid($tracking_no)
 {

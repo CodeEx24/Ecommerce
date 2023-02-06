@@ -63,20 +63,11 @@
   font-size: 16px;
 }
 
-.category-label {
-  color: #ebebeb !important;
-  margin-left: 0 !important;
-}
-
 .checkbox-label {
   font-size: 16px;
   color: white;
   margin: 0;
   margin-right: 50px;
-}
-.category-checkbox {
-  margin-bottom: 8px;
-  margin-right: 5px;
 }
 
 .flex-container {

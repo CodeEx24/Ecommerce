@@ -16,11 +16,11 @@ include('includes/header.php');
                         <table id="category" class="display" class="table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="table-text p-4">ID</th>
-                                    <th class="table-text p-4" style="width: 120px;">Image</th>
-                                    <th class="table-text p-4">Name</th>
-                                    <th class="table-text p-4">Status</th>
-                                    <th class="table-text p-4">Action</th>
+                                    <th class="table-text">ID</th>
+                                    <th class="table-text" style="width: 120px;">Image</th>
+                                    <th class="table-text">Name</th>
+                                    <th class="table-text">Status</th>
+                                    <th class="table-text">Action</th>
                                 </tr>
                             <tbody>
                                 <?php
@@ -31,11 +31,11 @@ include('includes/header.php');
                                 ?>
 
                                         <tr>
-                                            <td class="table-text p-4"><?= $item['ID']; ?></td>
-                                            <td class="table-text p-4" style="width: 120px;"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" width="100px" height="100px"></td>
-                                            <td class="table-text p-4"><?= $item['Name']; ?></td>
-                                            <td class="table-text p-4"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
-                                            <td class="table-text p-4">
+                                            <td class="table-text"><?= $item['ID']; ?></td>
+                                            <td class="table-text" style="width: 120px;"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
+                                            <td class="table-text"><?= $item['Name']; ?></td>
+                                            <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
+                                            <td class="table-text">
                                                 <a href="edit-category.php?id=<?= $item['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100px; margin-bottom: 0;">Edit</a>
                                                 <button type="button" value="<?= $item['ID']  ?>" class="btn btn-danger shadow button-text mx-2 delete_category_btn" style="width: 100px; margin-bottom: 0;">Delete</button>
                                             </td>
@@ -49,11 +49,11 @@ include('includes/header.php');
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th class="table-text p-4">ID</th>
-                                    <th class="table-text p-4" style="width: 120px;">Image</th>
-                                    <th class="table-text p-4">Name</th>
-                                    <th class="table-text p-4">Status</th>
-                                    <th class="table-text p-4">Action</th>
+                                    <th class="table-text">ID</th>
+                                    <th class="table-text" style="width: 120px;">Image</th>
+                                    <th class="table-text">Name</th>
+                                    <th class="table-text">Status</th>
+                                    <th class="table-text">Action</th>
                                 </tr>
                             </tfoot>
                             </thead>
