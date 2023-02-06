@@ -71,9 +71,9 @@ include('includes/header.php');
                                 foreach ($categories as $category) {
                             ?>
                                     <img src="../uploads/category/<?= $category['Image'] ?>" alt="" style="object-fit: cover; width: 100%; height: 400px;">
-                                    <h4><?= $category['Name'] ?></h4>
+                                    <h4 class='my-2'><?= $category['Name'] ?></h4>
                                     <p class="ref-excerpt text-white mb-2"><?= substr($category['Meta_Description'], 0, 130) . '...' ?></p>
-                                    <a href="edit-category.php?id=<?= $category['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100%; margin-bottom: 0; ">Edit</a>
+                                    <a href="edit-category.php?id=<?= $category['ID']; ?>" class="btn btn-info shadow button-text my-2" style="width: 100%; margin-bottom: 0; ">Edit</a>
                             <?php
                                 }
                             }

@@ -110,9 +110,9 @@ include('includes/header.php');
                                 foreach ($products as $product) {
                             ?>
                                     <img src="../uploads/<?= $product['Image'] ?>" alt="" style="object-fit: cover; width: 100%; height: 400px;">
-                                    <h4><?= $product['Name'] ?></h4>
+                                    <h4 class='my-2'><?= $product['Name'] ?></h4>
                                     <p class="ref-excerpt text-white mb-2"><?= substr($product['Meta_Description'], 0, 130) . '...' ?></p>
-                                    <a href="edit-product.php?id=<?= $product['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100%; margin-bottom: 0; ">Edit</a>
+                                    <a href="edit-product.php?id=<?= $product['ID']; ?>" class="btn btn-info shadow button-text my-2" style="width: 100%; margin-bottom: 0; ">Edit</a>
                             <?php
                                 }
                             }

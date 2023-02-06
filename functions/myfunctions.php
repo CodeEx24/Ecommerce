@@ -90,7 +90,7 @@ function getOrderHistory()
     return mysqli_query($con, $query);
 }
 
-//Check the tracking no. validation for orders
+// Check the tracking no. validation for orders
 function checkTrackingNoValid($tracking_no)
 {
     global $con;

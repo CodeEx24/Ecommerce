@@ -88,9 +88,9 @@ include('includes/header.php');
                                 foreach ($blogs as $blog) {
                             ?>
                                     <img src="../uploads/blog/<?= $blog['Image'] ?>" alt="" style="object-fit: cover; width: 100%; height: 400px;">
-                                    <h4><?= $blog['Title'] ?></h4>
+                                    <h4 class='my-2'><?= $blog['Title'] ?></h4>
                                     <p class="ref-excerpt text-white mb-2"><?= substr($blog['Meta_Description'], 0, 130) . '...' ?></p>
-                                    <a href="edit-post.php?id=<?= $blog['ID']; ?>" class="btn btn-info shadow button-text" style="width: 100%;">Edit</a>
+                                    <a href="edit-post.php?id=<?= $blog['ID']; ?>" class="btn btn-info shadow button-text my-2" style="width: 100%;">Edit</a>
                             <?php
                                 }
                             }
