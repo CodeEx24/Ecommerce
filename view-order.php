@@ -45,7 +45,7 @@ $data = mysqli_fetch_array($orderData);
                 <div class="row mt-4">
 
                     <div class="col-md-6">
-                        <h5>Delivery Details</h5>
+                        <h5 class="fw-bold">Delivery Details</h5>
                         <div class="row">
                             <div class="col-md-12 mt-3">
                                 <label class="fw-bold">Name</label>
@@ -86,13 +86,13 @@ $data = mysqli_fetch_array($orderData);
                         </div>
                     </div>
                     <div class="col-md-6 order-details">
-                        <h5>Order Details</h5>
+                        <h5 class="fw-bold">Order Details</h5>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,11 +110,11 @@ $data = mysqli_fetch_array($orderData);
                                 ?>
                                         <tr>
                                             <td class="">
-                                                <img src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="80px" height="80px">
+                                                <img src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="80px" height="80px" style="object-fit: cover;">
                                                 <span style="margin-left: 20px; "> <?= $item['Name'] ?></span>
                                             </td>
-                                            <td class="align-middle"><?= $item['Price'] ?></td>
-                                            <td class="align-middle"><?= $item['Order_Quantity'] ?></td>
+                                            <td class="align-middle text-end">$<?= $item['Price'] ?></td>
+                                            <td class="align-middle text-end">x<?= $item['Order_Quantity'] ?></td>
 
                                         </tr>
                                 <?php

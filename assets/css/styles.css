@@ -7,146 +7,10 @@ h6 {
   color: white;
 }
 
-.darker-item {
-  color: #000; /* black text */
-  background-color: #2d2c38; /* light grey background */
-}
-
-.dropdown-menu .dropdown-item {
-  color: white;
-  border-radius: 10px;
-}
-
-.dropdown-item:hover {
-  color: black;
-  font-weight: bold;
-}
-
-.ref-image {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-}
-
-.prod-view-img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.ref-sale-badge {
-  font-size: 12px;
-  font-weight: bold;
-  position: absolute;
-  top: 2em;
-  right: 2em;
-  background-color: #20be8a;
-  border-radius: 25px;
-  padding: 3px 10px;
-  color: white;
-  z-index: 999;
-}
-
-.ref-original-price {
-  color: gray;
-}
-
-.ref-selling-price {
-  color: white;
-  margin-left: 10px;
-}
-
-.selling-price {
-  color: #04ffab !important;
-  margin-left: 20px;
-}
-
-.orig-price h5 {
-  font-size: 18px;
-}
-
-.product-badge {
-  font-size: 12px;
-  font-weight: bold;
-  position: absolute;
-  top: 2em;
-  right: 2em;
-  background-color: #20be8a;
-  border-radius: 25px;
-  padding: 3px 10px;
-  color: white;
-  z-index: 999;
-}
-
-.card {
-  border-radius: 20px;
-  transition: all 0.3s;
-}
-.card2 {
-  width: 190px;
-  height: 254px;
-  background-color: #1a1a1a;
-
-  transition: all 0.2s;
-}
-
-.card2:hover {
-}
-
-.bg-card:hover {
-  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
-  transform: scale(1.02);
-  border-radius: 20px;
-}
-
 input.input-quantity[type='number']::-webkit-inner-spin-button,
 input.input-quantity[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.input-group-text:hover {
-  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
-}
-
-.cart-text-sm {
-  font-size: 12px;
-}
-
-.border-gray {
-  border-color: gray !important;
-}
-
-.form-2 {
-  width: 100%;
-  height: 40px;
-  padding: 0.3em;
-  margin-top: 5px;
-  border: solid 1px gray;
-  border-radius: 5px;
-}
-
-.placeorder {
-  border-radius: 5px !important;
-}
-
-.order-button .btn-primary {
-  border-radius: 7px;
-}
-
-.checkout .product-data p {
-  margin: 0;
-}
-
-.bg-light-dark {
-  background-color: rgb(36, 36, 41);
-}
-
-.text-aqua {
-  color: #04ffab !important;
-}
-
-.text-gray {
-  color: #8db6d3 !important;
 }
 
 #blog {
@@ -212,8 +76,140 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
   z-index: 1;
 }
 
+.bg-card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
+  transform: scale(1.02);
+  border-radius: 20px;
+}
+
+.bg-light-dark {
+  background-color: rgb(36, 36, 41);
+}
+
+.border-gray {
+  border-color: gray !important;
+}
+
+.card {
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+.card2 {
+  width: 190px;
+  height: 254px;
+  background-color: #1a1a1a;
+  transition: all 0.2s;
+}
+
 .cart-length {
   border-radius: 20px;
   padding: 1px 5px;
   font-size: 12px;
+}
+
+.cart-text-sm {
+  font-size: 12px;
+}
+
+.checkout .product-data p {
+  margin: 0;
+}
+
+.darker-item {
+  color: #000; /* black text */
+  background-color: #2d2c38; /* light grey background */
+}
+
+.dropdown-item:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.dropdown-menu .dropdown-item {
+  color: white;
+  border-radius: 10px;
+}
+
+.form-2 {
+  width: 100%;
+  height: 40px;
+  padding: 0.3em;
+  margin-top: 5px;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+.input-group-text:hover {
+  box-shadow: 0px 0px 30px 1px rgba(55, 99, 244, 0.1);
+}
+
+.orig-price h5 {
+  font-size: 18px;
+}
+
+.order-button .btn-primary {
+  border-radius: 7px;
+}
+
+.placeorder {
+  border-radius: 5px !important;
+}
+
+.prod-view-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-badge {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  background-color: #20be8a;
+  border-radius: 25px;
+  padding: 3px 10px;
+  color: white;
+  z-index: 999;
+}
+
+.ref-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.ref-original-price {
+  color: gray;
+}
+
+.ref-sale-badge {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  background-color: #20be8a;
+  border-radius: 25px;
+  padding: 3px 10px;
+  color: white;
+  z-index: 999;
+}
+
+.ref-selling-price {
+  color: white;
+  margin-left: 10px;
+}
+
+.selling-price {
+  color: #04ffab !important;
+  margin-left: 20px;
+}
+
+.text-aqua {
+  color: #04ffab !important;
+}
+
+.text-gray {
+  color: #8db6d3 !important;
 }

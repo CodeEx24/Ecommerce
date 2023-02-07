@@ -35,7 +35,7 @@ include('authenticate.php');
                             ?>
                                 <div class="row align-items-center py-3 product-data">
                                     <div class="col-lg-2 text-center">
-                                        <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" class="img-fluid" style="object-fit: fill; width: 120px; height: 120px;">
+                                        <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="object-fit: cover; width: 120px; height: 120px;">
                                     </div>
                                     <div class="col-lg-3 text-center">
                                         <strong><?= $item['name'] ?></strong>

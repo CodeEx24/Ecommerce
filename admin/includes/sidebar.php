@@ -23,7 +23,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white <?= $page == "orders.php" ? "active bg-gradient-info" : "" ?>" href="orders.php">
+                <a class="nav-link text-white <?= $page == "orders.php" || $page == "view-order.php" || $page == "order-history.php" ? "active bg-gradient-info" : "" ?>" href="orders.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">shopping_cart</i>
                     </div>

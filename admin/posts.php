@@ -12,7 +12,7 @@ include('includes/header.php');
                         <h2>Posts</h2>
                     </div>
                     <div class="card-body" id="post_table">
-                        <table id="posts" class="display" class="table-dark table-striped" style="width:100%">
+                        <table id="posts" class="display table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="table-text">ID</th>
@@ -30,8 +30,8 @@ include('includes/header.php');
                                     foreach ($posts as $item) {
                                 ?>
                                         <tr>
-                                            <td class="table-text"><?= $item['ID']; ?></td>
-                                            <td class="table-text" style="width: 120px;"><img src="../uploads/blog/<?= $item['Image']; ?>" alt="<?= $item['Title']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
+                                            <td class="table-text pl-2"><?= $item['ID']; ?></td>
+                                            <td class="table-text"><img src="../uploads/blog/<?= $item['Image']; ?>" alt="<?= $item['Title']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Title']; ?></td>
                                             <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                             <td class="table-text my-auto">

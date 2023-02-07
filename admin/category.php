@@ -13,7 +13,7 @@ include('includes/header.php');
                         <h2>Categories</h2>
                     </div>
                     <div class="card-body" id="category_table">
-                        <table id="category" class="display" class="table-dark table-striped" style="width:100%">
+                        <table id="category" class="display table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="table-text">ID</th>
@@ -31,8 +31,8 @@ include('includes/header.php');
                                 ?>
 
                                         <tr>
-                                            <td class="table-text"><?= $item['ID']; ?></td>
-                                            <td class="table-text" style="width: 120px;"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
+                                            <td class="table-text px-2"><?= $item['ID']; ?></td>
+                                            <td class="table-text"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Name']; ?></td>
                                             <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>
                                             <td class="table-text">

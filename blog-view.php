@@ -10,16 +10,16 @@ if (isset($_GET['post'])) {
 
     if ($post) {
 ?>
-        <section id="collections" class="d-flex align-items-center justify-content-center" style="height: 50vh;">
+        <section id="blog" class="d-flex align-items-center justify-content-center">
             <div class="overlay"></div>
-            <div class="d-inline">
-                <p class="text-center fw-bold text-success mb-2">Blog</p>
+            <div class="d-inline blog-main-div">
+                <p class="text-center fw-bold text-success mb-2">Blog Title</p>
                 <div class="container d-flex justify-content-center">
-                    <h1 class="text-white fw-bold h1 text-center w-75">Stay informed on e-commerce trends and deals with our blog</h1>
+                    <h1 class="text-white fw-bold h1 text-center w-100"><?= $post['Meta_Title'] ?></h1>
                 </div>
-
             </div>
         </section>
+
 
         <div class="bg-dark">
             <div class="container product-data">

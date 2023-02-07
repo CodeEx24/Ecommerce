@@ -268,6 +268,83 @@ if (isset($_POST['add_category_btn'])) {
     $tracking_no = mysqli_real_escape_string($con, $_POST['tracking_no']);
     $order_status = mysqli_real_escape_string($con, $_POST['status']);
 
+    // Get the current status of the order with the specified tracking number
+    $order_status_query = "SELECT Status FROM Orders WHERE Tracking_No='$tracking_no';";
+    $order_status_query_run = mysqli_query($con, $order_status_query);
+    $order_status_current = mysqli_fetch_assoc($order_status_query_run);
+
+    // Check if the current status of order is 'Under Process - 0'  or 'Completed - 1' and the changes of order status is 2 'Cancelled'
+    if (($order_status_current['Status'] == 1 || $order_status_current['Status'] == 0) && $order_status == 2) {
+        // Getting the orders with the same value of tracking no
+        $order_query = "SELECT * FROM orders WHERE Tracking_No='$tracking_no';";
+        $order_query_run = mysqli_query($con, $order_query);
+
+        // Order ID
+        $order = mysqli_fetch_assoc($order_query_run);
+        $order_id = $order['ID'];
+
+        // Getting all items in the order
+        $order_items_query =  "SELECT * FROM Order_Items WHERE Order_Id='$order_id'";
+        $order_items_query_run = mysqli_query($con, $order_items_query);
+
+        // Updating the quantity of products
+        while ($row = mysqli_fetch_assoc($order_items_query_run)) {
+            // Getting the Product ID and its quantity in the Order Items
+            $product_id = $row['Product_ID'];
+            $quantity = $row['Quantity'];
+
+            // Products query into its own Table
+            $product_query =  "SELECT * FROM Products WHERE id='$product_id'";
+            $product_query_run = mysqli_query($con, $product_query);
+
+            // Data of the Products in products table
+            $productData = mysqli_fetch_array($product_query_run);
+            $current_qty = $productData['Quantity'];
+
+            $new_qty = $current_qty + $quantity;
+
+            // Updating the quantity of the Products
+            $update_qty_query = "UPDATE Products SET Quantity='$new_qty' WHERE id='$product_id'";
+            $update_qty_query_run = mysqli_query($con, $update_qty_query);
+        }
+
+
+        // Opposite to previous if it will check the current status if it is 'Cancelled - 2' and changes to status is 'Under Process - 0' or 'Completed - 1'
+    } else if ($order_status_current['Status'] == 2 && ($order_status == 1 || $order_status == 0)) {
+        // Getting the orders with the same value of tracking no
+        $order_query = "SELECT * FROM orders WHERE Tracking_No='$tracking_no';";
+        $order_query_run = mysqli_query($con, $order_query);
+
+        // Order ID
+        $order = mysqli_fetch_assoc($order_query_run);
+        $order_id = $order['ID'];
+
+        // Getting all items in the order
+        $order_items_query =  "SELECT * FROM Order_Items WHERE Order_Id='$order_id'";
+        $order_items_query_run = mysqli_query($con, $order_items_query);
+
+        // Updating the quantity of products
+        while ($row = mysqli_fetch_assoc($order_items_query_run)) {
+            // Getting the Product ID and its quantity in the Order Items
+            $product_id = $row['Product_ID'];
+            $quantity = $row['Quantity'];
+
+            // Products query into its own Table
+            $product_query =  "SELECT * FROM Products WHERE id='$product_id'";
+            $product_query_run = mysqli_query($con, $product_query);
+
+            // Data of the Products in products table
+            $productData = mysqli_fetch_array($product_query_run);
+            $current_qty = $productData['Quantity'];
+
+            $new_qty = $current_qty - $quantity;
+
+            // Updating the quantity of the Products
+            $update_qty_query = "UPDATE Products SET Quantity='$new_qty' WHERE id='$product_id'";
+            $update_qty_query_run = mysqli_query($con, $update_qty_query);
+        }
+    }
+
     // Update the status of the order with the specified tracking number
     $update_order_query = "UPDATE orders SET Status='$order_status', Updated_At=CURRENT_TIMESTAMP WHERE Tracking_No='$tracking_no';";
     $update_order_query_run = mysqli_query($con, $update_order_query);
@@ -302,6 +379,8 @@ if (isset($_POST['add_category_btn'])) {
         redirect('add-post.php', "Please fill up all neccessary fields");
         exit();
     }
+
+
 
     // Insert the post into the Posts table
     $query = "INSERT INTO Posts (categoryid, title, image, slug, description, status, meta_title, meta_keywords, meta_description) 

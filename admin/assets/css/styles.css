@@ -1,29 +1,55 @@
-.text h1,
-.dataTables_length label {
+input,
+textarea,
+select {
+  color: black !important;
+  font-size: 16px !important;
+}
+
+input[type='file'] {
   color: white !important;
 }
 
-.dropdown-menu {
-  display: none;
+table {
+  border-collapse: collapse;
+  background-color: #24232b;
+  border-color: #000000b0 !important;
 }
 
-.dropdown-menu.show {
-  display: block;
+th {
+  background-color: #1615158f !important;
+  border-color: #161515b0 !important;
+  padding: 8px !important;
 }
 
-.table {
+tr:nth-child(even) {
+  background-color: #212029;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: white !important;
 }
 
-.card,
-.card-header {
-  background-color: #2d2c38 !important;
+hr.horizontal.light {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  ) !important;
 }
 
-.navbar {
-  background-color: #2d2c38 !important;
-}
-
+/* CLASSES */
 .btn-primary {
   --bs-btn-color: #fff !important;
   --bs-btn-bg: #3763f4 !important;
@@ -48,15 +74,17 @@
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
 }
 
-.form-control {
-  background-color: rgb(255, 255, 255) !important;
-  border: 1px solid #b3a1a1 !important;
-  padding: 8px 10px !important;
+.button-text {
+  color: white !important;
 }
 
-.form-control::placeholder {
-  color: #765d78 !important;
-  font-size: 16px;
+.card,
+.card-header {
+  background-color: #2d2c38 !important;
+}
+
+.card-404 {
+  padding-bottom: 50px;
 }
 
 .checkbox-label {
@@ -66,28 +94,24 @@
   margin-right: 50px;
 }
 
+.text h1,
+.dataTables_length label {
+  color: white !important;
+}
+
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
 .flex-container {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: flex-end;
   align-items: flex-end;
-}
-
-.button-text {
-  color: white !important;
-}
-
-.card-404 {
-  padding-bottom: 50px;
-}
-
-hr.horizontal.light {
-  background-image: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  ) !important;
 }
 
 .form-check:not(.form-switch) .form-check-input2[type='radio']:checked {
@@ -111,41 +135,56 @@ hr.horizontal.light {
   margin: auto;
 }
 
+.form-control {
+  background-color: rgb(255, 255, 255) !important;
+  border: 1px solid #b3a1a1 !important;
+  padding: 8px 10px !important;
+}
+
+.form-control::placeholder {
+  color: #765d78 !important;
+  font-size: 16px;
+}
+
+.modal-open {
+  z-index: 99 !important;
+}
+
+.modal-backdrop.show {
+  z-index: 1;
+}
+
+.navbar {
+  background-color: #2d2c38 !important;
+}
+
+.note-dropdown-menu a {
+  color: white;
+}
+
+.note-editor.note-frame .note-editing-area .note-codable {
+  background-color: #2d2c38 !important;
+  color: white !important;
+}
+
+.note-editor .note-toolbar .note-dropdown-menu,
+.note-popover .popover-content .note-dropdown-menu {
+  background-color: #282736;
+}
+
+.note-popover.popover,
+.note-editor.note-airframe.fullscreen,
+.note-editor.note-frame.fullscreen {
+  background-color: #282736;
+}
+
 .order-details table tr th {
   padding: 0 !important;
   color: red !important;
 }
 
-input,
-textarea,
-select {
-  color: black !important;
-  font-size: 16px !important;
-}
-
-input[type='file'] {
+.table {
   color: white !important;
-}
-
-th {
-  background-color: #1615158f !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  border-color: #161515b0 !important;
-}
-
-table {
-  border-collapse: collapse;
-  background-color: #24232b;
-  border-color: #000000b0 !important;
-}
-
-tr:nth-child(even) {
-  background-color: #212029;
-}
-
-th {
-  padding: 8px !important;
 }
 
 /* .note-editor.note-airframe.codeview .note-editing-area .note-codable {
@@ -179,46 +218,3 @@ button.note-btn.btn.btn-default.btn-sm.dropdown-toggle::after {
 .note-popover .popover-content > .note-btn-group {
   color: black !important;
 } */
-
-.note-editor .note-toolbar .note-dropdown-menu,
-.note-popover .popover-content .note-dropdown-menu {
-  background-color: #282736;
-}
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: white !important;
-}
-
-.note-dropdown-menu a {
-  color: white;
-}
-
-.note-popover.popover,
-.note-editor.note-airframe.fullscreen,
-.note-editor.note-frame.fullscreen {
-  background-color: #282736;
-}
-
-.note-editor.note-frame .note-editing-area .note-codable {
-  background-color: #2d2c38 !important;
-  color: white !important;
-}
-
-.modal-open {
-  z-index: 99 !important;
-}
-
-.modal-backdrop.show {
-  z-index: 1;
-}

@@ -11,21 +11,23 @@ include('includes/header.php');
                     <div class="d-flex justify-content-between">
                         <h2>Orders</h2>
                         <div class="order-button">
-                            <a href="orders.php" class="btn btn-danger text-white">Back</a>
+                            <a href="orders.php" class="btn btn-danger text-white">Back To Orders</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body" id="">
-                    <table class="table table-bordered ">
+                    <table id="order-history" class="display table-dark table-striped">
                         <thead>
                             <tr>
                                 <th class="table-text">ID</th>
                                 <th class="table-text">User</th>
                                 <th class="table-text">Tracking No.</th>
                                 <th class="table-text">Price</th>
+                                <th class="table-text">Status</th>
                                 <th class="table-text">Date</th>
                                 <th class="table-text">Action</th>
                             </tr>
+                        </thead>
                         <tbody>
                             <?php
                             $orders = getOrderHistory();
@@ -38,11 +40,11 @@ include('includes/header.php');
                                         <td><?= $item['Name'] ?></td>
                                         <td><?= $item['Tracking_No'] ?></td>
                                         <td>$<?= $item['Total_Price'] ?></td>
+                                        <td class="<?= $item['Status'] == 1 ? "text-info" : "text-danger" ?>"><?= $item['Status'] == 1 ? "Completed" : "Cancelled" ?></td>
                                         <td><?= $item['Created_At'] ?></td>
                                         <td class="table-text">
                                             <a href="view-order.php?tracking=<?= $item['Tracking_No']; ?>" class="btn btn-info shadow button-text">View Details</a>
                                         </td>
-
                                     </tr>
 
                                 <?php
@@ -55,9 +57,18 @@ include('includes/header.php');
                             <?php
                             }
                             ?>
-                            <tr></tr>
                         </tbody>
-                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="table-text">ID</th>
+                                <th class="table-text">User</th>
+                                <th class="table-text">Tracking No.</th>
+                                <th class="table-text">Price</th>
+                                <th class="table-text">Status</th>
+                                <th class="table-text">Date</th>
+                                <th class="table-text">Action</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -66,3 +77,9 @@ include('includes/header.php');
 </div>
 
 <?php include('includes/footer.php') ?>
+
+<script>
+    $(document).ready(function() {
+        $('#order-history').DataTable();
+    });
+</script>

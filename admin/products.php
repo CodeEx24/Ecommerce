@@ -13,7 +13,7 @@ include('includes/header.php');
                     </div>
                     <div class="card-body" id="products_table">
 
-                        <table id="products" class="display" class="table-dark table-striped" style="width:100%">
+                        <table id="products" class="display table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="table-text">ID</th>
@@ -32,7 +32,7 @@ include('includes/header.php');
                                     foreach ($products as $item) {
                                 ?>
                                         <tr>
-                                            <td class="table-text pl-2"><?= $item['ID']; ?></td>
+                                            <td class="table-text px-2"><?= $item['ID']; ?></td>
                                             <td class="table-text"><img src="../uploads/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Name']; ?></td>
                                             <td class="table-text"><?= $item['Status'] == 1 ? "Visible" : "Hidden" ?></td>

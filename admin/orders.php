@@ -17,7 +17,7 @@ include('includes/header.php');
 
                 </div>
                 <div class="card-body" id="">
-                    <table id="orders" class="display" class="table-dark table-striped" style="width:100%">
+                    <table id="orders" class="display table-dark table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="table-text">ID</th>
