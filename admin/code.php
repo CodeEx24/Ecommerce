@@ -23,16 +23,25 @@ if (isset($_POST['add_category_btn'])) {
     $filename = time() . '.' . $image_ext;
 
     // If name, slug, or description are null, redirect to the add-category.php page with an error message
-    if ($name == null || $slug == null || $description == null) {
-        redirect('add-category.php', "Something Went Wrong In Adding Category.");
+    if ($name == "" || $slug == "" || $description == "" || $image == "") {
+        redirect('add-category.php', "Please fill up all neccessary fields to add a category.");
         exit();
-    } else {
-        // Insert the form inputs into the Categories table
-        $category_query = "INSERT INTO Categories (name, slug, description, meta_title, meta_description, meta_keywords, image, status, popular) 
-      VALUES ('$name', '$slug', '$description', '$meta_title', '$meta_description', '$meta_keywords', '$filename', '$status', '$popular')";
-
-        $category_query_run = mysqli_query($con, $category_query);
     }
+
+    // Check if the slug already exists in the Category table
+    $check_query = "SELECT * FROM categories WHERE slug='$slug'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect('add-category.php', "Slug already exists. Please choose another one.");
+        exit();
+    }
+
+    // Insert the form inputs into the Categories table
+    $category_query = "INSERT INTO Categories (name, slug, description, meta_title, meta_description, meta_keywords, image, status, popular) 
+        VALUES ('$name', '$slug', '$description', '$meta_title', '$meta_description', '$meta_keywords', '$filename', '$status', '$popular')";
+
+    $category_query_run = mysqli_query($con, $category_query);
+
 
     // If the query was successful, move the uploaded image to the correct directory and redirect to the add-category.php page with a success message
     if ($category_query_run) {
@@ -61,16 +70,24 @@ if (isset($_POST['add_category_btn'])) {
     $old_image = mysqli_real_escape_string($con, $_POST['old_image']);
     $path = "../uploads/category";
 
+    //Check if name, slug, and description fields are empty
+    if ($name == "" || $slug == "" || $description == "") {
+        //Redirect to the add-category page with an error message
+        redirect("edit-category.php?id=$category_id", "Failed in updating the category. Please make sure all neccessary fields are filled up");
+        exit();
+    }
+
+    // Check if the slug existing multiple in the category table
+    $check_query = "SELECT * FROM categories WHERE slug='$slug' AND id!='$category_id'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect("edit-category.php?id=$category_id", "Slug exist in another category. Please choose another one.");
+        exit();
+    }
+
     //Update the status of products associated with the category
     $update_products = "UPDATE Products SET status='$status' WHERE CategoryID='$category_id'";
     $update_products_run = mysqli_query($con, $update_products);
-
-    //Check if name, slug, and description fields are empty
-    if ($name == null || $slug == null || $description == null) {
-        //Redirect to the add-category page with an error message
-        redirect('add-category.php', "Something Went Wrong In Updating Category.");
-        exit();
-    }
 
     //Check if a new image has been uploaded
     if ($new_image != "") {
@@ -157,10 +174,19 @@ if (isset($_POST['add_category_btn'])) {
     $filename = time() . '.' . $image_ext;
 
     // Check if the required fields are filled
-    if ($name == "" || $slug == "" || $description == "" ||  $category_id ==  "") {
-        redirect('add-product.php', "Please Fill Up All neccessary fields");
+    if ($name == "" || $slug == "" || $description == "" ||  $category_id ==  "" || $image == "") {
+        redirect('add-product.php', "Please fill up all neccessary fields to add a product");
         exit();
     }
+
+    // Check if the slug already exists in the product table
+    $check_query = "SELECT * FROM products WHERE slug='$slug'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect('add-product.php', "Slug already exists. Please choose another one.");
+        exit();
+    }
+
 
     // Insert the product into the database
     $add_product_query = "INSERT INTO products (CategoryID, Name, Slug, Small_Description, Description, Original_Price, Selling_Price, Image, Quantity, Status, Trending, Meta_Title, Meta_Keywords, Meta_Description) VALUES ('$category_id', '$name', '$slug', '$small_description', '$description', '$original_price', '$selling_price', '$filename', '$quantity', '$status', '$trending', '$meta_title', '$meta_keywords', '$meta_description')";
@@ -196,6 +222,21 @@ if (isset($_POST['add_category_btn'])) {
     $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
     $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
     $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
+
+
+    // Check if the required fields are filled
+    if ($name == "" || $slug == "" || $description == "" ||  $category_id ==  "") {
+        redirect("edit-product.php?id=$product_id", "Failed in updating the product. Please make sure all neccessary fields are filled up");
+        exit();
+    }
+
+    // Check if the slug existing multiple in the products table
+    $check_query = "SELECT * FROM products WHERE slug='$slug' AND id!='$product_id'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect("edit-product.php?id=$product_id", "Slug exist in another product. Please choose another one.");
+        exit();
+    }
 
     // Defining the path for saving the uploaded image
     $path = "../uploads";
@@ -376,11 +417,17 @@ if (isset($_POST['add_category_btn'])) {
     // Check if the title, slug, description, and category_id fields have values
     if ($title == "" || $slug == "" || $description == "" ||  $category_id ==  "") {
         // Redirect back to the add-post page and display an error message
-        redirect('add-post.php', "Please fill up all neccessary fields");
+        redirect('add-post.php', "Please fill up all neccessary fields to add a post.");
         exit();
     }
 
-
+    // Check if the slug already exists in the post table
+    $check_query = "SELECT * FROM posts WHERE slug='$slug'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect('add-post.php', "Slug already exists. Please choose another one.");
+        exit();
+    }
 
     // Insert the post into the Posts table
     $query = "INSERT INTO Posts (categoryid, title, image, slug, description, status, meta_title, meta_keywords, meta_description) 
@@ -413,6 +460,21 @@ if (isset($_POST['add_category_btn'])) {
     $meta_title = mysqli_real_escape_string($con, $_POST['meta_title']);
     $meta_keywords = mysqli_real_escape_string($con, $_POST['meta_description']);
     $meta_description = mysqli_real_escape_string($con, $_POST['meta_keywords']);
+
+    // Check if the title, slug, description, and category_id fields have values
+    if ($title == "" || $slug == "" || $description == "" ||  $category_id ==  "") {
+        // Redirect back to the add-post page and display an error message
+        redirect("edit-post.php?id=$post_id", "Failed in updating the post. Please make sure all neccessary fields are filled up");
+        exit();
+    }
+
+    // Check if the slug existing multiple in the posts table
+    $check_query = "SELECT * FROM posts WHERE slug='$slug' AND id!='$post_id'";
+    $check_query_run = mysqli_query($con, $check_query);
+    if (mysqli_num_rows($check_query_run) > 0) {
+        redirect("edit-post.php?id=$post_id", "Slug exist in another post. Please choose another one.");
+        exit();
+    }
 
     // The path to the uploads directory for the blog images
     $path = "../uploads/blog";

@@ -45,7 +45,10 @@ $(document).ready(function () {
                   'Post Deleted Successfully.',
                   'success'
                 );
-                $('#post_table').load(location.href + ' #post_table');
+                // Remove the post from data table
+                var table = $('#posts').DataTable();
+                var row = $('#' + id);
+                table.row(row).remove().draw();
               } else if (response == 500) {
                 // If the response is 500, show the error alert
                 swalWithBootstrapButtons.fire(
@@ -102,6 +105,10 @@ $(document).ready(function () {
             success: function (response) {
               // Check the response from the server
               if (response == 200) {
+                // Remove the product from data table
+                var table = $('#products').DataTable();
+                var row = $('#' + id);
+                table.row(row).remove().draw();
                 // Show success alert if product is deleted successfully
                 swalWithBootstrapButtons.fire(
                   'Deleted!',
@@ -109,7 +116,6 @@ $(document).ready(function () {
                   'success'
                 );
                 // Reload the products table
-                $('#products_table').load(location.href + ' #products_table');
               } else if (response == 500) {
                 // Show error alert if something went wrong
                 swalWithBootstrapButtons.fire(
@@ -173,8 +179,11 @@ $(document).ready(function () {
                   'Product Deleted Successfully.',
                   'success'
                 );
-                // Reload the content of the element with ID "category_table"
-                $('#category_table').load(location.href + ' #category_table');
+
+                // Remove the post from data table
+                var table = $('#category').DataTable();
+                var row = $('#' + id);
+                table.row(row).remove().draw();
               }
               // If the response from the server is "500"
               else if (response == 500) {

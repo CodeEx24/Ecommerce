@@ -29,7 +29,7 @@ include('includes/header.php');
                                 if (mysqli_num_rows($posts) > 0) {
                                     foreach ($posts as $item) {
                                 ?>
-                                        <tr>
+                                        <tr id="<?= $item['ID']; ?>">
                                             <td class="table-text pl-2"><?= $item['ID']; ?></td>
                                             <td class="table-text"><img src="../uploads/blog/<?= $item['Image']; ?>" alt="<?= $item['Title']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Title']; ?></td>

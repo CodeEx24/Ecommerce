@@ -30,7 +30,7 @@ include('includes/header.php');
                                     foreach ($category as $item) {
                                 ?>
 
-                                        <tr>
+                                        <tr id="<?= $item['ID']; ?>">
                                             <td class="table-text px-2"><?= $item['ID']; ?></td>
                                             <td class="table-text"><img src="../uploads/category/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Name']; ?></td>

@@ -12,7 +12,6 @@ include('includes/header.php');
                         <h2>Products</h2>
                     </div>
                     <div class="card-body" id="products_table">
-
                         <table id="products" class="display table-dark table-striped" style="width:100%">
                             <thead>
                                 <tr>
@@ -31,7 +30,7 @@ include('includes/header.php');
                                 if (mysqli_num_rows($products) > 0) {
                                     foreach ($products as $item) {
                                 ?>
-                                        <tr>
+                                        <tr id="<?= $item['ID']; ?>">
                                             <td class="table-text px-2"><?= $item['ID']; ?></td>
                                             <td class="table-text"><img src="../uploads/<?= $item['Image']; ?>" alt="<?= $item['Name']; ?>" style="object-fit: cover; width: 100px; height: 100px;"></td>
                                             <td class="table-text"><?= $item['Name']; ?></td>

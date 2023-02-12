@@ -41,6 +41,8 @@ if (isset($_SESSION['auth'])) {
             $total += $item['selling_price'] * $item['product_qty'];
         }
 
+        $total = ($total * 0.08) + $total;
+
         // Generate a tracking number
         $tracking_no = "TrackNo" . rand(1111, 9999) . substr($phone, 2);
 

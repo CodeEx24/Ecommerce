@@ -117,10 +117,15 @@ if (mysqli_num_rows($cartItems) === 0) {
                                 // Calculating the total of all products in the order
                                 $total += $item['selling_price'] * $item['product_qty'];
                             }
+                            $vat = ($total * 0.08);
                             ?>
-                            <div class="p-3">
-                                <h5>Total Price: <strong class="float-end">$<?= $total ?></strong></h5>
+                            <div class="px-3 pt-3 text-end">
+                                <p class=" text-gray">Includes 8% VAT($<?= $vat ?>)</p>
                             </div>
+                            <div class="px-3 pb-3">
+                                <h5>Total Price: <strong class="float-end">$<?= $total + $vat ?></strong></h5>
+                            </div>
+
                             <div class="order-button">
                                 <input type="hidden" name="payment_mode" value="COD">
                                 <button type="submit" name="placeOrderBtn" class="btn btn-primary text-white w-100">Confirm and place order | COD</button>
@@ -191,7 +196,7 @@ if (mysqli_num_rows($cartItems) === 0) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '<?= $total ?>' // Can also reference a variable or function
+                        value: '<?= $total + $vat ?>' // Can also reference a variable or function
                     }
                 }]
             });
