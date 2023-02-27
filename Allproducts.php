@@ -15,7 +15,6 @@ include('includes/header.php');
 <div class="bg-dark py-5">
     <div class="container pt-2">
         <div class="row pt-5">
-
             <h2>PHP MySQL Live Search</h2>
             <input type="text" class="form-control" oninput="change()" id="live_search" autocomplete="off" placeholder="Search ... ">
             <div id='searchresult'></div>

@@ -13,7 +13,6 @@ include('includes/header.php');
                 $category_item = getByID("categories", $id);
 
                 if (mysqli_num_rows($category_item) > 0) {
-
                     $data = mysqli_fetch_array($category_item);
             ?>
                     <div class="card">
@@ -28,7 +27,9 @@ include('includes/header.php');
                                     <div class="col-md-6">
                                         <input type="hidden" name="category_id" value="<?= $data['ID'] ?>">
                                         <label class="text-white my-2" for="">Name</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Enter Category Name" value="<?= $data['Name'] ?>" required></div>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="text" name="name" placeholder="Enter Category Name" value="<?= $data['Name'] ?>" required>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-white my-2" for="">Slug</label>
@@ -82,7 +83,9 @@ include('includes/header.php');
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="update_category_btn">Update Category</button></div>
+                                    <div class="mt-4">
+                                        <button class="btn btn-info shadow d-block w-100" type="submit" name="update_category_btn">Update Category</button>
+                                    </div>
                                 </div>
                         </div>
                         </form>

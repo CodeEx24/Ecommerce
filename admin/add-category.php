@@ -19,11 +19,15 @@ include('includes/header.php');
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="text-white my-2" for="">Name</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Enter Category Name" required></div>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="text" name="name" placeholder="Enter Category Name" required>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-white my-2" for="">Slug</label>
-                                        <div class="mb-3"><input class="form-control" type="text" name="slug" placeholder="Enter Slug" required></div>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="text" name="slug" placeholder="Enter Slug" required>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="text-white my-2" for="">Description</label><br>
@@ -55,13 +59,16 @@ include('includes/header.php');
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="mt-4"><button class="btn btn-info shadow d-block w-100" type="submit" name="add_category_btn">Add Category</button></div>
+                                        <div class="mt-4">
+                                            <button class="btn btn-info shadow d-block w-100" type="submit" name="add_category_btn">Add Category</button>
+                                        </div>
                                     </div>
 
                                 </div>
                             </form>
                         </div>
                     </div>
+
                     <div class="col-md-4 mt-3 card">
                         <div class="card-body">
                             <h4 class="text-white">Latest Added Category</h4>

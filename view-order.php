@@ -91,18 +91,16 @@ $data = mysqli_fetch_array($orderData);
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th class="text-end">Price</th>
+                                    <th class="text-start">Price</th>
                                     <th class="text-end">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-
                                 <?php
                                 // Get the user_id from the session
                                 $user_id = $_SESSION['auth_user']['user_id'];
                                 // Call the function
-                                $order_items = getOrderDetails($con, $user_id, $tracking_no);
+                                $order_items = getOrderDetails($user_id, $tracking_no);
 
                                 // Check if the result is not empty
                                 if (!empty($order_items)) {
@@ -113,7 +111,7 @@ $data = mysqli_fetch_array($orderData);
                                                 <img src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="80px" height="80px" style="object-fit: cover;">
                                                 <span style="margin-left: 20px; "> <?= $item['Name'] ?></span>
                                             </td>
-                                            <td class="align-middle text-end">$<?= $item['Price'] ?></td>
+                                            <td class="align-middle text-start">₱ <?= number_format($item['Selling_Price'], 2, '.', ',') ?></td>
                                             <td class="align-middle text-end">x<?= $item['Order_Quantity'] ?></td>
 
                                         </tr>
@@ -134,8 +132,11 @@ $data = mysqli_fetch_array($orderData);
                             <span class="float-end"> <?= $data['Status'] ? ($data['Status'] == 1 ? "Completed" : "Cancelled") : "Under Process" ?></span>
                         </div>
                         <hr>
-                        <div class="p-1 mb-3">
-                            <h5 class="fw-bold">Total Price: <span class="float-end">$<?= $data['Total_Price'] ?></span></h5>
+                        <div class="text-end">
+                            <p class=" text-gray">Includes 8% VAT(₱ <?= number_format($data['Total_Price'] - $data['Total_Price'] / (1 + 0.08), 2, '.', ',') ?>)</p>
+                        </div>
+                        <div class=" mb-3">
+                            <h5 class="fw-bold">Total Price: <span class="float-end">₱ <?= number_format($data['Total_Price'], 2, '.', ',') ?></span></h5>
                         </div>
 
 

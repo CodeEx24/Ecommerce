@@ -48,7 +48,7 @@ if (mysqli_num_rows($orders) == 0) {
                                 <tr>
                                     <td class="fw-bold"><?= $item['ID'] ?></td>
                                     <td class="fw-bold"><?= $item['Tracking_No'] ?></td>
-                                    <td>$<?= $item['Total_Price'] ?></td>
+                                    <td>₱ <?= number_format($item['Total_Price'], 2, '.', ',') ?></td>
                                     <td><?= $item['Created_At'] ?></td>
                                     <td><?= $item['Status'] ? ($item['Status'] == 1 ? "Completed" : "Cancel") : "Under Process" ?></td>
                                     <td>

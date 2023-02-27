@@ -107,7 +107,7 @@ $data = mysqli_fetch_array($orderData);
                                                     <img src="../uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" width="70px" height="70px" style="object-fit: cover;">
                                                     <span style="margin-left: 20px; "> <?= $item['Name'] ?></span>
                                                 </td>
-                                                <td class="align-middle text-end">$<?= $item['Selling_Price'] ?></td>
+                                                <td class="align-middle text-end">₱ <?= number_format($item['Selling_Price'], 2, '.', ',') ?></td>
                                                 <td class="align-middle text-end">x<?= $item['Order_Quantity'] ?></td>
                                             </tr>
                                     <?php
@@ -124,7 +124,7 @@ $data = mysqli_fetch_array($orderData);
                                 </div>
                                 <div class="p-1 fw-bold">
                                     Total Price:
-                                    <span class="float-end">$<?= $data['Total_Price'] ?></span>
+                                    <span class="float-end">₱ <?= number_format($data['Total_Price'], 2, '.', ',') ?></span>
                                 </div>
                             </div>
                             <hr style="color: white;">

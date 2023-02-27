@@ -89,7 +89,7 @@ function getOrders()
 {
     global $con;
     $user_id = $_SESSION['auth_user']['user_id'];
-    $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY Status ASC;";
+    $query = "SELECT * FROM Orders WHERE User_ID='$user_id' ORDER BY Created_At DESC;";
     return mysqli_query($con, $query);
 }
 
@@ -102,8 +102,9 @@ function getDetails()
     return mysqli_query($con, $query);
 }
 
-function getOrderDetails($con, $user_id, $tracking_no)
+function getOrderDetails($user_id, $tracking_no)
 {
+    global $con;
     // The query
     $order_query = "SELECT o.id as oid, o.tracking_no, o.user_id, oi.*, oi.quantity as Order_Quantity, p.* FROM orders o, order_items oi, products p WHERE o.user_id='$user_id' AND oi.order_id=o.id AND p.id=oi.product_id AND o.tracking_no='$tracking_no'";
 

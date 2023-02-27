@@ -39,7 +39,7 @@ include('includes/header.php');
                                         <td><?= $item['ID'] ?></td>
                                         <td><?= $item['Name'] ?></td>
                                         <td><?= $item['Tracking_No'] ?></td>
-                                        <td>$<?= $item['Total_Price'] ?></td>
+                                        <td>₱ <?= number_format($item['Total_Price'], 2, '.', ',') ?></td>
                                         <td class="<?= $item['Status'] == 1 ? "text-info" : "text-danger" ?>"><?= $item['Status'] == 1 ? "Completed" : "Cancelled" ?></td>
                                         <td><?= $item['Created_At'] ?></td>
                                         <td class="table-text">

@@ -1,8 +1,5 @@
 <?php
 $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1);
-
-
-
 ?>
 <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3 sticky-top" id="mainNav">
     <div class="container">

@@ -4,7 +4,6 @@ include('includes/header.php');
 
 
 if (isset($_GET['category'])) {
-
     $category_slug = $_GET['category']; //URL Parameters
     $category_data = getSlugActive("categories", $category_slug); //Calling Function to get active category
     $category = mysqli_fetch_array($category_data); //Fetching Data
@@ -13,6 +12,7 @@ if (isset($_GET['category'])) {
         include('includes/404.php');
         exit();
     }
+
     $category_id = $category['ID']; //
 ?>
     <section id="collections" class="d-flex align-items-center justify-content-center" style="height: 50vh;">

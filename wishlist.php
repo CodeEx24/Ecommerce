@@ -15,7 +15,7 @@ include('authenticate.php');
                     $items = getItemsWishlist();
                     if (mysqli_num_rows($items) > 0) {
                     ?>
-                        <h1>Shopping Cart</h1>
+                        <h1 class="fw-bold">Shopping Cart</h1>
                         <div class="row mt-4 d-none d-md-flex">
                             <div class="col-md-2 text-center cart-text-sm ">PRODUCT</div>
                             <div class="col-md-3 text-center cart-text-sm ">NAME</div>
@@ -40,7 +40,7 @@ include('authenticate.php');
                                     </div>
                                     <div class="col-lg-2 text-center">
                                         <input type="hidden" value="<?= $item['selling_price'] ?>" class='productPrice'>
-                                        $<?= $item['selling_price'] ?>
+                                        ₱ <?= number_format($item['selling_price'], 2, '.', ',') ?>
                                     </div>
                                     <div class="col-lg-5 text-center">
                                         <button class="btn btn-primary mx-3 <?= $item['pqty'] > 0 ? "addToCartWishlist-btn" : "disabled" ?>" value="<?= $item['pid'] ?>">

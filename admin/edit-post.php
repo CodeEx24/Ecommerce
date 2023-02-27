@@ -26,7 +26,6 @@ include('includes/header.php');
                                     <div class="col-md-4">
                                         <label class="text-white my-2" for="">Select Category</label>
                                         <select name="category_id" class="form-select form-control form-control-lg">
-
                                             <?php
                                             $categories = getAll("categories");
                                             if (mysqli_num_rows($categories) > 0) {

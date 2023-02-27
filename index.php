@@ -3,7 +3,6 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 ?>
 
-
 <header class="bg-dark">
     <div class="container pt-4 pt-xl-5">
         <div class="row pt-5">
@@ -63,7 +62,6 @@ include('includes/header.php');
             </div>
         </div>
         <div class="py-5">
-
             <div class="owl-carousel d-lg-block container-xxl container-md-fluid">
                 <?php
                 $trendingProducts = getAllTrending();
@@ -76,14 +74,17 @@ include('includes/header.php');
                                 <div class="card-body d-flex flex-column">
                                     <a class="ref-product" href="product-view.php?product=<?= $item['Slug'] ?>">
                                         <img class="ref-image mb-3" src="uploads/<?= $item['Image'] ?>" alt="<?= $item['Name'] ?>" loading="lazy" />
-                                        <p class="<?= $item['Trending']  ? "ref-sale-badge" : "" ?>"><?= $item['Trending'] ? "TRENDING" : "" ?></p>
+                                        <p class="ref-sale-badge" ?>
+                                            TRENDING
+                                        </p>
                                         <div class="ref-product-info d-flex justify-content-between">
                                             <p class="ref-name fw-bold"><?= $item['Name'] ?></p>
-                                            <p class="text-aqua">$<?= $item['Selling_Price'] ?></p>
+
+                                            <p class="text-aqua">₱<?= number_format($item['Selling_Price'], 2, '.', ',') ?></p>
                                         </div>
                                     </a>
                                     <div class="ref-addons mt-auto order-button">
-                                        <button class="btn btn-primary addToCart-btn w-100 text-sm" value="<?= $item['ID'] ?>">
+                                        <button class="btn btn-primary w-100 text-sm addToCart-btn" value="<?= $item['ID'] ?>">
                                             <i class="fa fa-shopping-cart me-2"></i>
                                             Add to Cart
                                         </button>

@@ -106,7 +106,7 @@ if (mysqli_num_rows($cartItems) === 0) {
                                         <p><?= $item['name'] ?></p>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <p>$<?= $item['selling_price'] ?></p>
+                                        <p>₱<?= number_format($item['selling_price'], 2, '.', ',') ?></p>
                                     </div>
                                     <div class="col-md-2 text-center">
                                         <p>x<?= $item['product_qty'] ?></p>
@@ -120,10 +120,10 @@ if (mysqli_num_rows($cartItems) === 0) {
                             $vat = ($total * 0.08);
                             ?>
                             <div class="px-3 pt-3 text-end">
-                                <p class=" text-gray">Includes 8% VAT($<?= $vat ?>)</p>
+                                <p class=" text-gray">Includes 8% VAT(₱<?= $vat ?>)</p>
                             </div>
                             <div class="px-3 pb-3">
-                                <h5>Total Price: <strong class="float-end">$<?= $total + $vat ?></strong></h5>
+                                <h5>Total Price: <strong class="float-end">₱<?= number_format($total + $vat, 2, '.', ',') ?></strong></h5>
                             </div>
 
                             <div class="order-button">
@@ -196,6 +196,7 @@ if (mysqli_num_rows($cartItems) === 0) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
+                        // currency_code: 'PHP',
                         value: '<?= $total + $vat ?>' // Can also reference a variable or function
                     }
                 }]

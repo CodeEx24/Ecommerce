@@ -42,7 +42,7 @@ include('authenticate.php');
                                     </div>
                                     <div class="col-lg-2 text-center">
                                         <input type="hidden" value="<?= $item['selling_price'] ?>" class='productPrice'>
-                                        $<?= $item['selling_price'] ?>
+                                        ₱<?= number_format($item['selling_price'], 2, '.', ',') ?>
                                     </div>
 
                                     <div class="col-lg-3 text-center">
@@ -59,9 +59,9 @@ include('authenticate.php');
 
                                     <div class="col-md-2">
                                         <div class="d-flex text-center justify-content-center justify-content-md-end">
-                                            <span>$</span>
+                                            <span>₱ </span>
                                             <input type="hidden" class="bg-dark text-white email form-control subtotal" style="border: none; padding: 0;" value="<?= $subtotal ?>" disabled>
-                                            <p class="bg-dark text-white subtotal-text" style=""><?= $subtotal ?></p>
+                                            <p class="bg-dark text-white subtotal-text" style=""><?= number_format($subtotal, 2, '.', ',') ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,9 +76,9 @@ include('authenticate.php');
                                     <a href="https://google.com" target="_blank">Refund Policy</a>
                                 </div>
                                 <div class="col-md-2 d-flex justify-content-end totals align-items-start">
-                                    <span>$</span>
+                                    <span>₱ </span>
                                     <input type="hidden" class="bg-dark text-white text-end total" style="border: none; padding: 0; width:46%" value="<?= $total ?>" disabled>
-                                    <p class="bg-dark text-white total-text" style="" id="total"><?= $total ?></p>
+                                    <p class="bg-dark text-white total-text" style="" id="total"><?= number_format($total, 2, '.', ',') ?></p>
                                 </div>
                             </div>
                             <div class="float-end mt-3 text-center w-100 w-md-25">

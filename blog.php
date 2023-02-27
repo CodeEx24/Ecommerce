@@ -35,8 +35,8 @@ include('includes/header.php');
                             <div class="bg-card card h-100" style="position: relative;">
                                 <div class="card-body">
                                     <img src="uploads/blog/<?= $item['Image'] ?>" width="100%" height="250px" style="object-fit: cover">
-                                    <h4 class="mt-3 text-white fw-bold"><?= $item['Title'] ?></h4>
-                                    <p class="ref-excerpt text-muted mb-5"><?= substr($item['Meta_Description'], 0, 130) . '...' ?></p>
+                                    <h6 class="mt-3 text-white fw-bold"><?= $item['Title'] ?></h6>
+                                    <p class="ref-excerpt text-muted mb-4"><?= substr($item['Meta_Description'], 0, 130) . '...' ?></p>
                                 </div>
                                 <a class="text-success" style="font-size: 16px !important; position: absolute; bottom: 10px; left: 16px;" href="blog-view.php?post=<?= $item['Slug'] ?>">Read More &#x000BB;</a>
                             </div>
