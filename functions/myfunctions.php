@@ -10,6 +10,14 @@ function getAll($table)
     return mysqli_query($con, $query);
 }
 
+function getAllClients()
+{
+    global $con;
+    $query = "SELECT * FROM Users WHERE Role_As=0";
+    return mysqli_query($con, $query);
+}
+
+
 function getClientNumber()
 {
     global $con;

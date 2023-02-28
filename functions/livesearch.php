@@ -9,9 +9,9 @@ if (isset($_POST['input'])) {
 
     // Check if there is a search input, otherwise show all products that is the same to the category_id
     if ($input != "") {
-        $query = "SELECT * FROM Products WHERE CategoryID='$category_id' AND Name LIKE '%{$input}%'";
+        $query = "SELECT * FROM Products WHERE CategoryID='$category_id' AND Name LIKE '%{$input}%' AND Status = 1";
     } else {
-        $query = "SELECT * FROM Products WHERE CategoryID='$category_id'";
+        $query = "SELECT * FROM Products WHERE CategoryID='$category_id' AND Status = 1";
     }
 
     //Products query
@@ -56,9 +56,9 @@ if (isset($_POST['input'])) {
 
     // Check if there is a search input, otherwise show all products which is trending
     if ($input != "") {
-        $query = "SELECT * FROM Products WHERE Trending=1 AND Name LIKE '%{$input}%'";
+        $query = "SELECT * FROM Products WHERE Trending=1 AND Status = 1 AND Name LIKE '%{$input}%'";
     } else {
-        $query = "SELECT * FROM Products WHERE Trending=1";
+        $query = "SELECT * FROM Products WHERE Trending=1 AND Status = 1";
     }
 
     //Products query

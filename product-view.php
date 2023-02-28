@@ -26,10 +26,10 @@ if (isset($_GET['product'])) {
                         <p><?= $product['Description'] ?></p>
                         <div class="d-flex">
                             <div class="orig-price">
-                                <h5>₱<s><?= $product['Original_Price'] ?></s></h5>
+                                <h5>₱<s><?= number_format($product['Original_Price'], 2, '.', ',') ?></s></h5>
                             </div>
                             <div class="selling-price">
-                                <h5 class="fw-bold">₱<?= $product['Selling_Price'] ?></h5>
+                                <h5 class="fw-bold">₱<?= number_format($product['Selling_Price'], 2, '.', ',') ?></h5>
                             </div>
                         </div>
                         <!-- The input field with the spinner -->
@@ -86,8 +86,8 @@ if (isset($_GET['product'])) {
                                             <div class="ref-product-info d-flex justify-content-between">
                                                 <h5 class="ref-name fw-bold"><?= $item['Name'] ?></h5>
                                                 <strong class="ref-price ref-on-sale">
-                                                    <s class="ref-original-price">₱<?= $item['Original_Price'] ?> </s>
-                                                    <span class="ref-selling-price">₱<?= $item['Selling_Price'] ?> </span>
+                                                    <s class="ref-original-price">₱<?= number_format($item['Original_Price'], 2, '.', ',') ?> </s>
+                                                    <span class="ref-selling-price">₱<?= number_format($item['Selling_Price'], 2, '.', ',') ?> </span>
                                                 </strong>
                                             </div>
                                             <p class="ref-excerpt"><?= substr($item['Description'], 0, 125) . '...' ?></p>

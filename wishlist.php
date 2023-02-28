@@ -33,16 +33,16 @@ include('authenticate.php');
                             ?>
                                 <div class="row align-items-center py-3 product-data">
                                     <div class="col-lg-2 text-center">
-                                        <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" class="img-fluid" style="object-fit: fill; width: 120px; height: 120px;">
+                                        <img src="uploads/<?= $item['image'] ?>" alt="<?= $item['name'] ?>" width="120px" height="120px" style="object-fit: cover;"">
                                     </div>
-                                    <div class="col-lg-3 text-center">
+                                    <div class=" col-lg-3 text-center">
                                         <strong><?= $item['name'] ?></strong>
                                     </div>
                                     <div class="col-lg-2 text-center">
                                         <input type="hidden" value="<?= $item['selling_price'] ?>" class='productPrice'>
                                         ₱ <?= number_format($item['selling_price'], 2, '.', ',') ?>
                                     </div>
-                                    <div class="col-lg-5 text-center">
+                                    <div class="col-lg-5 text-center mt-4 mt-md-0">
                                         <button class="btn btn-primary mx-3 <?= $item['pqty'] > 0 ? "addToCartWishlist-btn" : "disabled" ?>" value="<?= $item['pid'] ?>">
                                             <i class="fa fa-shopping-cart me-2"></i>
                                             <?= $item['pqty'] > 0 ? "Add to Cart" : "Out of Stock" ?>

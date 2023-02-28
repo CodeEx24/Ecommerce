@@ -102,6 +102,14 @@ function getDetails()
     return mysqli_query($con, $query);
 }
 
+function getUserRegistrationDetails()
+{
+    global $con;
+    $user_id = $_SESSION['auth_user']['user_id'];
+    $query = "SELECT * FROM Users WHERE ID='$user_id';";
+    return mysqli_query($con, $query);
+}
+
 function getOrderDetails($user_id, $tracking_no)
 {
     global $con;

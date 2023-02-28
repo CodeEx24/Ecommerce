@@ -74,6 +74,8 @@ $(document).ready(function () {
       .find('.input-quantity')
       .val();
 
+    console.log(quantity); // print quantity value to console
+
     // Convert the string quantity to a number
     var value = parseInt(quantity, 10);
 

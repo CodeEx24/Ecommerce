@@ -120,14 +120,16 @@ input.input-quantity[type='number']::-webkit-outer-spin-button {
   background-color: #2d2c38; /* light grey background */
 }
 
-.dropdown-item:hover {
-  color: black;
-  font-weight: bold;
-}
-
 .dropdown-menu .dropdown-item {
   color: white;
   border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  color: white !important;
+  background-color: #23222b !important;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .form-2 {

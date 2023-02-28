@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 06:35 PM
+-- Generation Time: Feb 12, 2023 at 07:55 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -143,7 +143,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`ID`, `Tracking_No`, `User_ID`, `Name`, `Email`, `Phone`, `Address`, `Pincode`, `Total_Price`, `Payment_Mode`, `Payment_ID`, `Status`, `Comments`, `Created_At`, `Updated_At`) VALUES
 (1, 'TrackNo2926123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 2799.99, 'COD', '', 0, NULL, '2023-02-04 19:10:20', '2023-02-04 19:30:24'),
-(2, 'TrackNo9165123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 4826.94, 'COD', '', 0, NULL, '2023-02-06 14:30:14', '2023-02-06 14:30:14');
+(2, 'TrackNo9165123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 4826.94, 'COD', '', 0, NULL, '2023-02-06 14:30:14', '2023-02-06 14:30:14'),
+(3, 'TrackNo2554123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 22.68, 'COD', '', 1, NULL, '2023-02-12 18:18:02', '2023-02-12 18:19:33');
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,9 @@ INSERT INTO `order_items` (`ID`, `Order_ID`, `Product_ID`, `Quantity`, `Price`, 
 (2, 1, 12, 5, 60, '2023-02-04 19:10:21'),
 (3, 1, 13, 10, 180, '2023-02-04 19:10:21'),
 (4, 2, 1, 3, 9, '2023-02-06 14:30:14'),
-(5, 2, 21, 6, 800, '2023-02-06 14:30:14');
+(5, 2, 21, 6, 800, '2023-02-06 14:30:14'),
+(6, 3, 2, 1, 10, '2023-02-12 18:18:02'),
+(7, 3, 3, 1, 11, '2023-02-12 18:18:02');
 
 -- --------------------------------------------------------
 
@@ -243,8 +246,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`ID`, `CategoryID`, `Name`, `Slug`, `Small_Description`, `Description`, `Original_Price`, `Selling_Price`, `Image`, `Quantity`, `Status`, `Trending`, `Meta_Title`, `Meta_Keywords`, `Meta_Description`, `Created_At`) VALUES
 (1, 1, 'To Kill a Mockingbird', 'to-kill-a-mockingbird', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', '10.00', '9.00', '1675490399.jpg', 97, 1, 1, 'To Kill a Mockingbird - A classic novel by Harper Lee', 'Buy To Kill a Mockingbird, a classic novel by Harper Lee about racial injustice, courage, and morality.', 'To Kill a Mockingbird, Harper Lee, Novel, Racial Injustice, Courage, Morality', '2023-02-02 20:04:31'),
-(2, 1, 'The Great Gatsby', 'the-great-gatsby', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', '11.00', '10.00', '1675491118.jpg', 100, 1, 1, 'The Great Gatsby - A novel by F. Scott Fitzgerald', 'Buy The Great Gatsby, a novel by F. Scott Fitzgerald about the decadence and excess of the Roaring Twenties and the shallowness of the people who lived during that time.', 'The Great Gatsby, F. Scott Fitzgerald, Novel, Decadence, Roaring Twenties, Shallowness', '2023-02-02 20:04:31'),
-(3, 1, 'Pride and Prejudice', 'pride-and-prejudice', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', '12.00', '11.00', '1675491132.jpg', 100, 1, 1, 'Pride and Prejudice - A classic novel by Jane Austen', 'Buy Pride and Prejudice, a classic novel by Jane Austen about love and social class in Georgian England.', 'Pride and Prejudice, Jane Austen, Novel, Love, Social Class, Georgian England', '2023-02-02 20:04:31'),
+(2, 1, 'The Great Gatsby', 'the-great-gatsby', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', '11.00', '10.00', '1675491118.jpg', 99, 1, 1, 'The Great Gatsby - A novel by F. Scott Fitzgerald', 'Buy The Great Gatsby, a novel by F. Scott Fitzgerald about the decadence and excess of the Roaring Twenties and the shallowness of the people who lived during that time.', 'The Great Gatsby, F. Scott Fitzgerald, Novel, Decadence, Roaring Twenties, Shallowness', '2023-02-02 20:04:31'),
+(3, 1, 'Pride and Prejudice', 'pride-and-prejudice', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', '12.00', '11.00', '1675491132.jpg', 99, 1, 1, 'Pride and Prejudice - A classic novel by Jane Austen', 'Buy Pride and Prejudice, a classic novel by Jane Austen about love and social class in Georgian England.', 'Pride and Prejudice, Jane Austen, Novel, Love, Social Class, Georgian England', '2023-02-02 20:04:31'),
 (4, 1, 'Wuthering Heights', 'wuthering-heights', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', '13.00', '12.00', '1675491143.jpg', 100, 1, 1, 'Wuthering Heights - A novel by Emily Bronte', 'Buy Wuthering Heights, a novel by Emily Bronte about love and revenge set on the wild and desolate Yorkshire moors.', 'Wuthering Heights, Emily Bronte, Novel, Love, Revenge, Yorkshire Moors', '2023-02-02 20:04:31'),
 (5, 1, 'The Lord of the Rings', 'the-lord-of-the-rings', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', '14.00', '13.00', '1675491152.jpg', 100, 1, 1, 'The Lord of the Rings - A classic epic fantasy novel by J.R.R. Tolkien', 'Buy The Lord of the Rings, a classic epic fantasy novel by J.R.R. Tolkien about hobbit Frodo Baggins and his quest to save Middle-earth.', 'The Lord of the Rings, J.R.R. Tolkien, Epic Fantasy, Middle-earth, One Ring, Sauron', '2023-02-02 20:04:31'),
 (6, 1, 'The Hobbit', 'the-hobbit', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', '15.00', '14.00', '1675491162.jpg', 100, 1, 1, 'The Hobbit - A prequel to The Lord of the Rings by J.R.R. Tolkien', 'Buy The Hobbit, a prequel to The Lord of the Rings by J.R.R. Tolkien about hobbit Bilbo Baggins and his journey to reclaim a lost treasure from the dragon Smaug.', 'The Hobbit, J.R.R. Tolkien, Prequel, Lord of the Rings, Dragon Smaug, Courage, Friendship', '2023-02-02 20:04:31'),
@@ -263,7 +266,7 @@ INSERT INTO `products` (`ID`, `CategoryID`, `Name`, `Slug`, `Small_Description`,
 (19, 2, 'Camping Chair', 'camping-chair', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', '50.00', '40.00', '1675515077.jpg', 40, 1, 1, 'Camping Chair', 'Comfortable camping chair for outdoor lounging', 'camping, chair, outdoor', '2023-02-02 20:04:31'),
 (20, 2, 'Camping Lantern', 'camping-lantern', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', '30.00', '25.00', '1675515090.jpg', 50, 1, 1, 'Camping Lantern', 'Bright and portable camping lantern', 'camping, lantern, outdoor', '2023-02-02 20:04:31'),
 (21, 3, 'iPhone X', 'iphone-x', 'The latest iPhone X model features a sleek design and powerful hardware', 'The latest iPhone X model features a sleek design and powerful hardware', '999.99', '799.99', '1675515388.jpg', 94, 1, 0, 'iPhone X - The latest and greatest', 'The latest iPhone X model is now available in our store', 'apple, iphone, x, latest', '2023-02-02 20:04:31'),
-(22, 3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', '899.99', '799.99', '1675515400.jpg', 200, 1, 1, 'Samsung Galaxy S21 - The latest from Samsung', 'The latest Samsung Galaxy S21 is now available in our store', 'samsung, galaxy, s21, latest', '2023-02-02 20:04:31'),
+(22, 3, 'Samsung Galaxy S21', 'samsung-galaxy-s21-2', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', '899.99', '799.99', '1675515400.jpg', 200, 1, 1, 'Samsung Galaxy S21 - The latest from Samsung', 'The latest Samsung Galaxy S21 is now available in our store', 'samsung, galaxy, s21, latest', '2023-02-02 20:04:31'),
 (23, 3, 'Google Pixel 5', 'google-pixel-5', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', '799.99', '699.99', '1675515423.jpg', 150, 1, 0, 'Google Pixel 5 - A great smartphone from Google', 'The latest Google Pixel 5 is now available in our store', 'google, pixel, 5, latest', '2023-02-02 20:04:31'),
 (24, 3, 'OnePlus 8T', 'oneplus-8t', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', '699.99', '599.99', '1675515440.jpg', 250, 1, 0, 'OnePlus 8T - A great smartphone from OnePlus', 'The latest OnePlus 8T is now available in our store', 'oneplus, 8t, latest', '2023-02-02 20:04:31'),
 (25, 3, 'Huawei P40 Pro', 'huawei-p40-pro', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', '999.99', '799.99', '1675515452.jpg', 200, 1, 0, 'Huawei P40 Pro - A great smartphone from Huawei', 'The latest Huawei P40 Pro is now available in our store', 'huawei, p40, pro, latest', '2023-02-02 20:04:31'),
@@ -402,7 +405,8 @@ ALTER TABLE `carts`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`);
 
 --
 -- Indexes for table `orders`
@@ -424,6 +428,7 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`),
   ADD KEY `CategoryID` (`CategoryID`);
 
 --
@@ -431,6 +436,7 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`),
   ADD KEY `CategoryID` (`CategoryID`);
 
 --
@@ -467,98 +473,37 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `wishlist`
---
-ALTER TABLE `wishlist`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `address`
---
-ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `carts`
---
-ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`ID`),
-  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`);
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`ID`);
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `wishlist`
---
-ALTER TABLE `wishlist`
-  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`) ON DELETE CASCADE;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

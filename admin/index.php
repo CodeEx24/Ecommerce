@@ -71,13 +71,13 @@ $orders_this_day = getCurrentDayOrdersNumber();
                         <i class="material-icons opacity-10">person</i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                        <p class="text-sm mb-0 text-capitalize">Total Clients</p>
                         <h4 class="mb-0 text-white"><?= $user_number ?></h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+<?= $users_this_month ?> </span>addded users this month</p>
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+<?= $users_this_month ?> </span>addded clients this month</p>
                 </div>
             </div>
         </div>

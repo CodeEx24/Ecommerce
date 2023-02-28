@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 06:35 PM
+-- Generation Time: Feb 20, 2023 at 04:50 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -21,63 +21,30 @@ SET time_zone = "+00:00";
 -- Database: `ecommerce`
 --
 
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)   SELECT * FROM categories WHERE cat_id=cid$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
 
---
--- Table structure for table `address`
---
-
-CREATE TABLE `address` (
-  `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Phone` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Province` varchar(255) NOT NULL,
-  `Street` varchar(255) NOT NULL,
-  `City` varchar(255) NOT NULL,
-  `Pincode` varchar(255) NOT NULL,
-  `Barangay` varchar(255) DEFAULT NULL,
-  `Bldg_houseno` varchar(255) NOT NULL,
-  `UserID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `address`
+-- Table structure for table `users`
 --
 
-INSERT INTO `address` (`ID`, `Name`, `Phone`, `Email`, `Province`, `Street`, `City`, `Pincode`, `Barangay`, `Bldg_houseno`, `UserID`) VALUES
-(1, 'Admin Name', '09123123123', 'admin@gmail.com', 'Metro Manila', 'Daisy', 'Caloocan', '1211', '123', 'Building # 132', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carts`
---
-
-CREATE TABLE `carts` (
-  `ID` int(11) NOT NULL,
-  `User_ID` int(11) DEFAULT NULL,
-  `Product_ID` int(11) DEFAULT NULL,
-  `Product_Qty` int(11) DEFAULT NULL,
-  `Created_At` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE users (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255) NOT NULL,
+    Phone VARCHAR(15) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Role_As TINYINT DEFAULT 0,
+    Created_At DATETIME DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `carts`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `carts` (`ID`, `User_ID`, `Product_ID`, `Product_Qty`, `Created_At`) VALUES
-(1, 2, 18, 1, '2023-02-02 12:05:18'),
-(2, 2, 19, 1, '2023-02-02 12:05:19'),
-(3, 2, 61, 1, '2023-02-02 12:06:57');
+INSERT INTO `users` (`ID`, `Name`, `Phone`, `Email`, `Password`, `Role_As`, `Created_At`) VALUES
+(1, 'Admin Side', '+639667337789', 'admin@gmail.com', '$2y$10$LDc2kOSNn2pwEUCTbIW.uu.Xlz6Ht1O/9OQyGeBObPlRxQ7JK.7iO', 1, '2023-02-02 20:02:31'),
+(2, 'User Side', '+639123123123', 'user@gmail.com', '$2y$10$sM2RCV5agxnEjv4x2gi3Q.M0mugYdqyf7WW.QylIm/fbI1YfpNGuW', 0, '2023-02-02 20:02:53');
 
 -- --------------------------------------------------------
 
@@ -85,18 +52,18 @@ INSERT INTO `carts` (`ID`, `User_ID`, `Product_ID`, `Product_Qty`, `Created_At`)
 -- Table structure for table `categories`
 --
 
-CREATE TABLE `categories` (
-  `ID` int(11) NOT NULL,
-  `Image` varchar(255) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Slug` varchar(255) NOT NULL,
-  `Description` mediumtext NOT NULL,
-  `Status` tinyint(4) DEFAULT 1,
-  `Popular` tinyint(4) DEFAULT 0,
-  `Meta_Title` varchar(255) DEFAULT NULL,
-  `Meta_Description` mediumtext DEFAULT NULL,
-  `Meta_Keywords` varchar(255) DEFAULT NULL,
-  `Created_At` datetime DEFAULT current_timestamp()
+CREATE TABLE Categories (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Image VARCHAR(255) NOT NULL,
+    Name VARCHAR(255) NOT NULL,
+    Slug VARCHAR(255) NOT NULL,
+    Description MEDIUMTEXT NOT NULL,
+    Status TINYINT DEFAULT 1,
+    Popular TINYINT DEFAULT 0,
+    Meta_Title VARCHAR(255),
+    Meta_Description MEDIUMTEXT,
+    Meta_Keywords VARCHAR(255),
+    Created_At DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -116,25 +83,187 @@ INSERT INTO `categories` (`ID`, `Image`, `Name`, `Slug`, `Description`, `Status`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE Products (
+  ID INT PRIMARY KEY AUTO_INCREMENT,
+  CategoryID INT NOT NULL,
+  FOREIGN KEY (CategoryID) REFERENCES Categories(ID) ON DELETE CASCADE,
+  Name VARCHAR(255) NOT NULL,
+  Slug VARCHAR(255) NOT NULL,
+  Small_Description MEDIUMTEXT NOT NULL,
+  Description MEDIUMTEXT NOT NULL,
+  Original_Price DECIMAL(10,2) NOT NULL,
+  Selling_Price DECIMAL(10,2) NOT NULL,
+  Image VARCHAR(255) NOT NULL,
+  Quantity INT UNSIGNED NOT NULL,
+  Status TINYINT,
+  Trending TINYINT,
+  Meta_Title VARCHAR(255),
+  Meta_Keywords MEDIUMTEXT,
+  Meta_Description MEDIUMTEXT,
+  Created_At DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`ID`, `CategoryID`, `Name`, `Slug`, `Small_Description`, `Description`, `Original_Price`, `Selling_Price`, `Image`, `Quantity`, `Status`, `Trending`, `Meta_Title`, `Meta_Keywords`, `Meta_Description`, `Created_At`) VALUES
+(1, 1, 'To Kill a Mockingbird', 'to-kill-a-mockingbird', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', '500.00', '450.00', '1675490399.jpg', 96, 1, 1, 'To Kill a Mockingbird - A classic novel by Harper Lee', 'Buy To Kill a Mockingbird, a classic novel by Harper Lee about racial injustice, courage, and morality.', 'To Kill a Mockingbird, Harper Lee, Novel, Racial Injustice, Courage, Morality', '2023-02-02 20:04:31'),
+(2, 1, 'The Great Gatsby', 'the-great-gatsby', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', '550.00', '500.00', '1675491118.jpg', 99, 1, 1, 'The Great Gatsby - A novel by F. Scott Fitzgerald', 'Buy The Great Gatsby, a novel by F. Scott Fitzgerald about the decadence and excess of the Roaring Twenties and the shallowness of the people who lived during that time.', 'The Great Gatsby, F. Scott Fitzgerald, Novel, Decadence, Roaring Twenties, Shallowness', '2023-02-02 20:04:31'),
+(3, 1, 'Pride and Prejudice', 'pride-and-prejudice', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', '600.00', '550.00', '1675491132.jpg', 99, 1, 1, 'Pride and Prejudice - A classic novel by Jane Austen', 'Buy Pride and Prejudice, a classic novel by Jane Austen about love and social class in Georgian England.', 'Pride and Prejudice, Jane Austen, Novel, Love, Social Class, Georgian England', '2023-02-02 20:04:31'),
+(4, 1, 'Wuthering Heights', 'wuthering-heights', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', '650.00', '600.00', '1675491143.jpg', 100, 1, 1, 'Wuthering Heights - A novel by Emily Bronte', 'Buy Wuthering Heights, a novel by Emily Bronte about love and revenge set on the wild and desolate Yorkshire moors.', 'Wuthering Heights, Emily Bronte, Novel, Love, Revenge, Yorkshire Moors', '2023-02-02 20:04:31'),
+(5, 1, 'The Lord of the Rings', 'the-lord-of-the-rings', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', '700.00', '650.00', '1675491152.jpg', 100, 1, 1, 'The Lord of the Rings - A classic epic fantasy novel by J.R.R. Tolkien', 'Buy The Lord of the Rings, a classic epic fantasy novel by J.R.R. Tolkien about hobbit Frodo Baggins and his quest to save Middle-earth.', 'The Lord of the Rings, J.R.R. Tolkien, Epic Fantasy, Middle-earth, One Ring, Sauron', '2023-02-02 20:04:31'),
+(6, 1, 'The Hobbit', 'the-hobbit', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', '750.00', '700.00', '1675491162.jpg', 100, 1, 1, 'The Hobbit - A prequel to The Lord of the Rings by J.R.R. Tolkien', 'Buy The Hobbit, a prequel to The Lord of the Rings by J.R.R. Tolkien about hobbit Bilbo Baggins and his journey to reclaim a lost treasure from the dragon Smaug.', 'The Hobbit, J.R.R. Tolkien, Prequel, Lord of the Rings, Dragon Smaug, Courage, Friendship', '2023-02-02 20:04:31'),
+(7, 1, 'Chronicles of Narnia', 'the-chronicles-of-narnia', 'The Chronicles of Narnia is a series of seven fantasy novels for children by C.S. Lewis. The series follows the adventures of a group of children who are transported to a magical land called Narnia, where they encounter talking animals, dwarves, and other magical creatures. The series is renowned for its imaginative world-building, memorable characters, and Christian themes.', 'The Chronicles of Narnia is a series of seven fantasy novels for children by C.S. Lewis. The series follows the adventures of a group of children who are transported to a magical land called Narnia, where they encounter talking animals, dwarves, and other magical creatures. The series is renowned for its imaginative world-building, memorable characters, and Christian themes.', '800.00', '750.00', '1675491171.jpg', 100, 1, 1, 'The Chronicles of Narnia - A series of fantasy novels for children by C.S. Lewis', 'The Chronicles of Narnia, C.S. Lewis, Fantasy, Children, Narnia, Talking Animals, Dwarves', 'Buy The Chronicles of Narnia, a series of seven fantasy novels for children by C.S. Lewis, about the adventures of a group of children in the magical land of Narnia.', '2023-02-02 20:04:31'),
+(8, 1, 'Catcher in the Rye', 'the-catcher-in-the-rye', 'The Catcher in the Rye is a novel by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him. The novel is a commentary on adolescence and the difficulties that young people face as they navigate the complexities of growing up. Holden\'s story is one of rebellion and nonconformity, as he rejects the hypocrisy and phoniness of the adult world.', 'The Catcher in the Rye is a novel by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him. The novel is a commentary on adolescence and the difficulties that young people face as they navigate the complexities of growing up. Holden\'s story is one of rebellion and nonconformity, as he rejects the hypocrisy and phoniness of the adult world.', '850.00', '800.00', '1675491182.jpg', 100, 1, 1, 'The Catcher in the Rye - A novel about adolescence and rebellion by J.D. Salinger', 'The Catcher in the Rye, J.D. Salinger, Adolescence, Rebellion, Holden Caulfield, Hypocrisy, Phoniness', 'Buy The Catcher in the Rye, a novel about adolescence and rebellion by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him.', '2023-02-02 20:04:31'),
+(9, 1, 'Moby Dick', 'moby-dick', 'Moby Dick is a novel by Herman Melville, set in the 19th century. The novel follows Ishmael, a sailor who signs up for a dangerous voyage in pursuit of a giant white whale, Moby Dick. The story is a commentary on obsession, revenge, and the dangerous allure of the sea.', 'Moby Dick is a novel by Herman Melville, set in the 19th century. The novel follows Ishmael, a sailor who signs up for a dangerous voyage in pursuit of a giant white whale, Moby Dick. The story is a commentary on obsession, revenge, and the dangerous allure of the sea.', '750.00', '700.00', '1675491190.jpg', 100, 1, 1, 'Moby Dick - A novel by Herman Melville', 'Buy Moby Dick, a novel by Herman Melville about a dangerous voyage in pursuit of a giant white whale.', 'Moby Dick, Herman Melville, Novel, Whale, Hunt, Sea', '2023-02-02 20:04:31'),
+(10, 1, 'To the Lighthouse', 'to-the-lighthouse', 'To the Lighthouse is a novel by Virginia Woolf, set in the early 20th century. The novel follows the Ramsay family and their guests as they spend a summer at their home on the Isle of Skye. The story is a meditation on the meaning of life, the passage of time, and the nature of art and creativity.', 'To the Lighthouse is a novel by Virginia Woolf, set in the early 20th century. The novel follows the Ramsay family and their guests as they spend a summer at their home on the Isle of Skye. The story is a meditation on the meaning of life, the passage of time, and the nature of art and creativity.', '850.00', '800.00', '1675491199.jpg', 100, 1, 1, 'To the Lighthouse - A novel by Virginia Woolf', 'Buy To the Lighthouse, a novel by Virginia Woolf about the meaning of life, the passage of time, and the nature of art and creativity.', 'To the Lighthouse, Virginia Woolf, Novel, Meaning of Life, Passage of Time, Art, Creativity', '2023-02-02 20:04:31'),
+(11, 2, 'Backpack', 'backpack', 'Take all your essentials with you on your outdoor adventures with this durable backpack. It has multiple compartments and is made from high-quality materials.', 'Take all your essentials with you on your outdoor adventures with this durable backpack. It has multiple compartments and is made from high-quality materials.', '5000.00', '4500.00', '1675514952.jpg', 60, 1, 1, 'Backpack', 'Durable backpack for outdoor adventures', 'backpack, outdoor, adventure', '2023-02-02 20:04:31'),
+(12, 2, 'Camp Hammock', 'camping-hammock', 'Relax in comfort on your next camping trip with this camping hammock. It is made from soft and durable materials and can hold up to two people.', 'Relax in comfort on your next camping trip with this camping hammock. It is made from soft and durable materials and can hold up to two people.', '3500.00', '3000.00', '1675514978.jpg', 64, 1, 1, 'Camping Hammock', 'Comfortable camping hammock for outdoor lounging', 'camping, hammock, outdoor', '2023-02-02 20:04:31'),
+(13, 2, 'Camping Cooler', 'camping-cooler', 'Keep your food and drinks cold on your next camping trip with this large and durable camping cooler. It has multiple compartments and can hold up to 50 cans.', 'Keep your food and drinks cold on your next camping trip with this large and durable camping cooler. It has multiple compartments and can hold up to 50 cans.', '10000.00', '9000.00', '1675514992.jpg', 69, 1, 1, 'Camping Cooler', 'Large and durable camping cooler', 'camping, cooler, outdoor', '2023-02-02 20:04:31'),
+(14, 2, 'Camping Grill', 'camping-grill', 'Cook your meals on the go with this lightweight and portable camping grill. It runs on propane and has adjustable heat controls.', 'Cook your meals on the go with this lightweight and portable camping grill. It runs on propane and has adjustable heat controls.', '4500.00', '4000.00', '1675515012.jpg', 90, 1, 1, 'Camping Grill', 'Lightweight and portable camping grill', 'camping, grill, outdoor', '2023-02-02 20:04:31'),
+(15, 2, 'Camping Pillow', 'camping-pillow', 'Get a good night\'s sleep on your next camping trip with this comfortable camping pillow. It is made from soft and supportive materials.', 'Get a good night\'s sleep on your next camping trip with this comfortable camping pillow. It is made from soft and supportive materials.', '1000.00', '750.00', '1675515025.jpg', 100, 1, 1, 'Camping Pillow', 'Comfortable camping pillow for a good night\'s sleep', 'camping, pillow, outdoor', '2023-02-02 20:04:31'),
+(16, 2, 'Camping Tent', 'camping-tent', 'This camping tent is perfect for outdoor enthusiasts who want a durable and long-lasting shelter. It is made from high-quality materials and can withstand harsh weather conditions.', 'This camping tent is perfect for outdoor enthusiasts who want a durable and long-lasting shelter. It is made from high-quality materials and can withstand harsh weather conditions.', '10000.00', '9000.00', '1675515039.jpg', 10, 1, 1, 'Camping Tent', 'Durable camping tent for outdoor enthusiasts', 'camping, tent, outdoor', '2023-02-02 20:04:31'),
+(17, 2, 'Sleeping Bag', 'sleeping-bag', 'Take comfort to the next level on your next camping trip with this sleeping bag. Made from soft and warm materials, you\'ll have a good night\'s sleep under the stars.', 'Take comfort to the next level on your next camping trip with this sleeping bag. Made from soft and warm materials, you\'ll have a good night\'s sleep under the stars.', '7500.00', '6500.00', '1675515050.jpg', 20, 1, 1, 'Sleeping Bag', 'Comfortable sleeping bag for camping trips', 'sleeping, bag, camping', '2023-02-02 20:04:31'),
+(18, 2, 'Camping Stove', 'camping-stove', 'Cook your meals on your next camping trip with ease using this lightweight and portable camping stove. It runs on propane and has adjustable heat controls.', 'Cook your meals on your next camping trip with ease using this lightweight and portable camping stove. It runs on propane and has adjustable heat controls.', '4000.00', '3500.00', '1675515062.jpg', 30, 1, 1, 'Camping Stove', 'Lightweight and portable camping stove', 'camping, stove, outdoor', '2023-02-02 20:04:31'),
+(19, 2, 'Camping Chair', 'camping-chair', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', '2500.00', '2000.00', '1675515077.jpg', 40, 1, 1, 'Camping Chair', 'Comfortable camping chair for outdoor lounging', 'camping, chair, outdoor', '2023-02-02 20:04:31'),
+(20, 2, 'Camping Lantern', 'camping-lantern', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', '1500.00', '1250.00', '1675515090.jpg', 50, 1, 1, 'Camping Lantern', 'Bright and portable camping lantern', 'camping, lantern, outdoor', '2023-02-02 20:04:31'),
+(21, 3, 'iPhone X', 'iphone-x', 'The latest iPhone X model features a sleek design and powerful hardware', 'The latest iPhone X model features a sleek design and powerful hardware', '49999.50', '39999.50', '1675515388.jpg', 94, 1, 0, 'iPhone X - The latest and greatest', 'The latest iPhone X model is now available in our store', 'apple, iphone, x, latest', '2023-02-02 20:04:31'),
+(22, 3, 'Samsung G1 S21', 'samsung-galaxy-s21-2', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', '44999.50', '39999.50', '1675515400.jpg', 198, 1, 1, 'Samsung Galaxy S21 - The latest from Samsung', 'samsung, galaxy, s21, latest', 'The latest Samsung Galaxy S21 is now available in our store', '2023-02-02 20:04:31'),
+(23, 3, 'Google Pixel 5', 'google-pixel-5', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', '39999.50', '34999.50', '1675515423.jpg', 150, 1, 0, 'Google Pixel 5 - A great smartphone from Google', 'The latest Google Pixel 5 is now available in our store', 'google, pixel, 5, latest', '2023-02-02 20:04:31'),
+(24, 3, 'OnePlus 8T', 'oneplus-8t', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', '34999.50', '29999.50', '1675515440.jpg', 250, 1, 0, 'OnePlus 8T - A great smartphone from OnePlus', 'The latest OnePlus 8T is now available in our store', 'oneplus, 8t, latest', '2023-02-02 20:04:31'),
+(25, 3, 'Huawei P40 Pro', 'huawei-p40-pro', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', '49999.50', '39999.50', '1675515452.jpg', 200, 1, 0, 'Huawei P40 Pro - A great smartphone from Huawei', 'The latest Huawei P40 Pro is now available in our store', 'huawei, p40, pro, latest', '2023-02-02 20:04:31'),
+(26, 3, 'iPhone 12', 'iphone-12', 'The iPhone 12 is the latest model in the iPhone lineup. It features a 6.1-inch Super Retina XDR display, 5G capabilities, and more.', 'The iPhone 12 is the latest model in the iPhone lineup. It features a 6.1-inch Super Retina XDR display, 5G capabilities, and more.', '49999.50', '44999.50', '1675515463.jpg', 100, 1, 1, 'iPhone 12', 'Get the latest iPhone model, the iPhone 12, with 5G capabilities and a 6.1-inch Super Retina XDR display', 'iPhone, Apple, smartphone', '2023-02-02 20:04:31'),
+(27, 3, 'Samsung G2 S21', 'samsung-galaxy-s21', 'The Samsung Galaxy S21 is the latest addition to the Samsung Galaxy lineup. It features a 6.2-inch Dynamic AMOLED 2X display, 5G capabilities, and more.', 'The Samsung Galaxy S21 is the latest addition to the Samsung Galaxy lineup. It features a 6.2-inch Dynamic AMOLED 2X display, 5G capabilities, and more.', '44999.50', '42499.50', '1675515474.jpg', 100, 1, 0, 'Samsung Galaxy S21', 'Samsung, Galaxy, smartphone', 'Get the latest Samsung smartphone, the Samsung Galaxy S21, with 5G capabilities and a 6.2-inch Dynamic AMOLED 2X display', '2023-02-02 20:04:31'),
+(28, 3, 'OnePlus 9 Pro', 'oneplus-9-pro', 'The OnePlus 9 Pro is the latest addition to the OnePlus lineup. It features a 6.7-inch Fluid AMOLED display, 5G capabilities, and more.', 'The OnePlus 9 Pro is the latest addition to the OnePlus lineup. It features a 6.7-inch Fluid AMOLED display, 5G capabilities, and more.', '39999.50', '37499.50', '1675515488.jpg', 100, 1, 0, 'OnePlus 9 Pro', 'Get the latest OnePlus smartphone, the OnePlus 9 Pro, with 5G capabilities and a 6.7-inch Fluid AMOLED display', 'OnePlus, smartphone', '2023-02-02 20:04:31'),
+(29, 3, 'Google Pixel 6', 'google-pixel-6', 'The Google Pixel 6 is the latest addition to the Google Pixel lineup. It features a 6.4-inch AMOLED display, 5G capabilities, and more.', 'The Google Pixel 6 is the latest addition to the Google Pixel lineup. It features a 6.4-inch AMOLED display, 5G capabilities, and more.', '34999.50', '32499.50', '1675515501.jpg', 100, 1, 0, 'Google Pixel 6', 'Get the latest Google smartphone, the Google Pixel 6, with 5G capabilities and a 6.4-inch AMOLED display', 'Google, Pixel, smartphone', '2023-02-02 20:04:31'),
+(30, 3, 'LG Velvet', 'lg-velvet', 'The LG Velvet is the latest addition to the LG lineup. It features a 6.8-inch P-OLED display, 5G capabilities, and more.', 'The LG Velvet is the latest addition to the LG lineup. It features a 6.8-inch P-OLED display, 5G capabilities, and more.', '29999.50', '27499.50', '1675515512.jpg', 100, 1, 0, 'LG Velvet', 'Get the latest LG smartphone, the LG Velvet, with 5G capabilities and a 6.8-inch P-OLED display', 'LG, smartphone', '2023-02-02 20:04:31'),
+(31, 4, 'Milk', 'milk', 'A gallon of milk, perfect for cereal or baking', 'A gallon of milk, perfect for cereal or baking', '149.50', '139.50', '1675518148.jpg', 100, 1, 0, 'Milk', 'Get a gallon of milk for your cereal or baking needs', 'Milk, Groceries, Household', '2023-02-02 20:04:31'),
+(32, 4, 'Bread', 'bread', 'A loaf of bread, perfect for sandwiches or toast', 'A loaf of bread, perfect for sandwiches or toast', '99.50', '89.50', '1675518157.jpg', 100, 1, 0, 'Bread', 'Get a loaf of bread for your sandwiches or toast needs', 'Bread, Groceries, Household', '2023-02-02 20:04:31'),
+(33, 4, 'Eggs', 'eggs', 'A dozen eggs, perfect for breakfast or baking', 'A dozen eggs, perfect for breakfast or baking', '124.50', '114.50', '1675518167.jpg', 100, 1, 0, 'Eggs', 'Get a dozen eggs for your breakfast or baking needs', 'Eggs, Groceries, Household', '2023-02-02 20:04:31'),
+(34, 4, 'Sugar', 'sugar', 'A bag of sugar, perfect for baking or sweetening your drinks', 'A bag of sugar, perfect for baking or sweetening your drinks', '99.50', '89.50', '1675518179.jpg', 100, 1, 0, 'Sugar', 'Get a bag of sugar for your baking or sweetening needs', 'Sugar, Groceries, Household', '2023-02-02 20:04:31'),
+(35, 4, 'Butter', 'butter', 'A stick of butter, perfect for baking or cooking', 'A stick of butter, perfect for baking or cooking', '149.50', '139.50', '1675518195.jpg', 100, 1, 0, 'Butter', 'Get a stick of butter for your baking or cooking needs', 'Butter, Groceries, Household', '2023-02-02 20:04:31'),
+(36, 4, 'Rice', 'rice', 'Rice is a staple food in many households around the world. It can be used in a variety of dishes and is a great source of carbohydrates.', 'Rice is a staple food in many households around the world. It can be used in a variety of dishes and is a great source of carbohydrates.', '249.50', '199.50', '1675518206.jpg', 1000, 1, 0, 'Rice for Sale', 'Shop our selection of rice, a staple food and great source of carbohydrates', 'rice, staple food, carbohydrates', '2023-02-02 20:04:31'),
+(37, 4, 'Pasta', 'pasta', 'Pasta is a classic staple food that is loved by many. It is a versatile ingredient that can be used in a variety of dishes and is a great source of carbohydrates.', 'Pasta is a classic staple food that is loved by many. It is a versatile ingredient that can be used in a variety of dishes and is a great source of carbohydrates.', '199.50', '149.50', '1675518216.jpg', 1000, 1, 0, 'Pasta for Sale', 'Shop our selection of pasta, a classic staple food and great source of carbohydrates', 'pasta, staple food, carbohydrates', '2023-02-02 20:04:31'),
+(38, 4, 'Apples', 'apples', 'A bag of apples', 'A bag of apples, perfect for snacking or baking.', '199.50', '149.50', '1675518510.jpg', 100, 1, 0, 'Apples', 'Get a bag of apples for your snacking or baking needs', 'Apples, Groceries, Fresh Fruits', '2023-02-02 20:04:31'),
+(39, 4, 'Oranges', 'oranges', 'A bag of oranges, perfect for snacking or juicing', 'A bag of oranges, perfect for snacking or juicing', '124.50', '114.50', '1675518722.jpg', 1000, 1, 0, 'Oranges', 'Oranges, Groceries, Fresh Fruits', 'Get a bag of oranges for your snacking or juicing needs', '2023-02-02 20:04:31'),
+(40, 4, 'Potatoes', 'potatoes', 'A bag of potatoes', 'A bag of potatoes, perfect for cooking or roasting', '149.50', '139.50', '1675519236.jpg', 100, 1, 0, 'Potatoes', 'Get a bag of potatoes for your cooking or roasting needs', 'Potatoes, Groceries, Fresh Vegetables', '2023-02-02 20:04:31'),
+(41, 5, 'MacBook Pro', 'macbook-pro', 'The 16-inch MacBook Pro is a powerful laptop with the latest technology.', 'The 16-inch MacBook Pro is a powerful laptop with the latest technology.', '99999.50', '89999.50', '1675519512.jpg', 100, 1, 1, 'MacBook Pro', 'Buy the latest MacBook Pro with 16-inch screen and the latest technology.', 'MacBook Pro, laptop, computer, Apple', '2023-02-02 20:04:31'),
+(42, 5, 'HP Envy x360', 'hp-envy-x360', 'The HP Envy x360 is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', 'The HP Envy x360 is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', '44999.50', '39999.50', '1675519530.jpg', 150, 1, 0, 'HP Envy x360', 'Get the best of both worlds with the HP Envy x360 2-in-1 laptop.', 'HP Envy x360, 2-in-1 laptop, computer, HP', '2023-02-02 20:04:31'),
+(43, 5, 'Dell XPS 13', 'dell-xps-13', 'The Dell XPS 13 is a thin and light laptop that is perfect for travel or everyday use.', 'The Dell XPS 13 is a thin and light laptop that is perfect for travel or everyday use.', '49999.50', '44999.50', '1675519552.jpg', 200, 1, 1, 'Dell XPS 13', 'Buy the latest Dell XPS 13 thin and light laptop for your travel or everyday use.', 'Dell XPS 13, thin laptop, computer, Dell', '2023-02-02 20:04:31'),
+(44, 5, 'MS Surface', 'microsoft-surface-pro', 'The Microsoft Surface Pro is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', 'The Microsoft Surface Pro is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', '49999.50', '44999.50', '1675519558.jpg', 200, 1, 0, 'Microsoft Surface Pro', 'Get the best of both worlds with the Microsoft Surface Pro 2-in-1 laptop.', 'Microsoft Surface Pro, 2-in-1 laptop, computer, Microsoft', '2023-02-02 20:04:31'),
+(45, 5, 'Acer Aspire 5', 'acer-aspire-5', 'The Acer Aspire 5 is an affordable laptop that offers good performance for everyday use.', 'The Acer Aspire 5 is an affordable laptop that offers good performance for everyday use.', '24999.50', '22499.50', '1675519564.jpg', 300, 1, 0, 'Acer Aspire 5', 'Buy the latest Acer Aspire 5 affordable laptop for your everyday use.', 'Acer Aspire 5, affordable laptop, computer, Acer', '2023-02-02 20:04:31'),
+(46, 5, 'Lenovo ThinkPad', 'lenovo-thinkpad-x1-carbon', 'The Lenovo ThinkPad X1 Carbon is a business laptop that offers strong performance and durability.', 'The Lenovo ThinkPad X1 Carbon is a business laptop that offers strong performance and durability.', '74999.50', '69999.50', '1675519570.jpg', 100, 1, 0, 'Lenovo ThinkPad X1 Carbon', 'Lenovo ThinkPad X1 Carbon, business laptop, computer, Lenovo', 'Get a business laptop that offers strong performance and durability with the Lenovo ThinkPad X1 Carbon.', '2023-02-02 20:04:31'),
+(47, 5, 'Asus ROG', 'asus-rog-zephyrus', 'The Asus ROG Zephyrus is a high-performance gaming laptop with a sleek design.', 'The Asus ROG Zephyrus is a high-performance gaming laptop with a sleek design.', '99999.50', '89999.50', '1675519576.jpg', 50, 1, 1, 'Asus ROG Zephyrus', 'Asus ROG Zephyrus, gaming laptop, computer, Asus', 'Play your favorite games with the high-performance Asus ROG Zephyrus gaming laptop.', '2023-02-02 20:04:31'),
+(48, 5, 'Pixelbook Go', 'google-pixelbook-go', 'The Google Pixelbook Go is a laptop running the Chrome OS that is fast and lightweight.', 'The Google Pixelbook Go is a laptop running the Chrome OS that is fast and lightweight.', '44999.50', '39999.50', '1675519582.jpg', 200, 1, 0, 'Google Pixelbook Go', 'Google Pixelbook Go, Chrome OS laptop, computer, Google', 'Get a fast and lightweight laptop with the Google Pixelbook Go running the Chrome OS.', '2023-02-02 20:04:31'),
+(49, 5, 'Razer Blade', 'razer-blade', 'The Razer Blade is a high-performance gaming laptop with a sleek design.', 'The Razer Blade is a high-performance gaming laptop with a sleek design.', '99999.50', '89999.50', '1675519588.jpg', 50, 1, 0, 'Razer Blade', 'Play your favorite games with the high-performance Razer Blade gaming laptop.', 'Razer Blade, gaming laptop, computer, Razer', '2023-02-02 20:04:31'),
+(50, 5, 'Apple MacBook', 'apple-macbook-air', 'The Apple MacBook Air is a thin and light laptop that is perfect for travel or everyday use.', 'The Apple MacBook Air is a thin and light laptop that is perfect for travel or everyday use.', '49999.50', '44999.50', '1675519594.jpg', 200, 1, 1, 'Apple MacBook Air', 'Apple MacBook Air, thin laptop, computer, Apple', 'Buy the latest Apple MacBook Air thin and light laptop for your travel or everyday use.', '2023-02-02 20:04:31'),
+(51, 6, 'Leather Backpack', 'leather-backpack', 'The Leather Backpack is a stylish and durable backpack that is perfect for everyday use.', 'The Leather Backpack is a stylish and durable backpack that is perfect for everyday use.', '9999.50', '8999.50', '1675519829.jpg', 50, 1, 1, 'Leather Backpack', 'Buy the latest Leather Backpack for your everyday use.', 'Leather Backpack, stylish backpack, durable backpack', '2023-02-02 20:04:31'),
+(52, 6, 'Leather Wallet', 'leather-wallet', 'The Leather Wallet is a stylish and durable wallet that is perfect for everyday use.', 'The Leather Wallet is a stylish and durable wallet that is perfect for everyday use.', '2499.50', '1999.50', '1675519837.jpg', 100, 1, 0, 'Leather Wallet', 'Buy the latest Leather Wallet for your everyday use.', 'Leather Wallet, stylish wallet, durable wallet', '2023-02-02 20:04:31'),
+(53, 6, 'Leather Phone Case', 'leather-phone-case', 'The Leather Phone Case is a stylish and durable phone case that is perfect for protecting your phone.', 'The Leather Phone Case is a stylish and durable phone case that is perfect for protecting your phone.', '1499.50', '999.50', '1675519843.jpg', 150, 1, 0, 'Leather Phone Case', 'Buy the latest Leather Phone Case for protecting your phone.', 'Leather Phone Case, stylish phone case, durable phone case', '2023-02-02 20:04:31'),
+(54, 6, 'Leather Luggage', 'leather-luggage', 'The Leather Luggage is a stylish and durable luggage that is perfect for travel.', 'The Leather Luggage is a stylish and durable luggage that is perfect for travel.', '14999.50', '13999.50', '1675519849.jpg', 100, 1, 1, 'Leather Luggage', 'Buy the latest Leather Luggage for your travel.', 'Leather Luggage, stylish luggage, durable luggage', '2023-02-02 20:04:31'),
+(55, 6, 'Leather Keychain', 'leather-keychain', 'The Leather Keychain is a stylish and durable keychain that is perfect for everyday use.', 'The Leather Keychain is a stylish and durable keychain that is perfect for everyday use.', '999.50', '499.50', '1675519855.jpg', 200, 1, 0, 'Leather Keychain', 'Buy the latest Leather Keychain for your everyday use.', 'Leather Keychain, stylish keychain, durable keychain', '2023-02-02 20:04:31'),
+(56, 6, 'Leather Wallet', 'leather-wallet-for-men', 'A stylish mens leather wallet that is perfect for everyday use.', 'A stylish mens leather wallet that is perfect for everyday use.', '2499.50', '1999.50', '1675519863.jpg', 100, 1, 1, 'Mens Leather Wallet', 'Mens leather wallet, leather, wallet, men', 'Buy a stylish mens leather wallet for everyday use.', '2023-02-02 20:04:31'),
+(57, 6, 'Leather Handbag', 'leather-handbag-for-women', 'A stylish womens leather handbag that is perfect for everyday use.', 'A stylish womens leather handbag that is perfect for everyday use.', '4999.50', '4499.50', '1675519881.jpg', 50, 1, 0, 'Womens Leather Handbag', 'Womens leather handbag, leather, handbag, women', 'Buy a stylish womens leather handbag for everyday use.', '2023-02-02 20:04:31'),
+(58, 6, 'Mens Leather Belt', 'leather-belt-for-men', 'A stylish mens leather belt that is perfect for everyday wear.', 'A stylish mens leather belt that is perfect for everyday wear.', '1499.50', '1249.50', '1675519892.jpg', 200, 1, 1, 'Mens Leather Belt', 'Buy a stylish mens leather belt for everyday wear.', 'Mens leather belt, leather, belt, men', '2023-02-02 20:04:31'),
+(59, 6, 'Sunglasses', 'women-sunglasses', 'A stylish pair of womens sunglasses that are perfect for sunny days.', 'A stylish pair of womens sunglasses that are perfect for sunny days.', '1999.50', '1499.50', '1675519902.jpg', 100, 1, 0, 'Womens Sunglasses', 'Womens sunglasses, sunglasses, women', 'Buy a stylish pair of womens sunglasses for sunny days.', '2023-02-02 20:04:31'),
+(60, 6, 'Childs Backpack', 'childs-backpack', 'A stylish childrens backpack that is perfect for school or travel.', 'A stylish childrens backpack that is perfect for school or travel.', '1499.50', '1249.50', '1675519910.jpg', 150, 1, 0, 'Childs Backpack', 'Childrens backpack, backpack, children', 'Buy a stylish childrens backpack for school or travel.', '2023-02-02 20:04:31'),
+(61, 7, 'Playstation 5', 'playstation-5', 'The Playstation 5 is the latest next-generation gaming console from Sony. With a sleek design and powerful hardware, it is perfect for gamers who demand the best.', 'The Playstation 5 is the latest next-generation gaming console from Sony. With a sleek design and powerful hardware, it is perfect for gamers who demand the best.', '24999.50', '22499.50', '1675520116.jpg', 50, 1, 1, 'Playstation 5 - Next-Gen Console', 'Buy the latest Playstation 5 gaming console', 'Playstation, Gaming, Console', '2023-02-02 20:04:31'),
+(62, 7, '4K Smart TV', '4k-smart-tv', 'Upgrade your viewing experience with this 4K Smart TV. With a large screen and vibrant colors, you will never want to leave your couch.', 'Upgrade your viewing experience with this 4K Smart TV. With a large screen and vibrant colors, you will never want to leave your couch.', '39999.50', '34999.50', '1675520123.jpg', 29, 1, 1, '4K Smart TV - Ultra HD Experience', 'Experience the best in home entertainment with this 4K Smart TV', 'TV, 4K, Smart, Home entertainment', '2023-02-02 20:04:31'),
+(63, 7, 'Blu-Ray Player', 'blu-ray-player', 'Get the most out of your movie collection with this Blu-Ray player. With high-definition playback and upscaling, you will enjoy every film in stunning detail.', 'Get the most out of your movie collection with this Blu-Ray player. With high-definition playback and upscaling, you will enjoy every film in stunning detail.', '4999.50', '3999.50', '1675520130.jpg', 50, 1, 0, 'Blu-Ray Player - High-Definition Movie Experience', 'Enjoy your movie collection in stunning detail with this Blu-Ray player', 'Blu-Ray, Movie, Player, Home entertainment', '2023-02-02 20:04:31'),
+(64, 7, 'Nintendo Switch', 'nintendo-switch', 'The Nintendo Switch is a hybrid gaming console that allows you to play your favorite games both at home and on-the-go. With a large game library, there is something for everyone.', 'The Nintendo Switch is a hybrid gaming console that allows you to play your favorite games both at home and on-the-go. With a large game library, there is something for everyone.', '14999.50', '13999.50', '1675520138.jpg', 50, 1, 1, 'Nintendo Switch - Hybrid Gaming Console', 'Play your favorite games both at home and on-the-go with the Nintendo Switch', 'Nintendo, Switch, Gaming, Console', '2023-02-02 20:04:31'),
+(65, 7, 'Theater System', 'theater-system', 'Transform your living room into a home theater with this surround sound system. With powerful speakers and immersive audio, you will feel like you\'re at the movies.', 'Transform your living room into a home theater with this surround sound system. With powerful speakers and immersive audio, you will feel like you\'re at the movies.', '24999.50', '19999.50', '1675520146.jpg', 20, 1, 0, 'Home Theater System - Surround Sound Experience', 'Home theater, Sound, System, Entertainment', 'Bring the movie theater experience to your living room with this home theater system', '2023-02-02 20:04:31'),
+(66, 7, 'VR Headset', 'vr-headset', 'Step into a new world with this VR headset. With a large field of view and accurate motion tracking, you will be fully immersed in the virtual reality experience.', 'Step into a new world with this VR headset. With a large field of view and accurate motion tracking, you will be fully immersed in the virtual reality experience.', '14999.50', '12499.50', '1676881382.jpg', 30, 1, 0, 'VR Headset - Virtual Reality Experience', 'Experience a new world with this VR headset', 'VR, Headset, Virtual reality, Gaming', '2023-02-02 20:04:31'),
+(67, 7, 'Soundbar', 'soundbar', 'Take your TV audio to the next level with this soundbar. With powerful speakers and easy setup, you will enjoy high-quality sound with every program.', 'Take your TV audio to the next level with this soundbar. With powerful speakers and easy setup, you will enjoy high-quality sound with every program.', '9999.50', '7499.50', '1675520151.jpg', 40, 1, 0, 'Soundbar - Upgrade Your TV Sound', 'Improve your TV audio with this soundbar', 'Soundbar, TV, Audio, Home entertainment', '2023-02-02 20:04:31'),
+(68, 7, 'Streaming Stick', 'streaming-stick', 'Stream your favorite content with this streaming stick. With a compact design and access to hundreds of channels, you will never run out of things to watch.', 'Stream your favorite content with this streaming stick. With a compact design and access to hundreds of channels, you will never run out of things to watch.', '2499.50', '1999.50', '1675520156.jpg', 50, 1, 0, 'Streaming Stick - Stream Your Favorite Content', 'Enjoy your favorite content on any TV with this streaming stick', 'Streaming, Stick, TV, Content', '2023-02-02 20:04:31'),
+(69, 7, 'Bluetooth Speaker', 'bluetooth-speaker', 'Take your music with you with this Bluetooth speaker. With long battery life and high-quality sound, you can enjoy your tunes anywhere, anytime.', 'Take your music with you with this Bluetooth speaker. With long battery life and high-quality sound, you can enjoy your tunes anywhere, anytime.', '4999.50', '4499.50', '1675520162.jpg', 50, 1, 0, 'Bluetooth Speaker - Portable Sound System', 'Enjoy high-quality sound anywhere with this portable Bluetooth speaker', 'Bluetooth, Speaker, Portable, Sound', '2023-02-02 20:04:31'),
+(70, 7, 'Gaming Chair', 'gaming-chair', 'Get comfortable and stay focused with this gaming chair. With adjustable settings and a sleek design, you will game in style.', 'Get comfortable and stay focused with this gaming chair. With adjustable settings and a sleek design, you will game in style.', '12499.50', '9999.50', '1675520170.jpg', 30, 1, 0, 'Gaming Chair - Comfortable Gaming Seat', 'Stay comfortable and focused with this stylish gaming chair', 'Gaming, Chair, Comfort, Seat', '2023-02-02 20:04:31'),
+(71, 8, 'Toy Car', 'toy-car', 'Remote control toy car for kids with lights and sound effects', 'Remote control toy car for kids with lights and sound effects', '1000.00', '750.00', '1675520357.jpg', 20, 1, 0, 'Toy Car', 'Remote control toy car for kids with lights and sound effects', 'toy car, kids, remote control', '2023-02-02 20:04:31'),
+(72, 8, 'Action Figure', 'action-figure', 'Marvel action figure for kids with accessories', 'Marvel action figure for kids with accessories', '750.00', '500.00', '1675520361.jpg', 15, 1, 1, 'Action Figure', 'Marvel action figure for kids with accessories', 'action figure, kids, marvel', '2023-02-02 20:04:31'),
+(73, 8, 'Lego Set', 'lego-set', 'Lego set for kids with instructions and accessories', 'Lego set for kids with instructions and accessories', '1250.00', '1000.00', '1675520367.jpg', 10, 1, 0, 'Lego Set', 'Lego set for kids with instructions and accessories', 'lego set, kids', '2023-02-02 20:04:31'),
+(74, 8, 'Board Game', 'board-game', 'Family board game for kids with multiple players', 'Family board game for kids with multiple players', '750.00', '500.00', '1675520374.jpg', 15, 1, 1, 'Board Game', 'Family board game for kids with multiple players', 'board game, kids, family', '2023-02-02 20:04:31'),
+(75, 8, 'Puzzle', 'puzzle', '3D puzzle for kids with different difficulty levels', '3D puzzle for kids with different difficulty levels', '500.00', '250.00', '1675520381.jpg', 20, 1, 0, 'Puzzle', '3D puzzle for kids with different difficulty levels', 'puzzle, kids, 3D', '2023-02-02 20:04:31'),
+(76, 8, 'Coloring Book', 'coloring-book', 'This coloring book contains various illustrations for kids to color and have fun.', 'This coloring book contains various illustrations for kids to color and have fun.', '399.50', '249.50', '1675520528.jpg', 150, 1, 1, 'Coloring Book for Kids', 'Get this fun coloring book for your kids to enjoy', 'coloring book, kids, fun', '2023-02-02 20:04:31'),
+(77, 8, 'Kids Backpack', 'kids-backpack', 'This backpack is designed for kids, made of durable material, and it has various compartments to store their belongings.', 'This backpack is designed for kids, made of durable material, and it has various compartments to store their belongings.', '1149.50', '949.50', '1675520543.jpg', 50, 1, 0, 'Durable Backpack for Kids', 'Get this durable backpack for your kids to store their belongings', 'kids, backpack, durable', '2023-02-02 20:04:31'),
+(78, 8, 'Kids Shoes', 'kids-shoes', 'These shoes are made of soft and comfortable material, perfect for kids daily wear.', 'These shoes are made of soft and comfortable material, perfect for kids daily wear.', '1499.50', '1249.50', '1675520551.jpg', 40, 1, 0, 'Comfortable Shoes for Kids', 'Get these comfortable shoes for your kids to wear daily', 'kids, shoes, comfortable', '2023-02-02 20:04:31'),
+(79, 8, 'Kids Scooter', 'kids-scooter', 'This scooter is perfect for kids of all ages. It\'s made from durable materials and features a safe design. Great for outdoor play.', 'This scooter is perfect for kids of all ages. It\'s made from durable materials and features a safe design. Great for outdoor play.', '2499.50', '1999.50', '1675520558.jpg', 75, 1, 1, 'Kids Scooter - Safe and Fun', 'Get your kids the safe and fun scooter they will love to ride and play with!', 'scooter, kids, safe, fun', '2023-02-02 20:04:31'),
+(80, 8, 'Kids Play Tent', 'kids-play-tent', 'This play tent is perfect for kids of all ages. It\'s made from durable materials and features a cozy design. Great for indoor and outdoor play.', 'This play tent is perfect for kids of all ages. It\'s made from durable materials and features a cozy design. Great for indoor and outdoor play.', '1999.50', '1749.50', '1675520563.jpg', 50, 1, 1, 'Kids Play Tent - Fun and Cozy', 'Get your kids the fun and cozy play tent they will love to play and imagine with!', 'play tent, kids, fun, cozy', '2023-02-02 20:04:31');
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE Carts (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID) ON DELETE CASCADE,
+    Product_ID INT,
+    FOREIGN KEY (Product_ID) REFERENCES Products(ID) ON DELETE CASCADE,
+    Product_Qty INT,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`ID`, `User_ID`, `Product_ID`, `Product_Qty`, `Created_At`) VALUES
+(1, 2, 18, 1, '2023-02-02 12:05:18'),
+(2, 2, 19, 1, '2023-02-02 12:05:19'),
+(3, 2, 61, 1, '2023-02-02 12:06:57');
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE Wishlist (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    FOREIGN KEY (User_ID) REFERENCES users(ID) ON DELETE CASCADE,
+    Product_ID INT,
+    FOREIGN KEY (Product_ID) REFERENCES Products(ID) ON DELETE CASCADE,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`ID`, `User_ID`, `Product_ID`, `Created_At`) VALUES
+(0, 1, 12, '2023-02-20 07:43:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
-  `ID` int(11) NOT NULL,
-  `Tracking_No` varchar(255) NOT NULL,
-  `User_ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Phone` varchar(255) NOT NULL,
-  `Address` varchar(500) NOT NULL,
-  `Pincode` int(11) NOT NULL,
-  `Total_Price` float NOT NULL,
-  `Payment_Mode` varchar(255) NOT NULL,
-  `Payment_ID` varchar(255) DEFAULT NULL,
-  `Status` tinyint(1) NOT NULL DEFAULT 0,
-  `Comments` varchar(500) DEFAULT NULL,
-  `Created_At` timestamp NOT NULL DEFAULT current_timestamp(),
-  `Updated_At` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE Orders (
+  ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  Tracking_No VARCHAR(255) NOT NULL,
+  User_ID INT NOT NULL,
+  FOREIGN KEY (User_ID) REFERENCES users(ID) ON DELETE CASCADE,
+  Name VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) NOT NULL,
+  Phone VARCHAR(255) NOT NULL,
+  Address VARCHAR(500) NOT NULL,
+  Pincode INT NOT NULL,
+  Total_Price DECIMAL(10,2) NOT NULL,
+  Payment_Mode VARCHAR(255) NOT NULL,
+  Payment_ID VARCHAR(255) NULL,
+  Status TINYINT(1) DEFAULT 0 NOT NULL,
+  Comments VARCHAR(500),
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -142,8 +271,14 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`ID`, `Tracking_No`, `User_ID`, `Name`, `Email`, `Phone`, `Address`, `Pincode`, `Total_Price`, `Payment_Mode`, `Payment_ID`, `Status`, `Comments`, `Created_At`, `Updated_At`) VALUES
-(1, 'TrackNo2926123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 2799.99, 'COD', '', 0, NULL, '2023-02-04 19:10:20', '2023-02-04 19:30:24'),
-(2, 'TrackNo9165123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 4826.94, 'COD', '', 0, NULL, '2023-02-06 14:30:14', '2023-02-06 14:30:14');
+(1, 'TrackNo2926123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 140000, 'COD', '', 0, NULL, '2023-02-04 19:10:20', '2023-02-20 08:13:50'),
+(2, 'TrackNo9165123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 241347, 'COD', '', 0, NULL, '2023-02-06 14:30:14', '2023-02-20 15:38:20'),
+(3, 'TrackNo2554123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 1134, 'COD', '', 1, NULL, '2023-02-12 18:18:02', '2023-02-20 08:14:21'),
+(4, 'TrackNo3083123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 486, 'COD', '', 1, NULL, '2023-02-20 07:41:25', '2023-02-20 08:16:44'),
+(5, 'TrackNo2936123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 43199.5, 'COD', '', 0, NULL, '2023-02-20 08:16:18', '2023-02-20 08:16:18'),
+(6, 'TrackNo2887123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 9720, 'PayPal', '362313474Y804394M', 0, NULL, '2023-02-20 08:31:14', '2023-02-20 08:31:14'),
+(7, 'TrackNo7069123123123', 1, 'Admin Name', 'admin@gmail.com', '09123123123', '(Metro Manila), Building # 132, Daisy Street, Caloocan City, Barangay 123', 1211, 46439.5, 'COD', '', 0, NULL, '2023-02-20 15:33:10', '2023-02-20 15:33:10');
+
 
 -- --------------------------------------------------------
 
@@ -151,13 +286,14 @@ INSERT INTO `orders` (`ID`, `Tracking_No`, `User_ID`, `Name`, `Email`, `Phone`, 
 -- Table structure for table `order_items`
 --
 
-CREATE TABLE `order_items` (
-  `ID` int(11) NOT NULL,
-  `Order_ID` int(11) NOT NULL,
-  `Product_ID` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL,
-  `Price` int(11) NOT NULL,
-  `Created_At` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE Order_Items (
+  ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  Order_ID INT NOT NULL,
+  Product_ID INT NOT NULL,
+  Quantity INT NOT NULL,
+  Price DECIMAL(10,2) NOT NULL,
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  FOREIGN KEY (Order_ID) REFERENCES orders(ID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -169,7 +305,15 @@ INSERT INTO `order_items` (`ID`, `Order_ID`, `Product_ID`, `Quantity`, `Price`, 
 (2, 1, 12, 5, 60, '2023-02-04 19:10:21'),
 (3, 1, 13, 10, 180, '2023-02-04 19:10:21'),
 (4, 2, 1, 3, 9, '2023-02-06 14:30:14'),
-(5, 2, 21, 6, 800, '2023-02-06 14:30:14');
+(5, 2, 21, 6, 800, '2023-02-06 14:30:14'),
+(6, 3, 2, 1, 10, '2023-02-12 18:18:02'),
+(7, 3, 3, 1, 11, '2023-02-12 18:18:02'),
+(8, 4, 1, 1, 9, '2023-02-20 07:41:25'),
+(9, 5, 22, 1, 800, '2023-02-20 08:16:19'),
+(10, 6, 13, 1, 180, '2023-02-20 08:31:16'),
+(11, 7, 12, 1, 3000, '2023-02-20 15:33:10'),
+(12, 7, 22, 1, 40000, '2023-02-20 15:33:11');
+
 
 -- --------------------------------------------------------
 
@@ -177,18 +321,19 @@ INSERT INTO `order_items` (`ID`, `Order_ID`, `Product_ID`, `Quantity`, `Price`, 
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `ID` int(11) NOT NULL,
-  `CategoryID` int(11) NOT NULL,
-  `Title` varchar(255) NOT NULL,
-  `Image` varchar(255) NOT NULL,
-  `Slug` varchar(255) NOT NULL,
-  `Description` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `Status` tinyint(4) DEFAULT NULL,
-  `Meta_Title` varchar(255) DEFAULT NULL,
-  `Meta_Keywords` mediumtext DEFAULT NULL,
-  `Meta_Description` mediumtext DEFAULT NULL,
-  `Created_At` datetime DEFAULT current_timestamp()
+CREATE TABLE Posts (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    CategoryID INT NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Image VARCHAR(255) NOT NULL,
+    Slug VARCHAR(255) NOT NULL,
+    Description MEDIUMTEXT COLLATE utf8_unicode_ci NOT NULL,
+    Status TINYINT,
+    Meta_Title VARCHAR(255),
+    Meta_Keywords MEDIUMTEXT,
+    Meta_Description MEDIUMTEXT,
+    Created_At DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(ID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -215,124 +360,13 @@ INSERT INTO `posts` (`ID`, `CategoryID`, `Title`, `Image`, `Slug`, `Description`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
---
-
-CREATE TABLE `products` (
-  `ID` int(11) NOT NULL,
-  `CategoryID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Slug` varchar(255) NOT NULL,
-  `Small_Description` mediumtext NOT NULL,
-  `Description` mediumtext NOT NULL,
-  `Original_Price` decimal(10,2) NOT NULL,
-  `Selling_Price` decimal(10,2) NOT NULL,
-  `Image` varchar(255) NOT NULL,
-  `Quantity` int(10) UNSIGNED NOT NULL,
-  `Status` tinyint(4) DEFAULT NULL,
-  `Trending` tinyint(4) DEFAULT NULL,
-  `Meta_Title` varchar(255) DEFAULT NULL,
-  `Meta_Keywords` mediumtext DEFAULT NULL,
-  `Meta_Description` mediumtext DEFAULT NULL,
-  `Created_At` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`ID`, `CategoryID`, `Name`, `Slug`, `Small_Description`, `Description`, `Original_Price`, `Selling_Price`, `Image`, `Quantity`, `Status`, `Trending`, `Meta_Title`, `Meta_Keywords`, `Meta_Description`, `Created_At`) VALUES
-(1, 1, 'To Kill a Mockingbird', 'to-kill-a-mockingbird', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', 'To Kill a Mockingbird is a classic novel by Harper Lee, set in the 1930s in the fictional town of Maycomb, Alabama. The novel tells the story of Scout Finch and her brother Jem, who are raised by their father Atticus, a respected lawyer. The story centers around Atticus\'s defense of a black man, Tom Robinson, who is wrongly accused of raping a white woman. The novel explores themes of racial injustice, courage, and morality.', '10.00', '9.00', '1675490399.jpg', 97, 1, 1, 'To Kill a Mockingbird - A classic novel by Harper Lee', 'Buy To Kill a Mockingbird, a classic novel by Harper Lee about racial injustice, courage, and morality.', 'To Kill a Mockingbird, Harper Lee, Novel, Racial Injustice, Courage, Morality', '2023-02-02 20:04:31'),
-(2, 1, 'The Great Gatsby', 'the-great-gatsby', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', 'The Great Gatsby is a novel by F. Scott Fitzgerald, set in the Roaring Twenties. The novel follows the life of Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in an attempt to win back his lost love, Daisy Buchanan. The story is a commentary on the decadence and excess of the era, as well as the shallowness of the people who lived during that time.', '11.00', '10.00', '1675491118.jpg', 100, 1, 1, 'The Great Gatsby - A novel by F. Scott Fitzgerald', 'Buy The Great Gatsby, a novel by F. Scott Fitzgerald about the decadence and excess of the Roaring Twenties and the shallowness of the people who lived during that time.', 'The Great Gatsby, F. Scott Fitzgerald, Novel, Decadence, Roaring Twenties, Shallowness', '2023-02-02 20:04:31'),
-(3, 1, 'Pride and Prejudice', 'pride-and-prejudice', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', 'Pride and Prejudice is a classic novel by Jane Austen, set in Georgian England. The novel tells the story of Elizabeth Bennet, a young woman who must navigate the treacherous waters of love and social class in order to find happiness. The story is a commentary on the societal norms of the time, as well as the dangers of pride and prejudice.', '12.00', '11.00', '1675491132.jpg', 100, 1, 1, 'Pride and Prejudice - A classic novel by Jane Austen', 'Buy Pride and Prejudice, a classic novel by Jane Austen about love and social class in Georgian England.', 'Pride and Prejudice, Jane Austen, Novel, Love, Social Class, Georgian England', '2023-02-02 20:04:31'),
-(4, 1, 'Wuthering Heights', 'wuthering-heights', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', 'Wuthering Heights is a novel by Emily Bronte, set on the wild and desolate Yorkshire moors. The novel tells the story of Catherine Earnshaw and Heathcliff, two lovers whose passion for each other is matched only by their desire for revenge. The story is a complex exploration of love, revenge, and the consequences of both. The novel\'s setting on the bleak moors of Yorkshire adds to the sense of isolation and turmoil that permeates the story.', '13.00', '12.00', '1675491143.jpg', 100, 1, 1, 'Wuthering Heights - A novel by Emily Bronte', 'Buy Wuthering Heights, a novel by Emily Bronte about love and revenge set on the wild and desolate Yorkshire moors.', 'Wuthering Heights, Emily Bronte, Novel, Love, Revenge, Yorkshire Moors', '2023-02-02 20:04:31'),
-(5, 1, 'The Lord of the Rings', 'the-lord-of-the-rings', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', 'The Lord of the Rings is a classic epic fantasy novel by J.R.R. Tolkien. The novel follows hobbit Frodo Baggins as he embarks on a quest to destroy the One Ring, a powerful artifact created by the dark lord Sauron. Along the way, Frodo is joined by a fellowship of diverse characters, including humans, elves, and dwarves, who must work together to defeat Sauron and save Middle-earth.', '14.00', '13.00', '1675491152.jpg', 100, 1, 1, 'The Lord of the Rings - A classic epic fantasy novel by J.R.R. Tolkien', 'Buy The Lord of the Rings, a classic epic fantasy novel by J.R.R. Tolkien about hobbit Frodo Baggins and his quest to save Middle-earth.', 'The Lord of the Rings, J.R.R. Tolkien, Epic Fantasy, Middle-earth, One Ring, Sauron', '2023-02-02 20:04:31'),
-(6, 1, 'The Hobbit', 'the-hobbit', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', 'The Hobbit is a novel by J.R.R. Tolkien and serves as a prequel to The Lord of the Rings. The novel follows hobbit Bilbo Baggins as he embarks on a dangerous journey to reclaim a lost treasure from the dragon Smaug. Along the way, Bilbo encounters a variety of creatures, including elves, dwarves, and goblins, and learns valuable lessons about courage and friendship.', '15.00', '14.00', '1675491162.jpg', 100, 1, 1, 'The Hobbit - A prequel to The Lord of the Rings by J.R.R. Tolkien', 'Buy The Hobbit, a prequel to The Lord of the Rings by J.R.R. Tolkien about hobbit Bilbo Baggins and his journey to reclaim a lost treasure from the dragon Smaug.', 'The Hobbit, J.R.R. Tolkien, Prequel, Lord of the Rings, Dragon Smaug, Courage, Friendship', '2023-02-02 20:04:31'),
-(7, 1, 'The Chronicles of Narnia', 'the-chronicles-of-narnia', 'The Chronicles of Narnia is a series of seven fantasy novels for children by C.S. Lewis. The series follows the adventures of a group of children who are transported to a magical land called Narnia, where they encounter talking animals, dwarves, and other magical creatures. The series is renowned for its imaginative world-building, memorable characters, and Christian themes.', 'The Chronicles of Narnia is a series of seven fantasy novels for children by C.S. Lewis. The series follows the adventures of a group of children who are transported to a magical land called Narnia, where they encounter talking animals, dwarves, and other magical creatures. The series is renowned for its imaginative world-building, memorable characters, and Christian themes.', '16.00', '15.00', '1675491171.jpg', 100, 1, 1, 'The Chronicles of Narnia - A series of fantasy novels for children by C.S. Lewis', 'Buy The Chronicles of Narnia, a series of seven fantasy novels for children by C.S. Lewis, about the adventures of a group of children in the magical land of Narnia.', 'The Chronicles of Narnia, C.S. Lewis, Fantasy, Children, Narnia, Talking Animals, Dwarves', '2023-02-02 20:04:31'),
-(8, 1, 'The Catcher in the Rye', 'the-catcher-in-the-rye', 'The Catcher in the Rye is a novel by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him. The novel is a commentary on adolescence and the difficulties that young people face as they navigate the complexities of growing up. Holden\'s story is one of rebellion and nonconformity, as he rejects the hypocrisy and phoniness of the adult world.', 'The Catcher in the Rye is a novel by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him. The novel is a commentary on adolescence and the difficulties that young people face as they navigate the complexities of growing up. Holden\'s story is one of rebellion and nonconformity, as he rejects the hypocrisy and phoniness of the adult world.', '17.00', '16.00', '1675491182.jpg', 100, 1, 1, 'The Catcher in the Rye - A novel about adolescence and rebellion by J.D. Salinger', 'Buy The Catcher in the Rye, a novel about adolescence and rebellion by J.D. Salinger, about a young man named Holden Caulfield who is struggling to come to terms with the world around him.', 'The Catcher in the Rye, J.D. Salinger, Adolescence, Rebellion, Holden Caulfield, Hypocrisy, Phoniness', '2023-02-02 20:04:31'),
-(9, 1, 'Moby Dick', 'moby-dick', 'Moby Dick is a novel by Herman Melville, set in the 19th century. The novel follows Ishmael, a sailor who signs up for a dangerous voyage in pursuit of a giant white whale, Moby Dick. The story is a commentary on obsession, revenge, and the dangerous allure of the sea.', 'Moby Dick is a novel by Herman Melville, set in the 19th century. The novel follows Ishmael, a sailor who signs up for a dangerous voyage in pursuit of a giant white whale, Moby Dick. The story is a commentary on obsession, revenge, and the dangerous allure of the sea.', '15.00', '14.00', '1675491190.jpg', 100, 1, 1, 'Moby Dick - A novel by Herman Melville', 'Buy Moby Dick, a novel by Herman Melville about a dangerous voyage in pursuit of a giant white whale.', 'Moby Dick, Herman Melville, Novel, Whale, Hunt, Sea', '2023-02-02 20:04:31'),
-(10, 1, 'To the Lighthouse', 'to-the-lighthouse', 'To the Lighthouse is a novel by Virginia Woolf, set in the early 20th century. The novel follows the Ramsay family and their guests as they spend a summer at their home on the Isle of Skye. The story is a meditation on the meaning of life, the passage of time, and the nature of art and creativity.', 'To the Lighthouse is a novel by Virginia Woolf, set in the early 20th century. The novel follows the Ramsay family and their guests as they spend a summer at their home on the Isle of Skye. The story is a meditation on the meaning of life, the passage of time, and the nature of art and creativity.', '17.00', '16.00', '1675491199.jpg', 100, 1, 1, 'To the Lighthouse - A novel by Virginia Woolf', 'Buy To the Lighthouse, a novel by Virginia Woolf about the meaning of life, the passage of time, and the nature of art and creativity.', 'To the Lighthouse, Virginia Woolf, Novel, Meaning of Life, Passage of Time, Art, Creativity', '2023-02-02 20:04:31'),
-(11, 2, 'Backpack', 'backpack', 'Take all your essentials with you on your outdoor adventures with this durable backpack. It has multiple compartments and is made from high-quality materials.', 'Take all your essentials with you on your outdoor adventures with this durable backpack. It has multiple compartments and is made from high-quality materials.', '100.00', '90.00', '1675514952.jpg', 60, 1, 1, 'Backpack', 'Durable backpack for outdoor adventures', 'backpack, outdoor, adventure', '2023-02-02 20:04:31'),
-(12, 2, 'Camping Hammock', 'camping-hammock', 'Relax in comfort on your next camping trip with this camping hammock. It is made from soft and durable materials and can hold up to two people.', 'Relax in comfort on your next camping trip with this camping hammock. It is made from soft and durable materials and can hold up to two people.', '70.00', '60.00', '1675514978.jpg', 65, 1, 1, 'Camping Hammock', 'Comfortable camping hammock for outdoor lounging', 'camping, hammock, outdoor', '2023-02-02 20:04:31'),
-(13, 2, 'Camping Cooler', 'camping-cooler', 'Keep your food and drinks cold on your next camping trip with this large and durable camping cooler. It has multiple compartments and can hold up to 50 cans.', 'Keep your food and drinks cold on your next camping trip with this large and durable camping cooler. It has multiple compartments and can hold up to 50 cans.', '200.00', '180.00', '1675514992.jpg', 70, 1, 1, 'Camping Cooler', 'Large and durable camping cooler', 'camping, cooler, outdoor', '2023-02-02 20:04:31'),
-(14, 2, 'Camping Grill', 'camping-grill', 'Cook your meals on the go with this lightweight and portable camping grill. It runs on propane and has adjustable heat controls.', 'Cook your meals on the go with this lightweight and portable camping grill. It runs on propane and has adjustable heat controls.', '90.00', '80.00', '1675515012.jpg', 90, 1, 1, 'Camping Grill', 'Lightweight and portable camping grill', 'camping, grill, outdoor', '2023-02-02 20:04:31'),
-(15, 2, 'Camping Pillow', 'camping-pillow', 'Get a good night\'s sleep on your next camping trip with this comfortable camping pillow. It is made from soft and supportive materials.', 'Get a good night\'s sleep on your next camping trip with this comfortable camping pillow. It is made from soft and supportive materials.', '20.00', '15.00', '1675515025.jpg', 100, 1, 1, 'Camping Pillow', 'Comfortable camping pillow for a good night\'s sleep', 'camping, pillow, outdoor', '2023-02-02 20:04:31'),
-(16, 2, 'Camping Tent', 'camping-tent', 'This camping tent is perfect for outdoor enthusiasts who want a durable and long-lasting shelter. It is made from high-quality materials and can withstand harsh weather conditions.', 'This camping tent is perfect for outdoor enthusiasts who want a durable and long-lasting shelter. It is made from high-quality materials and can withstand harsh weather conditions.', '200.00', '180.00', '1675515039.jpg', 10, 1, 1, 'Camping Tent', 'Durable camping tent for outdoor enthusiasts', 'camping, tent, outdoor', '2023-02-02 20:04:31'),
-(17, 2, 'Sleeping Bag', 'sleeping-bag', 'Take comfort to the next level on your next camping trip with this sleeping bag. Made from soft and warm materials, you\'ll have a good night\'s sleep under the stars.', 'Take comfort to the next level on your next camping trip with this sleeping bag. Made from soft and warm materials, you\'ll have a good night\'s sleep under the stars.', '150.00', '130.00', '1675515050.jpg', 20, 1, 1, 'Sleeping Bag', 'Comfortable sleeping bag for camping trips', 'sleeping, bag, camping', '2023-02-02 20:04:31'),
-(18, 2, 'Camping Stove', 'camping-stove', 'Cook your meals on your next camping trip with ease using this lightweight and portable camping stove. It runs on propane and has adjustable heat controls.', 'Cook your meals on your next camping trip with ease using this lightweight and portable camping stove. It runs on propane and has adjustable heat controls.', '80.00', '70.00', '1675515062.jpg', 30, 1, 1, 'Camping Stove', 'Lightweight and portable camping stove', 'camping, stove, outdoor', '2023-02-02 20:04:31'),
-(19, 2, 'Camping Chair', 'camping-chair', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', 'Take a break and relax in style on your next camping trip with this comfortable camping chair. It has a sturdy frame and adjustable armrests for maximum comfort.', '50.00', '40.00', '1675515077.jpg', 40, 1, 1, 'Camping Chair', 'Comfortable camping chair for outdoor lounging', 'camping, chair, outdoor', '2023-02-02 20:04:31'),
-(20, 2, 'Camping Lantern', 'camping-lantern', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', 'Light up your campsite with this bright and portable camping lantern. It runs on batteries and has adjustable brightness levels.', '30.00', '25.00', '1675515090.jpg', 50, 1, 1, 'Camping Lantern', 'Bright and portable camping lantern', 'camping, lantern, outdoor', '2023-02-02 20:04:31'),
-(21, 3, 'iPhone X', 'iphone-x', 'The latest iPhone X model features a sleek design and powerful hardware', 'The latest iPhone X model features a sleek design and powerful hardware', '999.99', '799.99', '1675515388.jpg', 94, 1, 0, 'iPhone X - The latest and greatest', 'The latest iPhone X model is now available in our store', 'apple, iphone, x, latest', '2023-02-02 20:04:31'),
-(22, 3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', 'The new Samsung Galaxy S21 is a powerful smartphone with an immersive display', '899.99', '799.99', '1675515400.jpg', 200, 1, 1, 'Samsung Galaxy S21 - The latest from Samsung', 'The latest Samsung Galaxy S21 is now available in our store', 'samsung, galaxy, s21, latest', '2023-02-02 20:04:31'),
-(23, 3, 'Google Pixel 5', 'google-pixel-5', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', 'The new Google Pixel 5 is a fast and efficient smartphone with a great camera', '799.99', '699.99', '1675515423.jpg', 150, 1, 0, 'Google Pixel 5 - A great smartphone from Google', 'The latest Google Pixel 5 is now available in our store', 'google, pixel, 5, latest', '2023-02-02 20:04:31'),
-(24, 3, 'OnePlus 8T', 'oneplus-8t', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', 'The new OnePlus 8T is a powerful smartphone with fast charging and a large battery', '699.99', '599.99', '1675515440.jpg', 250, 1, 0, 'OnePlus 8T - A great smartphone from OnePlus', 'The latest OnePlus 8T is now available in our store', 'oneplus, 8t, latest', '2023-02-02 20:04:31'),
-(25, 3, 'Huawei P40 Pro', 'huawei-p40-pro', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', 'The new Huawei P40 Pro is a high-end smartphone with advanced camera capabilities', '999.99', '799.99', '1675515452.jpg', 200, 1, 0, 'Huawei P40 Pro - A great smartphone from Huawei', 'The latest Huawei P40 Pro is now available in our store', 'huawei, p40, pro, latest', '2023-02-02 20:04:31'),
-(26, 3, 'iPhone 12', 'iphone-12', 'The iPhone 12 is the latest model in the iPhone lineup. It features a 6.1-inch Super Retina XDR display, 5G capabilities, and more.', 'The iPhone 12 is the latest model in the iPhone lineup. It features a 6.1-inch Super Retina XDR display, 5G capabilities, and more.', '999.99', '899.99', '1675515463.jpg', 100, 1, 1, 'iPhone 12', 'Get the latest iPhone model, the iPhone 12, with 5G capabilities and a 6.1-inch Super Retina XDR display', 'iPhone, Apple, smartphone', '2023-02-02 20:04:31'),
-(27, 3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'The Samsung Galaxy S21 is the latest addition to the Samsung Galaxy lineup. It features a 6.2-inch Dynamic AMOLED 2X display, 5G capabilities, and more.', 'The Samsung Galaxy S21 is the latest addition to the Samsung Galaxy lineup. It features a 6.2-inch Dynamic AMOLED 2X display, 5G capabilities, and more.', '899.99', '849.99', '1675515474.jpg', 100, 1, 0, 'Samsung Galaxy S21', 'Get the latest Samsung smartphone, the Samsung Galaxy S21, with 5G capabilities and a 6.2-inch Dynamic AMOLED 2X display', 'Samsung, Galaxy, smartphone', '2023-02-02 20:04:31'),
-(28, 3, 'OnePlus 9 Pro', 'oneplus-9-pro', 'The OnePlus 9 Pro is the latest addition to the OnePlus lineup. It features a 6.7-inch Fluid AMOLED display, 5G capabilities, and more.', 'The OnePlus 9 Pro is the latest addition to the OnePlus lineup. It features a 6.7-inch Fluid AMOLED display, 5G capabilities, and more.', '799.99', '749.99', '1675515488.jpg', 100, 1, 0, 'OnePlus 9 Pro', 'Get the latest OnePlus smartphone, the OnePlus 9 Pro, with 5G capabilities and a 6.7-inch Fluid AMOLED display', 'OnePlus, smartphone', '2023-02-02 20:04:31'),
-(29, 3, 'Google Pixel 6', 'google-pixel-6', 'The Google Pixel 6 is the latest addition to the Google Pixel lineup. It features a 6.4-inch AMOLED display, 5G capabilities, and more.', 'The Google Pixel 6 is the latest addition to the Google Pixel lineup. It features a 6.4-inch AMOLED display, 5G capabilities, and more.', '699.99', '649.99', '1675515501.jpg', 100, 1, 0, 'Google Pixel 6', 'Get the latest Google smartphone, the Google Pixel 6, with 5G capabilities and a 6.4-inch AMOLED display', 'Google, Pixel, smartphone', '2023-02-02 20:04:31'),
-(30, 3, 'LG Velvet', 'lg-velvet', 'The LG Velvet is the latest addition to the LG lineup. It features a 6.8-inch P-OLED display, 5G capabilities, and more.', 'The LG Velvet is the latest addition to the LG lineup. It features a 6.8-inch P-OLED display, 5G capabilities, and more.', '599.99', '549.99', '1675515512.jpg', 100, 1, 0, 'LG Velvet', 'Get the latest LG smartphone, the LG Velvet, with 5G capabilities and a 6.8-inch P-OLED display', 'LG, smartphone', '2023-02-02 20:04:31'),
-(31, 4, 'Milk', 'milk', 'A gallon of milk, perfect for cereal or baking', 'A gallon of milk, perfect for cereal or baking', '2.99', '2.79', '1675518148.jpg', 100, 1, 0, 'Milk', 'Get a gallon of milk for your cereal or baking needs', 'Milk, Groceries, Household', '2023-02-02 20:04:31'),
-(32, 4, 'Bread', 'bread', 'A loaf of bread, perfect for sandwiches or toast', 'A loaf of bread, perfect for sandwiches or toast', '1.99', '1.79', '1675518157.jpg', 100, 1, 0, 'Bread', 'Get a loaf of bread for your sandwiches or toast needs', 'Bread, Groceries, Household', '2023-02-02 20:04:31'),
-(33, 4, 'Eggs', 'eggs', 'A dozen eggs, perfect for breakfast or baking', 'A dozen eggs, perfect for breakfast or baking', '2.49', '2.29', '1675518167.jpg', 100, 1, 0, 'Eggs', 'Get a dozen eggs for your breakfast or baking needs', 'Eggs, Groceries, Household', '2023-02-02 20:04:31'),
-(34, 4, 'Sugar', 'sugar', 'A bag of sugar, perfect for baking or sweetening your drinks', 'A bag of sugar, perfect for baking or sweetening your drinks', '1.99', '1.79', '1675518179.jpg', 100, 1, 0, 'Sugar', 'Get a bag of sugar for your baking or sweetening needs', 'Sugar, Groceries, Household', '2023-02-02 20:04:31'),
-(35, 4, 'Butter', 'butter', 'A stick of butter, perfect for baking or cooking', 'A stick of butter, perfect for baking or cooking', '2.99', '2.79', '1675518195.jpg', 100, 1, 0, 'Butter', 'Get a stick of butter for your baking or cooking needs', 'Butter, Groceries, Household', '2023-02-02 20:04:31'),
-(36, 4, 'Rice', 'rice', 'Rice is a staple food in many households around the world. It can be used in a variety of dishes and is a great source of carbohydrates.', 'Rice is a staple food in many households around the world. It can be used in a variety of dishes and is a great source of carbohydrates.', '4.99', '3.99', '1675518206.jpg', 1000, 1, 0, 'Rice for Sale', 'Shop our selection of rice, a staple food and great source of carbohydrates', 'rice, staple food, carbohydrates', '2023-02-02 20:04:31'),
-(37, 4, 'Pasta', 'pasta', 'Pasta is a classic staple food that is loved by many. It is a versatile ingredient that can be used in a variety of dishes and is a great source of carbohydrates.', 'Pasta is a classic staple food that is loved by many. It is a versatile ingredient that can be used in a variety of dishes and is a great source of carbohydrates.', '3.99', '2.99', '1675518216.jpg', 1000, 1, 0, 'Pasta for Sale', 'Shop our selection of pasta, a classic staple food and great source of carbohydrates', 'pasta, staple food, carbohydrates', '2023-02-02 20:04:31'),
-(38, 4, 'Apples', 'apples', 'A bag of apples', 'A bag of apples, perfect for snacking or baking.', '3.99', '2.99', '1675518510.jpg', 100, 1, 0, 'Apples', 'Get a bag of apples for your snacking or baking needs', 'Apples, Groceries, Fresh Fruits', '2023-02-02 20:04:31'),
-(39, 4, 'Oranges', 'oranges', 'A bag of oranges, perfect for snacking or juicing', 'A bag of oranges, perfect for snacking or juicing', '2.49', '2.29', '1675518722.jpg', 1000, 1, 0, 'Oranges', 'Oranges, Groceries, Fresh Fruits', 'Get a bag of oranges for your snacking or juicing needs', '2023-02-02 20:04:31'),
-(40, 4, 'Potatoes', 'potatoes', 'A bag of potatoes', 'A bag of potatoes, perfect for cooking or roasting', '2.99', '2.79', '1675519236.jpg', 100, 1, 0, 'Potatoes', 'Get a bag of potatoes for your cooking or roasting needs', 'Potatoes, Groceries, Fresh Vegetables', '2023-02-02 20:04:31'),
-(41, 5, 'MacBook Pro', 'macbook-pro', 'The 16-inch MacBook Pro is a powerful laptop with the latest technology.', 'The 16-inch MacBook Pro is a powerful laptop with the latest technology.', '1999.99', '1799.99', '1675519512.jpg', 100, 1, 1, 'MacBook Pro', 'Buy the latest MacBook Pro with 16-inch screen and the latest technology.', 'MacBook Pro, laptop, computer, Apple', '2023-02-02 20:04:31'),
-(42, 5, 'HP Envy x360', 'hp-envy-x360', 'The HP Envy x360 is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', 'The HP Envy x360 is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', '899.99', '799.99', '1675519530.jpg', 150, 1, 0, 'HP Envy x360', 'Get the best of both worlds with the HP Envy x360 2-in-1 laptop.', 'HP Envy x360, 2-in-1 laptop, computer, HP', '2023-02-02 20:04:31'),
-(43, 5, 'Dell XPS 13', 'dell-xps-13', 'The Dell XPS 13 is a thin and light laptop that is perfect for travel or everyday use.', 'The Dell XPS 13 is a thin and light laptop that is perfect for travel or everyday use.', '999.99', '899.99', '1675519552.jpg', 200, 1, 1, 'Dell XPS 13', 'Buy the latest Dell XPS 13 thin and light laptop for your travel or everyday use.', 'Dell XPS 13, thin laptop, computer, Dell', '2023-02-02 20:04:31'),
-(44, 5, 'Microsoft Surface Pro', 'microsoft-surface-pro', 'The Microsoft Surface Pro is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', 'The Microsoft Surface Pro is a versatile 2-in-1 laptop that can be used as a laptop or tablet.', '999.99', '899.99', '1675519558.jpg', 200, 1, 0, 'Microsoft Surface Pro', 'Get the best of both worlds with the Microsoft Surface Pro 2-in-1 laptop.', 'Microsoft Surface Pro, 2-in-1 laptop, computer, Microsoft', '2023-02-02 20:04:31'),
-(45, 5, 'Acer Aspire 5', 'acer-aspire-5', 'The Acer Aspire 5 is an affordable laptop that offers good performance for everyday use.', 'The Acer Aspire 5 is an affordable laptop that offers good performance for everyday use.', '499.99', '449.99', '1675519564.jpg', 300, 1, 0, 'Acer Aspire 5', 'Buy the latest Acer Aspire 5 affordable laptop for your everyday use.', 'Acer Aspire 5, affordable laptop, computer, Acer', '2023-02-02 20:04:31'),
-(46, 5, 'Lenovo ThinkPad X1 Carbon', 'lenovo-thinkpad-x1-carbon', 'The Lenovo ThinkPad X1 Carbon is a business laptop that offers strong performance and durability.', 'The Lenovo ThinkPad X1 Carbon is a business laptop that offers strong performance and durability.', '1499.99', '1399.99', '1675519570.jpg', 100, 1, 0, 'Lenovo ThinkPad X1 Carbon', 'Get a business laptop that offers strong performance and durability with the Lenovo ThinkPad X1 Carbon.', 'Lenovo ThinkPad X1 Carbon, business laptop, computer, Lenovo', '2023-02-02 20:04:31'),
-(47, 5, 'Asus ROG Zephyrus', 'asus-rog-zephyrus', 'The Asus ROG Zephyrus is a high-performance gaming laptop with a sleek design.', 'The Asus ROG Zephyrus is a high-performance gaming laptop with a sleek design.', '1999.99', '1799.99', '1675519576.jpg', 50, 1, 1, 'Asus ROG Zephyrus', 'Play your favorite games with the high-performance Asus ROG Zephyrus gaming laptop.', 'Asus ROG Zephyrus, gaming laptop, computer, Asus', '2023-02-02 20:04:31'),
-(48, 5, 'Google Pixelbook Go', 'google-pixelbook-go', 'The Google Pixelbook Go is a laptop running the Chrome OS that is fast and lightweight.', 'The Google Pixelbook Go is a laptop running the Chrome OS that is fast and lightweight.', '899.99', '799.99', '1675519582.jpg', 200, 1, 0, 'Google Pixelbook Go', 'Get a fast and lightweight laptop with the Google Pixelbook Go running the Chrome OS.', 'Google Pixelbook Go, Chrome OS laptop, computer, Google', '2023-02-02 20:04:31'),
-(49, 5, 'Razer Blade', 'razer-blade', 'The Razer Blade is a high-performance gaming laptop with a sleek design.', 'The Razer Blade is a high-performance gaming laptop with a sleek design.', '1999.99', '1799.99', '1675519588.jpg', 50, 1, 0, 'Razer Blade', 'Play your favorite games with the high-performance Razer Blade gaming laptop.', 'Razer Blade, gaming laptop, computer, Razer', '2023-02-02 20:04:31'),
-(50, 5, 'Apple MacBook Air', 'apple-macbook-air', 'The Apple MacBook Air is a thin and light laptop that is perfect for travel or everyday use.', 'The Apple MacBook Air is a thin and light laptop that is perfect for travel or everyday use.', '999.99', '899.99', '1675519594.jpg', 200, 1, 1, 'Apple MacBook Air', 'Buy the latest Apple MacBook Air thin and light laptop for your travel or everyday use.', 'Apple MacBook Air, thin laptop, computer, Apple', '2023-02-02 20:04:31'),
-(51, 6, 'Leather Backpack', 'leather-backpack', 'The Leather Backpack is a stylish and durable backpack that is perfect for everyday use.', 'The Leather Backpack is a stylish and durable backpack that is perfect for everyday use.', '199.99', '179.99', '1675519829.jpg', 50, 1, 1, 'Leather Backpack', 'Buy the latest Leather Backpack for your everyday use.', 'Leather Backpack, stylish backpack, durable backpack', '2023-02-02 20:04:31'),
-(52, 6, 'Leather Wallet', 'leather-wallet', 'The Leather Wallet is a stylish and durable wallet that is perfect for everyday use.', 'The Leather Wallet is a stylish and durable wallet that is perfect for everyday use.', '49.99', '39.99', '1675519837.jpg', 100, 1, 0, 'Leather Wallet', 'Buy the latest Leather Wallet for your everyday use.', 'Leather Wallet, stylish wallet, durable wallet', '2023-02-02 20:04:31'),
-(53, 6, 'Leather Phone Case', 'leather-phone-case', 'The Leather Phone Case is a stylish and durable phone case that is perfect for protecting your phone.', 'The Leather Phone Case is a stylish and durable phone case that is perfect for protecting your phone.', '29.99', '19.99', '1675519843.jpg', 150, 1, 0, 'Leather Phone Case', 'Buy the latest Leather Phone Case for protecting your phone.', 'Leather Phone Case, stylish phone case, durable phone case', '2023-02-02 20:04:31'),
-(54, 6, 'Leather Luggage', 'leather-luggage', 'The Leather Luggage is a stylish and durable luggage that is perfect for travel.', 'The Leather Luggage is a stylish and durable luggage that is perfect for travel.', '299.99', '279.99', '1675519849.jpg', 100, 1, 1, 'Leather Luggage', 'Buy the latest Leather Luggage for your travel.', 'Leather Luggage, stylish luggage, durable luggage', '2023-02-02 20:04:31'),
-(55, 6, 'Leather Keychain', 'leather-keychain', 'The Leather Keychain is a stylish and durable keychain that is perfect for everyday use.', 'The Leather Keychain is a stylish and durable keychain that is perfect for everyday use.', '19.99', '9.99', '1675519855.jpg', 200, 1, 0, 'Leather Keychain', 'Buy the latest Leather Keychain for your everyday use.', 'Leather Keychain, stylish keychain, durable keychain', '2023-02-02 20:04:31'),
-(56, 6, 'Mens Leather Wallet', 'leather-wallet-for-men', 'A stylish mens leather wallet that is perfect for everyday use.', 'A stylish mens leather wallet that is perfect for everyday use.', '49.99', '39.99', '1675519863.jpg', 100, 1, 1, 'Mens Leather Wallet', 'Buy a stylish mens leather wallet for everyday use.', 'Mens leather wallet, leather, wallet, men', '2023-02-02 20:04:31'),
-(57, 6, 'Womens Leather Handbag', 'leather-handbag-for-women', 'A stylish womens leather handbag that is perfect for everyday use.', 'A stylish womens leather handbag that is perfect for everyday use.', '99.99', '89.99', '1675519881.jpg', 50, 1, 0, 'Womens Leather Handbag', 'Buy a stylish womens leather handbag for everyday use.', 'Womens leather handbag, leather, handbag, women', '2023-02-02 20:04:31'),
-(58, 6, 'Mens Leather Belt', 'leather-belt-for-men', 'A stylish mens leather belt that is perfect for everyday wear.', 'A stylish mens leather belt that is perfect for everyday wear.', '29.99', '24.99', '1675519892.jpg', 200, 1, 1, 'Mens Leather Belt', 'Buy a stylish mens leather belt for everyday wear.', 'Mens leather belt, leather, belt, men', '2023-02-02 20:04:31'),
-(59, 6, 'Womens Sunglasses', 'women-sunglasses', 'A stylish pair of womens sunglasses that are perfect for sunny days.', 'A stylish pair of womens sunglasses that are perfect for sunny days.', '39.99', '29.99', '1675519902.jpg', 100, 1, 0, 'Womens Sunglasses', 'Buy a stylish pair of womens sunglasses for sunny days.', 'Womens sunglasses, sunglasses, women', '2023-02-02 20:04:31'),
-(60, 6, 'Childrens Backpack', 'children-backpack', 'A stylish childrens backpack that is perfect for school or travel.', 'A stylish childrens backpack that is perfect for school or travel.', '29.99', '24.99', '1675519910.jpg', 150, 1, 0, 'Childrens Backpack', 'Buy a stylish childrens backpack for school or travel.', 'Childrens backpack, backpack, children', '2023-02-02 20:04:31'),
-(61, 7, 'Playstation 5', 'playstation-5', 'The Playstation 5 is the latest next-generation gaming console from Sony. With a sleek design and powerful hardware, it is perfect for gamers who demand the best.', 'The Playstation 5 is the latest next-generation gaming console from Sony. With a sleek design and powerful hardware, it is perfect for gamers who demand the best.', '499.99', '449.99', '1675520116.jpg', 50, 1, 1, 'Playstation 5 - Next-Gen Console', 'Buy the latest Playstation 5 gaming console', 'Playstation, Gaming, Console', '2023-02-02 20:04:31'),
-(62, 7, '4K Smart TV', '4k-smart-tv', 'Upgrade your viewing experience with this 4K Smart TV. With a large screen and vibrant colors, you will never want to leave your couch.', 'Upgrade your viewing experience with this 4K Smart TV. With a large screen and vibrant colors, you will never want to leave your couch.', '799.99', '699.99', '1675520123.jpg', 29, 1, 1, '4K Smart TV - Ultra HD Experience', 'Experience the best in home entertainment with this 4K Smart TV', 'TV, 4K, Smart, Home entertainment', '2023-02-02 20:04:31'),
-(63, 7, 'Blu-Ray Player', 'blu-ray-player', 'Get the most out of your movie collection with this Blu-Ray player. With high-definition playback and upscaling, you will enjoy every film in stunning detail.', 'Get the most out of your movie collection with this Blu-Ray player. With high-definition playback and upscaling, you will enjoy every film in stunning detail.', '99.99', '79.99', '1675520130.jpg', 50, 1, 0, 'Blu-Ray Player - High-Definition Movie Experience', 'Enjoy your movie collection in stunning detail with this Blu-Ray player', 'Blu-Ray, Movie, Player, Home entertainment', '2023-02-02 20:04:31'),
-(64, 7, 'Nintendo Switch', 'nintendo-switch', 'The Nintendo Switch is a hybrid gaming console that allows you to play your favorite games both at home and on-the-go. With a large game library, there is something for everyone.', 'The Nintendo Switch is a hybrid gaming console that allows you to play your favorite games both at home and on-the-go. With a large game library, there is something for everyone.', '299.99', '279.99', '1675520138.jpg', 50, 1, 1, 'Nintendo Switch - Hybrid Gaming Console', 'Play your favorite games both at home and on-the-go with the Nintendo Switch', 'Nintendo, Switch, Gaming, Console', '2023-02-02 20:04:31'),
-(65, 7, 'Home Theater System', 'home-theater-system', 'Transform your living room into a home theater with this surround sound system. With powerful speakers and immersive audio, you will feel like you\'re at the movies.', 'Transform your living room into a home theater with this surround sound system. With powerful speakers and immersive audio, you will feel like you\'re at the movies.', '499.99', '399.99', '1675520146.jpg', 20, 1, 0, 'Home Theater System - Surround Sound Experience', 'Bring the movie theater experience to your living room with this home theater system', 'Home theater, Sound, System, Entertainment', '2023-02-02 20:04:31'),
-(66, 7, 'VR Headset', 'vr-headset', 'Virtual Reality Headset', 'Step into a new world with this VR headset. With a large field of view and accurate motion tracking, you will be fully immersed in the virtual reality experience.', '299.99', '249.99', 'vrheadset.jpg', 30, 1, 0, 'VR Headset - Virtual Reality Experience', 'VR, Headset, Virtual reality, Gaming', 'Experience a new world with this VR headset', '2023-02-02 20:04:31'),
-(67, 7, 'Soundbar', 'soundbar', 'Take your TV audio to the next level with this soundbar. With powerful speakers and easy setup, you will enjoy high-quality sound with every program.', 'Take your TV audio to the next level with this soundbar. With powerful speakers and easy setup, you will enjoy high-quality sound with every program.', '199.99', '149.99', '1675520151.jpg', 40, 1, 0, 'Soundbar - Upgrade Your TV Sound', 'Improve your TV audio with this soundbar', 'Soundbar, TV, Audio, Home entertainment', '2023-02-02 20:04:31'),
-(68, 7, 'Streaming Stick', 'streaming-stick', 'Stream your favorite content with this streaming stick. With a compact design and access to hundreds of channels, you will never run out of things to watch.', 'Stream your favorite content with this streaming stick. With a compact design and access to hundreds of channels, you will never run out of things to watch.', '49.99', '39.99', '1675520156.jpg', 50, 1, 0, 'Streaming Stick - Stream Your Favorite Content', 'Enjoy your favorite content on any TV with this streaming stick', 'Streaming, Stick, TV, Content', '2023-02-02 20:04:31'),
-(69, 7, 'Bluetooth Speaker', 'bluetooth-speaker', 'Take your music with you with this Bluetooth speaker. With long battery life and high-quality sound, you can enjoy your tunes anywhere, anytime.', 'Take your music with you with this Bluetooth speaker. With long battery life and high-quality sound, you can enjoy your tunes anywhere, anytime.', '99.99', '89.99', '1675520162.jpg', 50, 1, 0, 'Bluetooth Speaker - Portable Sound System', 'Enjoy high-quality sound anywhere with this portable Bluetooth speaker', 'Bluetooth, Speaker, Portable, Sound', '2023-02-02 20:04:31'),
-(70, 7, 'Gaming Chair', 'gaming-chair', 'Get comfortable and stay focused with this gaming chair. With adjustable settings and a sleek design, you will game in style.', 'Get comfortable and stay focused with this gaming chair. With adjustable settings and a sleek design, you will game in style.', '249.99', '199.99', '1675520170.jpg', 30, 1, 0, 'Gaming Chair - Comfortable Gaming Seat', 'Stay comfortable and focused with this stylish gaming chair', 'Gaming, Chair, Comfort, Seat', '2023-02-02 20:04:31'),
-(71, 8, 'Toy Car', 'toy-car', 'Remote control toy car for kids with lights and sound effects', 'Remote control toy car for kids with lights and sound effects', '20.00', '15.00', '1675520357.jpg', 20, 1, 0, 'Toy Car', 'Remote control toy car for kids with lights and sound effects', 'toy car, kids, remote control', '2023-02-02 20:04:31'),
-(72, 8, 'Action Figure', 'action-figure', 'Marvel action figure for kids with accessories', 'Marvel action figure for kids with accessories', '15.00', '10.00', '1675520361.jpg', 15, 1, 1, 'Action Figure', 'Marvel action figure for kids with accessories', 'action figure, kids, marvel', '2023-02-02 20:04:31'),
-(73, 8, 'Lego Set', 'lego-set', 'Lego set for kids with instructions and accessories', 'Lego set for kids with instructions and accessories', '25.00', '20.00', '1675520367.jpg', 10, 1, 0, 'Lego Set', 'Lego set for kids with instructions and accessories', 'lego set, kids', '2023-02-02 20:04:31'),
-(74, 8, 'Board Game', 'board-game', 'Family board game for kids with multiple players', 'Family board game for kids with multiple players', '15.00', '10.00', '1675520374.jpg', 15, 1, 1, 'Board Game', 'Family board game for kids with multiple players', 'board game, kids, family', '2023-02-02 20:04:31'),
-(75, 8, 'Puzzle', 'puzzle', '3D puzzle for kids with different difficulty levels', '3D puzzle for kids with different difficulty levels', '10.00', '5.00', '1675520381.jpg', 20, 1, 0, 'Puzzle', '3D puzzle for kids with different difficulty levels', 'puzzle, kids, 3D', '2023-02-02 20:04:31'),
-(76, 8, 'Coloring Book', 'coloring-book', 'This coloring book contains various illustrations for kids to color and have fun.', 'This coloring book contains various illustrations for kids to color and have fun.', '7.99', '4.99', '1675520528.jpg', 150, 1, 1, 'Coloring Book for Kids', 'Get this fun coloring book for your kids to enjoy', 'coloring book, kids, fun', '2023-02-02 20:04:31'),
-(77, 8, 'Kids Backpack', 'kids-backpack', 'This backpack is designed for kids, made of durable material, and it has various compartments to store their belongings.', 'This backpack is designed for kids, made of durable material, and it has various compartments to store their belongings.', '22.99', '18.99', '1675520543.jpg', 50, 1, 0, 'Durable Backpack for Kids', 'Get this durable backpack for your kids to store their belongings', 'kids, backpack, durable', '2023-02-02 20:04:31'),
-(78, 8, 'Kids Shoes', 'kids-shoes', 'These shoes are made of soft and comfortable material, perfect for kids daily wear.', 'These shoes are made of soft and comfortable material, perfect for kids daily wear.', '29.99', '24.99', '1675520551.jpg', 40, 1, 0, 'Comfortable Shoes for Kids', 'Get these comfortable shoes for your kids to wear daily', 'kids, shoes, comfortable', '2023-02-02 20:04:31'),
-(79, 8, 'Kids Scooter', 'kids-scooter', 'This scooter is perfect for kids of all ages. It\'s made from durable materials and features a safe design. Great for outdoor play.', 'This scooter is perfect for kids of all ages. It\'s made from durable materials and features a safe design. Great for outdoor play.', '49.99', '39.99', '1675520558.jpg', 75, 1, 1, 'Kids Scooter - Safe and Fun', 'Get your kids the safe and fun scooter they will love to ride and play with!', 'scooter, kids, safe, fun', '2023-02-02 20:04:31'),
-(80, 8, 'Kids Play Tent', 'kids-play-tent', 'This play tent is perfect for kids of all ages. It\'s made from durable materials and features a cozy design. Great for indoor and outdoor play.', 'This play tent is perfect for kids of all ages. It\'s made from durable materials and features a cozy design. Great for indoor and outdoor play.', '39.99', '34.99', '1675520563.jpg', 50, 1, 1, 'Kids Play Tent - Fun and Cozy', 'Get your kids the fun and cozy play tent they will love to play and imagine with!', 'play tent, kids, fun, cozy', '2023-02-02 20:04:31');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `subscribers`
 --
 
-CREATE TABLE `subscribers` (
-  `ID` int(11) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Created_At` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE Subscribers (
+    ID INT PRIMARY KEY,
+    Email VARCHAR(255) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -342,223 +376,59 @@ CREATE TABLE `subscribers` (
 INSERT INTO `subscribers` (`ID`, `Email`, `Created_At`) VALUES
 (0, 'jocarlbasco24@gmail.com', '2023-02-02 12:05:01');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Phone` varchar(15) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Role_As` tinyint(4) DEFAULT 0,
-  `Created_At` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`ID`, `Name`, `Phone`, `Email`, `Password`, `Role_As`, `Created_At`) VALUES
-(1, 'Admin Side', '+639667337789', 'admin@gmail.com', '$2y$10$LDc2kOSNn2pwEUCTbIW.uu.Xlz6Ht1O/9OQyGeBObPlRxQ7JK.7iO', 1, '2023-02-02 20:02:31'),
-(2, 'User Side', '+639123123123', 'user@gmail.com', '$2y$10$sM2RCV5agxnEjv4x2gi3Q.M0mugYdqyf7WW.QylIm/fbI1YfpNGuW', 0, '2023-02-02 20:02:53');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wishlist`
+-- Table structure for table `address`
 --
 
-CREATE TABLE `wishlist` (
-  `ID` int(11) NOT NULL,
-  `User_ID` int(11) DEFAULT NULL,
-  `Product_ID` int(11) DEFAULT NULL,
-  `Created_At` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE Address (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Phone VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Province VARCHAR(255) NOT NULL,
+    Street VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
+    Pincode VARCHAR(255) NOT NULL,
+    Barangay VARCHAR(255),
+    Bldg_houseno VARCHAR(255) NOT NULL,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES users(ID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`ID`, `Name`, `Phone`, `Email`, `Province`, `Street`, `City`, `Pincode`, `Barangay`, `Bldg_houseno`, `UserID`) VALUES
+(1, 'Admin Name', '09123123123', 'admin@gmail.com', 'Metro Manila', 'Daisy', 'Caloocan', '1211', '123', 'Building # 132', 1);
+
+
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables
 --
 
---
--- Indexes for table `address`
---
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `UserID` (`UserID`);
-
---
--- Indexes for table `carts`
---
-ALTER TABLE `carts`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `User_ID` (`User_ID`),
-  ADD KEY `Product_ID` (`Product_ID`);
-
---
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `User_ID` (`User_ID`);
-
---
--- Indexes for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `Order_ID` (`Order_ID`),
-  ADD KEY `Product_ID` (`Product_ID`);
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `CategoryID` (`CategoryID`);
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `CategoryID` (`CategoryID`);
+  ADD UNIQUE KEY `Slug_Unique` (`Slug`);
 
---
--- Indexes for table `subscribers`
---
-ALTER TABLE `subscribers`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `wishlist`
---
-ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `User_ID` (`User_ID`),
-  ADD KEY `Product_ID` (`Product_ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `address`
---
-ALTER TABLE `address`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `carts`
---
-ALTER TABLE `carts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `order_items`
---
-ALTER TABLE `order_items`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `wishlist`
---
-ALTER TABLE `wishlist`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `address`
---
-ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `carts`
---
-ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`ID`),
-  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`);
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`ID`);
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`ID`) ON DELETE CASCADE;
-
---
--- Constraints for table `wishlist`
---
-ALTER TABLE `wishlist`
-  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `products` (`ID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

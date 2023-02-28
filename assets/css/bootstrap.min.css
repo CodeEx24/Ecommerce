@@ -3178,8 +3178,8 @@ fieldset:disabled .btn {
   --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: 0 0.5rem 1rem rgba(55, 99, 244, 0.15);
   --bs-dropdown-link-color: #2d2d2d;
-  --bs-dropdown-link-hover-color: #292929;
-  --bs-dropdown-link-hover-bg: #e9ecef;
+  --bs-dropdown-link-hover-color: #2d2d2d;
+  /* --bs-dropdown-link-hover-bg: #e9ecef; */
   --bs-dropdown-link-active-color: #fff;
   --bs-dropdown-link-active-bg: #3763f4;
   --bs-dropdown-link-disabled-color: #adb5bd;
@@ -10747,5 +10747,3 @@ footer ul li a {
     --ref-products-per-row: 3 !important;
   }
 }
-
-

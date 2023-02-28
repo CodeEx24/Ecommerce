@@ -16,7 +16,7 @@ include('authenticate.php');
                     if (mysqli_num_rows($items) > 0) {
                     ?>
                         <h1>Shopping Cart</h1>
-                        <div class="row mt-4 d-none d-md-flex">
+                        <div class="row mt-4 d-none d-lg-flex">
                             <div class="col-md-2 text-center cart-text-sm ">PRODUCT</div>
                             <div class="col-md-3 text-center cart-text-sm ">NAME</div>
                             <div class="col-md-2 text-center cart-text-sm ">PRICE</div>
@@ -57,8 +57,8 @@ include('authenticate.php');
                                         <button class="btn btn-danger bg-dark text-danger deleteItem" value="<?= $item['cid'] ?>" style=" border: none; font-size: 14px;">REMOVE</button>
                                     </div>
 
-                                    <div class="col-md-2">
-                                        <div class="d-flex text-center justify-content-center justify-content-md-end">
+                                    <div class="col-lg-2">
+                                        <div class="d-flex text-center justify-content-center justify-content-lg-end">
                                             <span>₱ </span>
                                             <input type="hidden" class="bg-dark text-white email form-control subtotal" style="border: none; padding: 0;" value="<?= $subtotal ?>" disabled>
                                             <p class="bg-dark text-white subtotal-text" style=""><?= number_format($subtotal, 2, '.', ',') ?></p>

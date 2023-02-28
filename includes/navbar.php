@@ -3,18 +3,19 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
 ?>
 <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3 sticky-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center justify-content-between" style="width: 180px;" href="index.php">
+        <a class="navbar-brand d-flex align-items-center justify-content-center justify-content-md-between" style="width: 180px;" href="index.php">
             <img src="./uploads/trendycart.png" class="navbar-brand-img h-100" height="50px" width="50px" alt="main_logo">
             <span>TrendyCart</span>
         </a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav mx-auto">
+
+        <div class="collapse navbar-collapse text-center" id="navcol-1">
+            <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item"><a class="nav-link <?= $page == "index.php" ? "active text-aqua" : "" ?>"" href=" index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "categories.php" ||  $page == "product-view.php" ||  $page == "products.php" || $page == "trending-products.php" ? "active text-aqua" : "" ?>" href="categories.php">Collections</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "blog.php" ||  $page == "blog-view.php" ? "active text-aqua" : "" ?>" href="blog.php">Blog</a></li>
                 <li class="nav-item"><a class="nav-link <?= $page == "about.php" ? "active text-aqua" : "" ?>" href="about.php">About</a></li>
             </ul>
-            <a href="cart.php" id="cart" class=" <?= $page == "cart.php" ? "active text-aqua fw-bold" : "" ?>" href="cart.php"">
+            <a href="cart.php" id="cart" class="text-center <?= $page == "cart.php" ? "active text-aqua fw-bold" : "" ?>" href="cart.php"">
                 Cart 
                 <?php if (isset($_SESSION['auth'])) {
                     $items = getCartItemsActiveStatus();
@@ -33,25 +34,26 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 
             <?php
             if (isset($_SESSION['auth'])) {
             ?>
-                <div class=" dropdown show">
+                <div class=" dropdown show mt-4 mt-md-0">
                 <a class="btn btn-primary shadow dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user"></i>
                     <?= $_SESSION['auth_user']['name']; ?>
                 </a>
 
                 <div class="dropdown-menu darker-item" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="address.php">Save Details</a>
-                    <a class="dropdown-item" href="my-orders.php">Orders</a>
-                    <a class="dropdown-item" href="wishlist.php">Wishlist</a>
+                    <a class="dropdown-item <?= $page == "address.php" ? "fw-bold text-aqua" : "" ?>" href="address.php">Save Details</a>
+                    <a class="dropdown-item <?= $page == "my-orders.php" ||  $page == "view-order.php" ? "fw-bold text-aqua" : "" ?>" href="my-orders.php">Orders</a>
+                    <a class="dropdown-item <?= $page == "wishlist.php" ? "fw-bold text-aqua" : "" ?>" href="wishlist.php">Wishlist</a>
                     <!-- <a class="dropdown-item" href="view-order.php">View Order</a> -->
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
         </div>
-    <?php
+    </div>
+<?php
             } else {
-    ?>
-        <a class="btn btn-primary shadow" role="button" href="login.php">Log In</a>
-    <?php
+?>
+    <a class="btn btn-primary shadow" role="button" href="login.php">Log In</a>
+<?php
             }
-    ?>
+?>
 </nav>

@@ -26,7 +26,7 @@ include('includes/header.php');
 
                             <tbody>
                                 <?php
-                                $users = getAll("Users");
+                                $users = getAllClients();
 
                                 if (mysqli_num_rows($users) > 0) {
                                     foreach ($users as $user) {

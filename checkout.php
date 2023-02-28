@@ -7,7 +7,13 @@ include('functions/cartstockchecker.php');
 
 // Getting the user details
 $user_details = getDetails();
-$user_details_data = mysqli_fetch_array($user_details);
+if (mysqli_num_rows($user_details) > 0) {
+    $user_details_data = mysqli_fetch_array($user_details);
+} else {
+    // Getting the registration of a user details
+    $registration_details = getUserRegistrationDetails();
+    $registration_details_data = mysqli_fetch_array($registration_details);
+}
 
 // Check if the user have a cart items
 $cartItems = getCartItems();
@@ -28,17 +34,17 @@ if (mysqli_num_rows($cartItems) === 0) {
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6>Name</h6>
-                                    <input class="form-2" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : '' ?>">
+                                    <input class="form-2" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : $registration_details_data['Name'] ?>">
                                     <small class="text-danger name"></small>
                                 </div>
                                 <div class="col-md-6">
                                     <h6>Email</h6>
-                                    <input class="form-2" name="email" id="email" type="email" placeholder="Enter your email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $_SESSION['auth_user']['email'] ?>">
+                                    <input class="form-2" name="email" id="email" type="email" placeholder="Enter your email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $registration_details_data['Email']  ?>">
                                     <small class="text-danger email"></small>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <h6>Phone</h6>
-                                    <input class="form-2" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : '' ?>">
+                                    <input class="form-2" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : $registration_details_data['Phone']  ?>">
                                     <small class="text-danger phone"></small>
                                 </div>
                                 <h5 class="mt-4">Address Details</h5>

@@ -4,8 +4,16 @@ include('includes/header.php');
 
 include('authenticate.php');
 
+// Getting the user details
 $user_details = getDetails();
-$user_details_data = mysqli_fetch_array($user_details);
+if (mysqli_num_rows($user_details) > 0) {
+    $user_details_data = mysqli_fetch_array($user_details);
+} else {
+    // Getting the details of users in it's registration
+    $registration_details = getUserRegistrationDetails();
+    $registration_details_data = mysqli_fetch_array($registration_details);
+}
+
 ?>
 <section class="">
     <div class="container py-5">
@@ -27,17 +35,17 @@ $user_details_data = mysqli_fetch_array($user_details);
                                     <div class="col-md-6">
                                         <input type="hidden" name="id" id='id' value="<?= $_SESSION['auth_user']['user_id'] ?>">
                                         <h6>Name</h6>
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : '' ?>">
+                                        <input class="form-control" name="name" id="name" type="text" placeholder="Enter your full name" value="<?= isset($user_details_data['Name']) ? $user_details_data['Name'] : $registration_details_data['Name'] ?>">
                                         <small class=" text-danger name"></small>
                                     </div>
                                     <div class="col-md-6 ">
                                         <h6>Phone</h6>
-                                        <input class="form-control" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : '' ?>">
+                                        <input class="form-control" name="phone" id="phone" type="text" placeholder="Enter your phone number" value="<?= isset($user_details_data['Phone']) ? $user_details_data['Phone'] : $registration_details_data['Phone'] ?>">
                                         <small class="text-danger phone"></small>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <h6>Email</h6>
-                                        <input class="form-control" name="email" id="email" type="email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $_SESSION['auth_user']['email'] ?>" placeholder="Enter your email">
+                                        <input class="form-control" name="email" id="email" type="email" value="<?= isset($user_details_data['Email']) ? $user_details_data['Email'] : $registration_details_data['Email'] ?>" placeholder="Enter your email">
                                         <small class="text-danger email"></small>
                                     </div>
                                     <h5 class="mt-5 mb-3 fw-bold">Address Details</h5>

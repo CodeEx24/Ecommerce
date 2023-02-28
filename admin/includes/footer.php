@@ -14,16 +14,16 @@
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="../index.php" class="nav-link" target="_blank">Home</a>
+                        <a href="../index.php" class="nav-link text-white" target="_blank">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../about.php" class="nav-link" target="_blank">About Us</a>
+                        <a href="../about.php" class="nav-link text-white" target="_blank">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../categories.php" class="nav-link" target="_blank">Collections</a>
+                        <a href="../categories.php" class="nav-link text-white" target="_blank">Collections</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../blog.php" class="nav-link pe-0" target="_blank">Blog</a>
+                        <a href="../blog.php" class="nav-link text-white" target="_blank">Blog</a>
                     </li>
                 </ul>
             </div>

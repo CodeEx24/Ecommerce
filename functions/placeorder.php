@@ -8,7 +8,7 @@ if (isset($_SESSION['auth'])) {
     // Check if the form to place an order is submitted
     if (isset($_POST['placeOrderBtn'])) {
         // Create the address string from the form data
-        $address = "(" . $_POST['province'] . "), " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . " Street, " . $_POST['city'] . " City, Barangay " . $_POST['barangay'];
+        $address =  $_POST['province'] . ", " . $_POST['bldg_houseno'] . ", " . $_POST['street'] . " Street, " . $_POST['city'] . " City, Barangay " . $_POST['barangay'];
 
         // Escape user input to prevent SQL injection
         $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -41,7 +41,7 @@ if (isset($_SESSION['auth'])) {
             $total += $item['selling_price'] * $item['product_qty'];
         }
 
-        $total = ($total * 0.08) + $total;
+        $total =  $total + ($total * 0.08);
 
         // Generate a tracking number
         $tracking_no = "TrackNo" . rand(1111, 9999) . substr($phone, 2);
